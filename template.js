@@ -10,12 +10,12 @@
  * Output Example:  
  */
 
- function solutionTemplate (param) {
+function solutionTemplate (param) {
     let answer;
     return answer;
 }
 
- function testTemplate () {
+function testTemplate () {
     const testNum = 1;
     const input = 0;   
     const expectResult = 1;
@@ -28,6 +28,8 @@ function mainTemplate () {
     const input = 0;
     const output = this.solutionTemplate(input);
     
+    console.log("SnPn\n");
+    testTemplate();
     // console.log(`Input: ${input} `);
     // console.log(`Output: ${output}\n`);
 }
@@ -35,5 +37,4 @@ function mainTemplate () {
 function testTemplate() {
 }
 
-testTemplate();
 mainTemplate();
