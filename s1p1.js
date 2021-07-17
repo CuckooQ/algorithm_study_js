@@ -113,10 +113,10 @@ function main () {
     const num3 = 2;
     const output = this.solution(num1, num2, num3);
     
-    console.log("P1\n");
+    console.log("S1P1\n");
+    // test();
     console.log(`Input: ${num1} ${num2} ${num3}`);
     console.log(`Output: ${output}\n`);
 }
 
-// test();
 main();
