@@ -10,7 +10,9 @@
  * Output Example: YES
  */
 // *삼각형 길이 조건 검색 결과:  가장 큰 한 변의 길이는 다른 두 변의 합보다 작아야 한다.
+// *해답에서는 sum-max > max로 판별했다.
 
+// 세 변들을 내림차순으로 정렬한 배열 출력
 function getSortedSides (side1, side2, side3) {
     let arr = [];
     arr.push(side1);
@@ -32,7 +34,8 @@ function testGetSortedSides() {
     validateTestResult(testNum, condition);
 }
 
-function isBiggerTopSideThanOthersSum (sortedSides) {
+// 가장 큰 변이 다른 두 변의 합보다 작은 지 판별
+function isTheBiggestSideSmallerThanOthersSum (sortedSides) {
     if (sortedSides[0] < sortedSides[1] + sortedSides[2]) {
         return true;
     } else{
@@ -40,24 +43,25 @@ function isBiggerTopSideThanOthersSum (sortedSides) {
     }
 }
 
-function testIsBiggerTopSideThanOthersSum() {
+function testIsTheBiggestSideSmallerThanOthersSum() {
     const testNum = 2;
     let input = [40, 30, 20];
     let expectResult = true;
-    let result = isBiggerTopSideThanOthersSum(input);
+    let result = isTheBiggestSideSmallerThanOthersSum(input);
     let condition = (result === expectResult);    
     validateTestResult(testNum, condition);
 
     input = [3, 2, 1];
     expectResult = false;
-    result = isBiggerTopSideThanOthersSum(input);
+    result = isTheBiggestSideSmallerThanOthersSum(input);
     condition = (result === expectResult);    
     validateTestResult(testNum, condition);
 }
 
+// 세 변으로 삼각형 만들 수 있는 지 판별
 function validateMakingTriangle(side1, side2, side3) {
     const sortedSides = getSortedSides(side1, side2, side3);
-    return isBiggerTopSideThanOthersSum(sortedSides);
+    return isTheBiggestSideSmallerThanOthersSum(sortedSides);
 }
 
 function testValidateMakingTriangle() {
@@ -91,15 +95,6 @@ function solution (num1, num2, num3) {
     return answer;
 }
 
-function testTemplate () {
-    const testNum = 1;
-    const input = 0;   
-    const expectResult = 1;
-    const testFunction = solutionTemplate;
-    const condition = (testFunction(input) === expectResult);    
-    validateTestResult(testNum, condition);
-}
-
 function main() {
     const input1 = 20;
     const input2 = 10;
@@ -114,7 +109,7 @@ function main() {
 
 function test() {
     testGetSortedSides();
-    testIsBiggerTopSideThanOthersSum();
+    testIsTheBiggestSideSmallerThanOthersSum();
     testValidateMakingTriangle();
 }
 
