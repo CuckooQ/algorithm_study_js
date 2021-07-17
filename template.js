@@ -1,6 +1,14 @@
 /**
  * Problem file template 
  *  */ 
+/**
+ * Title: 
+ * Content: 
+ * Input Condition: 
+ * Output Condition: 
+ * Input Example: 
+ * Output Example:  
+ */
 
  function solutionTemplate (param) {
     let answer;
