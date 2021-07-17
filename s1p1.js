@@ -114,9 +114,9 @@ function main () {
     const output = this.solution(num1, num2, num3);
     
     console.log("S1P1\n");
+    // test();
     console.log(`Input: ${num1} ${num2} ${num3}`);
     console.log(`Output: ${output}\n`);
 }
 
-// test();
 main();
