@@ -1,7 +1,4 @@
 /**
- * Problem file template 
- *  */ 
-/**
  * Title: 연필 개수
  * Content: 학생 1인당 연필을 1자루씩 나누어 준다고 할 때, n명의 학생 수를 입력하면 필요한 연필의 다스 수 계산.
  * Input Condition: 첫 번째 줄에 1000이하의 자연수 n 입력

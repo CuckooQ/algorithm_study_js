@@ -1,7 +1,4 @@
 /**
- * Problem file template 
- *  */ 
-/**
  * Title: 최소값 구하기
  * Content: 7개의 수가 주어지면 그 숫자 중 가장 작은 수 출력
  * Input Condition: 첫 번째 줄에 7개의 수 입력
