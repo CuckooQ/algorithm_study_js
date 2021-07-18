@@ -11,7 +11,7 @@
  */
 
 // 1~num까지의 합 구하기
-function sum(num) {
+function sumFromOneTo(num) {
     let sum = 0;
     for(let i=1; i<=num; i++) {
         sum += i;
@@ -21,7 +21,7 @@ function sum(num) {
 
 function solution (num) {
     let answer;
-    answer = sum(num);
+    answer = sumFromOneTo(num);
     return answer;
 }
 
