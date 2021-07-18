@@ -73,7 +73,7 @@ function testToLessThanTwelveStudents() {
 }
 
 function main() {
-    const input = 999;
+    const input = 25;
     const output = this.solution(input);
     
     console.log("S1P3\n");
