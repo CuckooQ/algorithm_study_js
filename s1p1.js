@@ -108,9 +108,9 @@ function test() {
 }
 
 function main () {
-    const num1 = 3;
-    const num2 = 1;
-    const num3 = 2;
+    const num1 = 6;
+    const num2 = 5;
+    const num3 = 11;
     const output = this.solution(num1, num2, num3);
     
     console.log("S1P1\n");

@@ -96,9 +96,9 @@ function solution (num1, num2, num3) {
 }
 
 function main() {
-    const input1 = 20;
-    const input2 = 10;
-    const input3 = 15;
+    const input1 = 6;
+    const input2 = 7;
+    const input3 = 11;
     const output = this.solution(input1, input2, input3);
     
     console.log("S1P2\n");
