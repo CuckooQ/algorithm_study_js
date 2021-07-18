@@ -19,11 +19,10 @@ function arraysEqual(a1, a2) {
     while (i--) {
       if (a1[i] !== a2[i]) return false;
     }
-    
+
     return true;
 };
 
-// 최소값 구하기
 function getMin(arr) {
     // return Math.min.apply(null, arr);
     return Math.min(...arr);
