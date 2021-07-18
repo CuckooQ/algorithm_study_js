@@ -1,7 +1,4 @@
 /**
- * Problem file template 
- *  */ 
-/**
  * Title: 1부터 N까지 합 출력하기
  * Content: 자연수 N이 입력되면 1부터 N까지의 합을 출력하는 프로그램 작성.
  * Input Condition: 첫 번째 줄에 20이하의 자연수 N 입력 

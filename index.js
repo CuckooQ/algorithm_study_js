@@ -27,3 +27,7 @@ function getMin(arr) {
     // return Math.min.apply(null, arr);
     return Math.min(...arr);
 }
+
+function changeArrToStrForPrinting(arr) {
+    return arr.toString().split(",").join(" ");
+}
