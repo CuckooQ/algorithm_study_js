@@ -54,7 +54,7 @@ function main () {
     const output = this.solution(input);
     
     console.log("S1P12\n");
-    test();
+    // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
 }
