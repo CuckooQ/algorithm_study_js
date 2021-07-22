@@ -80,7 +80,7 @@ function main () {
     const output = this.solution(input);
     
     console.log("S1P13\n");
-    test();
+    // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
 }
