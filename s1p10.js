@@ -87,7 +87,7 @@ function main () {
     const input2 = "R";
     const output = this.solution(input1, input2);
     
-    console.log("S1P10n\n");
+    console.log("S1P10\n");
     // test();
     console.log(`Input: ${input1}\n ${input2} `);
     console.log(`Output: ${output}\n`);
