@@ -7,19 +7,13 @@
  * Output Example: kset
  */
 
-function removeSameChar(text) {
-    const uniqueCharArr = [];
-    Array.from(text).forEach((char) => {
-        if (uniqueCharArr.indexOf(char) === -1) {
-            uniqueCharArr.push(char);
-        }
-    });
-
+function removeSameCharIn(text) {
+    const uniqueCharArr = removeSameValIn(Array.from(text));
     return uniqueCharArr.join('');
 }
 
 function solution (text) {
-    let answer = removeSameChar(text);
+    let answer = removeSameCharIn(text);
     return answer;
 }
 

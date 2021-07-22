@@ -31,3 +31,14 @@ function getMin(arr) {
 function changeArrToStrForPrinting(arr) {
     return arr.toString().split(",").join(" ");
 }
+
+function removeSameValIn(arr) {
+    const uniqueValArr = [];
+    arr.forEach((val) => {
+        if (uniqueValArr.indexOf(val) === -1) {
+            uniqueValArr.push(val);
+        }
+    });
+
+    return uniqueValArr;
+}
