@@ -25,7 +25,7 @@ function filterToViewableHeights(heightArr) {
 
 function solution (heightArr) {
     const viewableHeightArr = filterToViewableHeights(heightArr);
-    const answer = viewableHeightArr.join(' ');
+    const answer = viewableHeightArr.length;
     return answer;
 }
 
@@ -35,7 +35,7 @@ function testToMaxCount () {
     for (let i=0; i<1000; i++) {
         input.push(130 + (i*0.005));
     }   
-    const expectResult = input.join(' ');
+    const expectResult = 1000;
     const testFunction = solution;
     const condition = (testFunction(input) === expectResult);    
     validateTestResult(testNum, condition);
@@ -44,7 +44,7 @@ function testToMaxCount () {
 function testToMinCount () {
     const testNum = 2;
     const input = [130];   
-    const expectResult = "130";
+    const expectResult = 1;
     const testFunction = solution;
     const condition = (testFunction(input) === expectResult);    
     validateTestResult(testNum, condition);
@@ -56,7 +56,7 @@ function testToSerialHeights () {
     for (let i=0; i<10; i++) {
         input.push(130 + i);
     }   
-    const expectResult = input.join(' ');
+    const expectResult = 10;
     const testFunction = solution;
     const condition = (testFunction(input) === expectResult);    
     validateTestResult(testNum, condition);
@@ -68,7 +68,7 @@ function testToReverseSerialHeights () {
     for (let i=10; i>0; i--) {
         input.push(130 + i);
     }   
-    const expectResult = "140";
+    const expectResult = 1;
     const testFunction = solution;
     const condition = (testFunction(input) === expectResult);    
     validateTestResult(testNum, condition);
@@ -80,7 +80,7 @@ function testToAllSameHeights () {
     for (let i=10; i>0; i--) {
         input.push(130);
     }      
-    const expectResult = "130";
+    const expectResult = 1;
     const testFunction = solution;
     const condition = (testFunction(input) === expectResult);    
     validateTestResult(testNum, condition);
