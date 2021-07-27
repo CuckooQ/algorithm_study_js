@@ -123,7 +123,7 @@
         const output = this.solution(input1, input2);
         
         console.log("S3P4\n");
-        test();
+        // test();
         console.log(`Input: ${input1} ${input2}`);
         console.log(`Output: ${output}\n`);
     }
