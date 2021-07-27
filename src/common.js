@@ -2,7 +2,7 @@
  * Common functions 
  *  */ 
 
-function validateTestResult (testNum, condition) {
+ function validateTestResult (testNum, condition) {
     let result;
     if (condition) {
         result = "OK"
