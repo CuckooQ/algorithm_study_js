@@ -4,7 +4,7 @@
 
     function loadTests(){
         const directories = ['s1', 's2', 's3', 's4'];  
-        const fileCounts = [17, 7, 5, 1];
+        const fileCounts = [17, 7, 5, 2];
         directories.forEach((directory, idx) => {
             const fileCount = fileCounts[idx];
             for(let i=1; i<=fileCount; i++) {
