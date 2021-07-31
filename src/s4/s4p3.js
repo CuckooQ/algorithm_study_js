@@ -142,7 +142,7 @@
         const output = this.solution(input);
         
         console.log("S4P3\n");
-        test();
+        // test();
         console.log(`Input: ${input.join('\n')} `);
         console.log(`Output: ${output}\n`);
     }
