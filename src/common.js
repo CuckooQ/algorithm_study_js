@@ -43,11 +43,11 @@ function removeSameValIn (arr) {
     return uniqueValArr;
 }
 
-function sumFromOneToSelectedNum(selectedNum) {
-    let sum = 0;
-    for (let i=1; i<=selectedNum; i++) {
-        sum += i;
-    }
+function sumToSelectedNum(selectedNum, sum = 0) {
+    if (selectedNum > 0) {
+        sum += selectedNum;
+        sum = sumToSelectedNum(selectedNum -1, sum);
+    } 
 
     return sum;
 }

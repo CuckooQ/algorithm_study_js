@@ -113,7 +113,7 @@
     function testToMaxStudentsMinTests () {
         const testNum = 2;
         const input = createTestInput(MAX_STUDENT_COUNT, MIN_TEST_COUNT);
-        const expectResult = sumFromOneToSelectedNum(MAX_STUDENT_COUNT-1);
+        const expectResult = sumToSelectedNum(MAX_STUDENT_COUNT-1);
         const testFunction = solution;
         const condition = (testFunction(input) === expectResult);    
         validateTestResult(testNum, condition);
