@@ -12,7 +12,7 @@
     console.log(`Test${testNum}: ${result}`);
 }
 
-function arraysEqual(a1, a2) {
+function arraysEqual (a1, a2) {
     let i = a1.length;
     if (i != a2.length) return false;
  
@@ -23,16 +23,16 @@ function arraysEqual(a1, a2) {
     return true;
 };
 
-function getMin(arr) {
+function getMin (arr) {
     // return Math.min.apply(null, arr);
     return Math.min(...arr);
 }
 
-function changeArrToStrForPrinting(arr) {
+function changeArrToStrForPrinting (arr) {
     return arr.toString().split(",").join(" ");
 }
 
-function removeSameValIn(arr) {
+function removeSameValIn (arr) {
     const uniqueValArr = [];
     arr.forEach((val) => {
         if (uniqueValArr.indexOf(val) === -1) {
@@ -42,3 +42,15 @@ function removeSameValIn(arr) {
 
     return uniqueValArr;
 }
+
+function sumFromOneToSelectedNum(selectedNum) {
+    let sum = 0;
+    for (let i=1; i<=selectedNum; i++) {
+        sum += i;
+    }
+
+    return sum;
+}
+
+
+    
