@@ -25,3 +25,4 @@
 * number.toString().split(''): 숫자의 각 자리수로 이루어진 배열.
 * 소수 판별은 제곱근 이용.
 * 유니크한 값들을 다룰 경우 SET 데이터 타입 사용.
+* Two Pointer Algorithm: 배열에서 두 개의 포인터를 사용한 알고리즘.
