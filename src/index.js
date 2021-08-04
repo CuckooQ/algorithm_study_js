@@ -3,8 +3,8 @@
     const extension = '.js';
 
     function loadTests(){
-        const directories = ['s1', 's2', 's3', 's4', 's5'];  
-        const fileCounts = [17, 7, 5, 5, 8];
+        const directories = ['s1', 's2', 's3', 's4', 's5', 's6'];  
+        const fileCounts = [17, 7, 5, 5, 8, 1];
         directories.forEach((directory, idx) => {
             const fileCount = fileCounts[idx];
             for(let i=1; i<=fileCount; i++) {
