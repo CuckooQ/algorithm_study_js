@@ -25,10 +25,9 @@
                 if (stack.length === 0) {
                     filteredText += char;
                 }
-            }
-
-            
+            }            
         });
+        
         return filteredText;
     }
 
