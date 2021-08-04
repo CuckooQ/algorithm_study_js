@@ -63,17 +63,16 @@
         validateTestResult(testNum, condition);
     }
 
-    function testToMexLen() {
+    function testToMaxLen() {
         const testNum = 3;
-        const input = ""; 
-        Array.from({length: MAX_LENGTH}, (val, idx)=> {
+        const input = Array.from({length: MAX_LENGTH}, (_, idx)=> {
             if(idx%2===0) {
-                val = LEFT_PARENTHESIS;
+               return LEFT_PARENTHESIS;
             } 
             else {
-                val = RIGHT_PARENTHESIS;
+                return RIGHT_PARENTHESIS;
             }
-        });  
+        }).join("");  
         const expectResult = YES;
         const testFunction = solution;
         const condition = (testFunction(input) === expectResult);    
@@ -93,7 +92,7 @@
     function test() {
         testToRightParenthesis();
         testToWorngParenthesis();
-        testToMexLen();
+        testToMaxLen();
     }
     
     main();
