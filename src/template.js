@@ -11,12 +11,12 @@
  */
 
 {
-    function solutionTemplate (param) {
+    function solutionTemplate(param) {
         let answer;
         return answer;
     }
 
-    function testTemplate () {
+    function testTemplate() {
         const testNum = 1;
         const input = 0;   
         const expectResult = 1;
@@ -25,7 +25,7 @@
         validateTestResult(testNum, condition);
     }
 
-    function mainTemplate () {
+    function mainTemplate() {
         const input = 0;
         const output = this.solutionTemplate(input);
         
