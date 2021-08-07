@@ -30,6 +30,11 @@
     const MAX_WORK_ID = 100;
 
     class CacheMemory {
+        STATUS = {
+            CACHE_HIT: "CACHE_HIT",
+            CACHE_MISS: "CACHE_MISS"
+        }
+
         stack;
         size;
 
@@ -51,16 +56,19 @@
             return this.isExist(work);
         }
 
+        getStatus(work) {
+            const isCacheHit = this.isCacheHit(work);
+            return isCacheHit ? this.STATUS.CACHE_HIT : this.STATUS.CACHE_MISS;
+        }
+
         insert(work) {
-            const CACHE_HIT = "CACHE_HIT";
-            const CACHE_MISS = "CACHE_MISS";
-            const STATUS = this.isCacheHit(work) ? CACHE_HIT : CACHE_MISS;
-            switch(STATUS) {
-                case CACHE_HIT: 
+            const status = this.getStatus(work);
+            switch(status) {
+                case this.STATUS.CACHE_HIT: 
                     this.stack.splice(this.getIdx(work));
                     this.stack.unshift(work);
                     break;
-                case CACHE_MISS:
+                case this.STATUS.CACHE_MISS:
                     if(this.stack.length + 1 > this.size) {
                         this.stack.pop();
                     }
