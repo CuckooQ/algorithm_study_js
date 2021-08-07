@@ -62,7 +62,7 @@
         
         console.log("S7P1\n");
         // test();
-        console.log(`Input: ${input} `);
+        console.log(`Input: ${input.join(" ")} `);
         console.log(`Output: ${output}\n`);
     }
     
