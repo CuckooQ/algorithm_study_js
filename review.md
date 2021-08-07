@@ -25,19 +25,21 @@
 * 유니크한 값들을 다루는 것도 고려하자.
 * Map을 사용하는 것도 고려하자.
 * Stack을 사용하는 것도 고려하자.
+* Selection Sort의 구현을 알아두자.
 
 ## 새로 알게 된 지식
-* Math.max(...arr), Math.min(...arr): 최대, 최소값 구할 경우 사용.
-* Number.MIN_SAFE_INTEGER: 기본값으로 최소 숫자 설정이 필요할 경우 사용.
-* Array.from({length: LENGTH}, (_, i)=> i): [0,1,2,3,4,...]와 같은 배열 생성이 가능.
-* /[^a-z]/g: 소문자 알파벳이 아닌 것만 판별하는 정규식.
-* /[^0-9]/g: 숫자가 아닌 것만 판별하는 정규식.
-* number.toString().split(''): 숫자의 각 자리수로 이루어진 배열.
-* 소수 판별은 제곱근 이용.
-* 유니크한 값들을 다룰 경우 SET 데이터 타입 사용.
-* Two Pointer Algorithm: 배열에서 두 개의 포인터를 사용한 알고리즘. 완전탐색보다 시간복잡도가 줄어든다.
-* Sliding Window: 배열의 일정 범위 값 비교 목적의, 인덱스를 이동하면서 일정 범위의 윈도우로 들어간 값과 함께 범위 밖으로 밀려난 값을 처리하는 알고리즘.
-* 괄호에 대한 문제는 대부분 Stack을 사용하는 것이 좋다.
-* 한 배열을 순환하면서 탐색할 때는 Queue 사용.
 * 영소문자 a 표현: String.fromCharCode(97).
 * 영대문자 A 표현: String.fromCharCode(65).
+* 기본 최소 숫자 설정 값: Number.MIN_SAFE_INTEGER.
+* 배열 생성: Array.from({length: LENGTH}, (_, i)=> i) or Array.of({length: LENGTH}, (_, i)=> i));
+* 숫자의 각 자리수로 이루어진 배열: number.toString().split('').
+* 배열의 두 요소를 서로 바꾸는 식: [arr[i], arr[j]] = [arr[j], arr[i]].
+* 소수 판별 함수: 제곱근 이용.
+* 유니크한 값들을 다루는 경우의 데이터타입: SET.
+* 괄호에 대한 문제: 대부분 Stack 사용.
+* 한 배열의 순환 탐색 문제: Queue 사용.
+* 최대/최소값 구하기 문제: Math.max(...arr), Math.min(...arr).
+* 소문자 알파벳이 아닌 것만 판별하는 정규식: /[^a-z]/g.
+* 숫자가 아닌 것만 판별하는 정규식: /[^0-9]/g.
+* Two Pointer Algorithm: 배열에서 두 개의 포인터를 사용한 알고리즘. 완전탐색보다 시간복잡도가 줄어든다.
+* Sliding Window: 배열의 일정 범위 값 비교 목적의, 인덱스를 이동하면서 일정 범위의 윈도우로 들어간 값과 함께 범위 밖으로 밀려난 값을 처리하는 알고리즘.
