@@ -11,32 +11,32 @@
  */
 
 {
-    function solutionTemplate(param) {
+    function solution(param) {
         let answer;
         return answer;
     }
 
-    function testTemplate() {
+    function test() {
         const testNum = 1;
         const input = 0;   
         const expectResult = 1;
-        const testFunction = solutionTemplate;
+        const testFunction = solution;
         const condition = (testFunction(input) === expectResult);    
         validateTestResult(testNum, condition);
     }
 
-    function mainTemplate() {
+    function main() {
         const input = 0;
-        const output = this.solutionTemplate(input);
+        const output = this.solution(input);
         
         console.log("SnPn\n");
-        testTemplate();
-        // console.log(`Input: ${input} `);
-        // console.log(`Output: ${output}\n`);
+        test();
+        console.log(`Input: ${input} `);
+        console.log(`Output: ${output}\n`);
     }
     
-    function testTemplate() {
+    function test() {
     }
     
-    mainTemplate();
+    main();
 }
