@@ -26,15 +26,15 @@
         let rightIdx = tmpNums.length - 1;
         let midIdx;
         let midVal;
-        while(leftIdx !== rightIdx) {
+        while(leftIdx <= rightIdx) {
             midIdx = Math.floor((leftIdx + rightIdx) / 2);
             midVal = tmpNums[midIdx];
             if (midVal === selNum) {
                 break;
             } else if (midVal > selNum) {
-                rightIdx = midIdx;
+                rightIdx = midIdx - 1;
             } else {
-                leftIdx = midIdx;
+                leftIdx = midIdx + 1;
             }
         }
        
