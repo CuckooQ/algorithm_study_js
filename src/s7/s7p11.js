@@ -30,7 +30,7 @@
         let sum = 0;
         singTimes.forEach((singTime, idx) => {
             sum += singTime;
-            if (sum >= totalSize) {
+            if (sum > totalSize) {
                 dvdCount++;
                 sum = singTime;
 
