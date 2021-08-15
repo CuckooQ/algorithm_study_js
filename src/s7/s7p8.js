@@ -102,7 +102,7 @@
         const output = this.solution(input);
         
         console.log("S7P8\n");
-        test();
+        // test();
         console.log(`Input: ${input.join("\n")} `);
         console.log(`Output: ${output}\n`);
     }
