@@ -27,9 +27,9 @@
     const RAZOR = "|";
 
     class Bar {
-        razorCount;
-        slicedBarCount;
-        children;
+        #razorCount;
+        #slicedBarCount;
+        #children;
 
         constructor() {
             this.initBar();

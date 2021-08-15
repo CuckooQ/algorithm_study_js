@@ -18,7 +18,7 @@
  */
 
 class RockScissorPaperUser {
-    selection;
+    #selection;
     
     constructor(selection){
         this.selection = selection;

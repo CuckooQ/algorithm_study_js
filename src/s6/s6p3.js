@@ -58,10 +58,10 @@
     const BURST_CONDITION = 2;
 
     class Bucket {
-        stack;
-        prevPuppet;
-        score;
-        samePuppetCount;
+        #stack;
+        #prevPuppet;
+        #score;
+        #samePuppetCount;
         
         constructor() {
             this.init();
