@@ -54,7 +54,7 @@
 // *다시 풀기
 // *0일 때의 처리에서 간과한 것이 있었다. 주의하자.
 
- {  
+{  
     const BURST_CONDITION = 2;
 
     class Bucket {
@@ -68,30 +68,34 @@
         }
 
         insert(puppet) {
-            if(this.prevPuppet === puppet) {
-                this.samePuppetCount++;
+            if(this.#prevPuppet === puppet) {
+                this.#samePuppetCount++;
             } else {
-                this.stack.push(puppet);
-                this.prevPuppet = puppet;
+                this.#stack.push(puppet);
+                this.#prevPuppet = puppet;
             }
 
-            if(this.samePuppetCount === BURST_CONDITION) {
+            if(this.#samePuppetCount === BURST_CONDITION) {
                 this.burstPuppet();
             }
         }
 
         burstPuppet() {
-            this.stack.pop();
-            this.prevPuppet = this.stack[this.stack.length-1];
-            this.score++;
-            this.samePuppetCount = 1;
+            this.#stack.pop();
+            this.#prevPuppet = this.#stack[this.#stack.length-1];
+            this.#score++;
+            this.#samePuppetCount = 1;
+        }
+
+        getScore() {
+            return this.#score;
         }
 
         init() {
-            this.stack = new Array();
-            this.prevPuppet = -1;
-            this.score = 0;
-            this.samePuppetCount = 1;
+            this.#stack = new Array();
+            this.#prevPuppet = -1;
+            this.#score = 0;
+            this.#samePuppetCount = 1;
         }
     }
 
@@ -125,7 +129,7 @@
             }
         });
         
-        return bucket.score;
+        return bucket.getScore();
     }
 
     function getBurstedPuppetCount(board, moves) {

@@ -21,7 +21,7 @@
 // *풀이와는 매우 다르게 풀었다. 풀이가 훨씬 간단하기는 한대... 내가 푼 방법이 더 선호된다.
 // *풀이 방법도 알아두자.
 
- {
+{
     const LEFT_PARENTHESIS = "(";
     const RIGHT_PARENTHESIS = ")";
     const RAZOR = "|";
@@ -36,27 +36,27 @@
         }
 
         addRazorCount(razorCount) {
-            this.razorCount+=razorCount;
+            this.#razorCount+=razorCount;
         }
 
         calcSlicedBarCount() {
-            this.slicedBarCount = this.razorCount + 1;
-            this.children.forEach((child) => {
-                this.slicedBarCount += child.calcSlicedBarCount(); 
+            this.#slicedBarCount = this.#razorCount + 1;
+            this.#children.forEach((child) => {
+                this.#slicedBarCount += child.calcSlicedBarCount(); 
             })
 
-            return this.slicedBarCount;
+            return this.#slicedBarCount;
         }
 
         addChild(child) {
-            this.razorCount += child.razorCount;
-            this.children.push(child);
+            this.#razorCount += child.#razorCount;
+            this.#children.push(child);
         }
 
         initBar() {
-            this.razorCount = 0;
-            this.slicedBarCount = 0;
-            this.children = new Array();
+            this.#razorCount = 0;
+            this.#slicedBarCount = 0;
+            this.#children = new Array();
         }
     }
 
