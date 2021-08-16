@@ -36,27 +36,27 @@
         }
 
         addRazorCount(razorCount) {
-            this.razorCount+=razorCount;
+            this.#razorCount+=razorCount;
         }
 
         calcSlicedBarCount() {
-            this.slicedBarCount = this.razorCount + 1;
-            this.children.forEach((child) => {
-                this.slicedBarCount += child.calcSlicedBarCount(); 
+            this.#slicedBarCount = this.#razorCount + 1;
+            this.#children.forEach((child) => {
+                this.#slicedBarCount += child.calcSlicedBarCount(); 
             })
 
-            return this.slicedBarCount;
+            return this.#slicedBarCount;
         }
 
         addChild(child) {
-            this.razorCount += child.razorCount;
-            this.children.push(child);
+            this.#razorCount += child.#razorCount;
+            this.#children.push(child);
         }
 
         initBar() {
-            this.razorCount = 0;
-            this.slicedBarCount = 0;
-            this.children = new Array();
+            this.#razorCount = 0;
+            this.#slicedBarCount = 0;
+            this.#children = new Array();
         }
     }
 
