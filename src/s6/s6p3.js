@@ -54,7 +54,7 @@
 // *다시 풀기
 // *0일 때의 처리에서 간과한 것이 있었다. 주의하자.
 
- {  
+{  
     const BURST_CONDITION = 2;
 
     class Bucket {

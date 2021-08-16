@@ -21,7 +21,7 @@
 // *풀이와는 매우 다르게 풀었다. 풀이가 훨씬 간단하기는 한대... 내가 푼 방법이 더 선호된다.
 // *풀이 방법도 알아두자.
 
- {
+{
     const LEFT_PARENTHESIS = "(";
     const RIGHT_PARENTHESIS = ")";
     const RAZOR = "|";

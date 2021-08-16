@@ -166,7 +166,7 @@
         const output = this.solution(inputCacheSize, inputWorks);
         
         console.log("S7P5\n");
-        test();
+        // test();
         console.log(`Input: ${inputCacheSize}\n ${inputWorks.join(" ")}`);
         console.log(`Output: ${output}\n`);
     }
