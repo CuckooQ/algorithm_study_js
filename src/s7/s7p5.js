@@ -39,8 +39,8 @@
         #size;
 
         constructor(size) {
-            this.stack = new Array();
-            this.size = size;
+            this.#stack = new Array();
+            this.#size = size;
         }
 
         isExist(work) {
@@ -49,7 +49,7 @@
         }
 
         getIdx(work) {
-            return this.stack.indexOf(work);
+            return this.#stack.indexOf(work);
         }
 
         isCacheHit(work) {
@@ -61,18 +61,22 @@
             return isCacheHit ? STATUS.CACHE_HIT : STATUS.CACHE_MISS;
         }
 
+        getStack() { 
+            return this.#stack;
+        }
+
         insert(work) {
             const status = this.getStatus(work);
             switch(status) {
                 case STATUS.CACHE_HIT: 
-                    this.stack.splice(this.getIdx(work));
-                    this.stack.unshift(work);
+                    this.#stack.splice(this.getIdx(work));
+                    this.#stack.unshift(work);
                     break;
                 case STATUS.CACHE_MISS:
-                    if(this.stack.length + 1 > this.size) {
-                        this.stack.pop();
+                    if(this.#stack.length + 1 > this.#size) {
+                        this.#stack.pop();
                     }
-                    this.stack.unshift(work);
+                    this.#stack.unshift(work);
                     break;
                 default:
             }
@@ -85,7 +89,7 @@
             cacheMemory.insert(work);
         });
 
-        return cacheMemory.stack;
+        return cacheMemory.getStack();
     }
 
     function solution(cacheSize, works){
@@ -162,7 +166,7 @@
         const output = this.solution(inputCacheSize, inputWorks);
         
         console.log("S7P5\n");
-        // test();
+        test();
         console.log(`Input: ${inputCacheSize}\n ${inputWorks.join(" ")}`);
         console.log(`Output: ${output}\n`);
     }
