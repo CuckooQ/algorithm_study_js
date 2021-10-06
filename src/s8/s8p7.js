@@ -7,7 +7,7 @@
  * Input Condition: 첫 번째 줄에 문제의 개수 N(1<=N<=20)과 제한 시간 M(10<=M<=300)이 주어진다.
  *                  두 번째 줄부터 N줄에 걸쳐 문제를 풀었을 때의 점수와 푸는데 걸리는 시간이 주어진다.
  * Output Condition: 첫 번째 줄에 제한 시간안에 얻을 수 있는 최대 점수를 출력한다.
- * Input Example: 5 20 
+ * Input Example: 5 20
  *                10 5
  *                25 12
  *                15 8
@@ -17,108 +17,120 @@
  */
 
 {
-    const MAX_Q_CNT = 20;
-    const MIN_Q_CNT = 1;
-    const MAX_LIMIT_TIME = 300;
-    const MIN_LIMIT_TIME = 10;
+  const MAX_Q_CNT = 20;
+  const MIN_Q_CNT = 1;
+  const MAX_LIMIT_TIME = 300;
+  const MIN_LIMIT_TIME = 10;
 
-    Q_SCORE_IDX = 0;
-    Q_TIME_IDX = 1;
-    RESULT_SCORE_IDX = 0;
-    RESULT_TIME_IDX = 1;
+  Q_SCORE_IDX = 0;
+  Q_TIME_IDX = 1;
+  RESULT_SCORE_IDX = 0;
+  RESULT_TIME_IDX = 1;
 
-    function getMaxScore(limitTime, qInfos) {
-        let maxScore = 0;
-        dfs(0);
-        return maxScore;
+  function getMaxScore(limitTime, qInfos) {
+    let maxScore = 0;
+    dfs(0);
+    return maxScore;
 
-        function dfs(idx, result = [0, 0]) {
-            if(result[RESULT_TIME_IDX] > limitTime) {
-                return;
-            }
+    function dfs(idx, result = [0, 0]) {
+      if (result[RESULT_TIME_IDX] > limitTime) {
+        return;
+      }
 
-            if (idx >= qInfos.length) {
-                if(result[RESULT_SCORE_IDX] > maxScore) {
-                    maxScore = result[RESULT_SCORE_IDX];
-                };
-
-                return;
-            }
-            const updatedResult = updateResultToQInfo(result, qInfos[idx]);
-            dfs(idx+1, updatedResult);
-            dfs(idx+1, result);
+      if (idx >= qInfos.length) {
+        if (result[RESULT_SCORE_IDX] > maxScore) {
+          maxScore = result[RESULT_SCORE_IDX];
         }
 
-        function updateResultToQInfo(result, qInfo) {
-            const tmpResult = Array.from(result);
-            tmpResult[RESULT_SCORE_IDX] = tmpResult[RESULT_SCORE_IDX ]+ qInfo[Q_SCORE_IDX];
-            tmpResult[RESULT_TIME_IDX] = tmpResult[RESULT_TIME_IDX ]+ qInfo[Q_TIME_IDX];
-            return tmpResult;
-        }
+        return;
+      }
+      const updatedResult = updateResultToQInfo(result, qInfos[idx]);
+      dfs(idx + 1, updatedResult);
+      dfs(idx + 1, result);
     }
 
-    function solution(limitTime, qInfos) {
-        const answer = getMaxScore(limitTime, qInfos);
-        return answer;
+    function updateResultToQInfo(result, qInfo) {
+      const tmpResult = Array.from(result);
+      tmpResult[RESULT_SCORE_IDX] =
+        tmpResult[RESULT_SCORE_IDX] + qInfo[Q_SCORE_IDX];
+      tmpResult[RESULT_TIME_IDX] =
+        tmpResult[RESULT_TIME_IDX] + qInfo[Q_TIME_IDX];
+      return tmpResult;
     }
+  }
 
-    function testToMaxQCnt() {
-        const testNum = 1;
-        const inputLimitTime = MAX_Q_CNT;
-        const inputQInfos = Array.from({length: MAX_Q_CNT}, () => [1, 1]);
-        const expectResult = MAX_Q_CNT;
-        const testFunction = solution;
-        const condition = (testFunction(inputLimitTime, inputQInfos) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function solution(limitTime, qInfos) {
+    const answer = getMaxScore(limitTime, qInfos);
+    return answer;
+  }
 
-    function testToMinQCnt() {
-        const testNum = 2;
-        const inputLimitTime = MIN_Q_CNT;
-        const inputQInfos = Array.from({length: MIN_Q_CNT}, () => [1, 1]);
-        const expectResult = MIN_Q_CNT;
-        const testFunction = solution;
-        const condition = (testFunction(inputLimitTime, inputQInfos) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMaxQCnt() {
+    const testNum = 1;
+    const inputLimitTime = MAX_Q_CNT;
+    const inputQInfos = Array.from({ length: MAX_Q_CNT }, () => [1, 1]);
+    const expectResult = MAX_Q_CNT;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputLimitTime, inputQInfos) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToMaxLimitTime() {
-        const testNum = 3;
-        const inputLimitTime = MAX_LIMIT_TIME;
-        const inputQInfos = Array.from({length: 1}, () => [1, MAX_LIMIT_TIME]);
-        const expectResult = 1;
-        const testFunction = solution;
-        const condition = (testFunction(inputLimitTime, inputQInfos) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMinQCnt() {
+    const testNum = 2;
+    const inputLimitTime = MIN_Q_CNT;
+    const inputQInfos = Array.from({ length: MIN_Q_CNT }, () => [1, 1]);
+    const expectResult = MIN_Q_CNT;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputLimitTime, inputQInfos) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToMinLimitTime() {
-        const testNum = 4;
-        const inputLimitTime = MIN_LIMIT_TIME;
-        const inputQInfos = Array.from({length: 1}, () => [1, MIN_LIMIT_TIME]);
-        const expectResult = 1;
-        const testFunction = solution;
-        const condition = (testFunction(inputLimitTime, inputQInfos) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMaxLimitTime() {
+    const testNum = 3;
+    const inputLimitTime = MAX_LIMIT_TIME;
+    const inputQInfos = Array.from({ length: 1 }, () => [1, MAX_LIMIT_TIME]);
+    const expectResult = 1;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputLimitTime, inputQInfos) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function main() {
-        const inputLimitTime = 20;
-        const inputQInfos = [[10, 5], [25, 12], [15, 8], [6, 3], [7, 4]];
-        const output = this.solution(inputLimitTime, inputQInfos);
-        
-        console.log("S8P7\n");
-        // test();
-        console.log(`Input: ${inputLimitTime}\n${inputQInfos.join("\n")}`);
-        console.log(`Output: ${output}\n`);
-    }
-    
-    function test() {
-        testToMaxQCnt();
-        testToMinQCnt();
-        testToMaxLimitTime();
-        testToMinLimitTime();
-    }
-    
-    main();
+  function testToMinLimitTime() {
+    const testNum = 4;
+    const inputLimitTime = MIN_LIMIT_TIME;
+    const inputQInfos = Array.from({ length: 1 }, () => [1, MIN_LIMIT_TIME]);
+    const expectResult = 1;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputLimitTime, inputQInfos) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function main() {
+    const inputLimitTime = 20;
+    const inputQInfos = [
+      [10, 5],
+      [25, 12],
+      [15, 8],
+      [6, 3],
+      [7, 4],
+    ];
+    const output = this.solution(inputLimitTime, inputQInfos);
+
+    console.log("S8P7\n");
+    // test();
+    console.log(`Input: ${inputLimitTime}\n${inputQInfos.join("\n")}`);
+    console.log(`Output: ${output}\n`);
+  }
+
+  function test() {
+    testToMaxQCnt();
+    testToMinQCnt();
+    testToMaxLimitTime();
+    testToMinLimitTime();
+  }
+
+  main();
 }

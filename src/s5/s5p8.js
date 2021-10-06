@@ -13,143 +13,146 @@
 // *다시 풀기.
 // *예제 이해도 못했다.
 
- {
-    const MAX_TEXT_LENGTH = 10_000;
-    
-    function getCharCountMap(text) {
-        const map = new Map();
-        text.split("").forEach((char)=> {
-            if(map.has(char)) {
-                map.set(char, map.get(char) + 1);
-            } else {
-                map.set(char, 1);
-            }
-        });
+{
+  const MAX_TEXT_LENGTH = 10_000;
 
-        return map;
+  function getCharCountMap(text) {
+    const map = new Map();
+    text.split("").forEach((char) => {
+      if (map.has(char)) {
+        map.set(char, map.get(char) + 1);
+      } else {
+        map.set(char, 1);
+      }
+    });
+
+    return map;
+  }
+
+  function isAnagramToMap(firstTextMap, secondTextMap) {
+    let isAnagram = true;
+    Array.from(firstTextMap).forEach((keyValPair) => {
+      if (!secondTextMap.has(keyValPair[0])) {
+        isAnagram = false;
+        return;
+      }
+
+      if (keyValPair[1] !== secondTextMap.get(keyValPair[0])) {
+        isAnagram = false;
+        return;
+      }
+    });
+
+    return isAnagram;
+  }
+
+  function isAnagram(firstText, secondText) {
+    const firstTextMap = getCharCountMap(firstText);
+    const secondTextMap = getCharCountMap(secondText);
+    return isAnagramToMap(firstTextMap, secondTextMap);
+  }
+
+  function getAnagramCount(firstText, secondText) {
+    const windowLen = secondText.length;
+    let count = 0;
+    let window = "";
+    firstText.split("").forEach((char, idx) => {
+      if (window.length < windowLen) {
+        window = window.concat(char);
+      }
+      if (idx >= windowLen) {
+        window = window.concat(char);
+        window = window.slice(1, window.length);
+      }
+
+      if (window.length === windowLen && isAnagram(window, secondText)) {
+        count++;
+      }
+    });
+
+    return count;
+  }
+
+  function solution(firstText, secondText) {
+    let answer = getAnagramCount(firstText, secondText);
+    return answer;
+  }
+
+  function testToMaxFirstTextLenMaxScondeTextLen() {
+    const testNum = 1;
+    let inputFirstText = "";
+    let inputFirstTextUnit = "";
+    for (let i = 0; i < 10; i++) {
+      inputFirstTextUnit += String.fromCharCode(97 + i);
     }
-
-    function isAnagramToMap(firstTextMap, secondTextMap) {
-        let isAnagram = true;
-        Array.from(firstTextMap).forEach((keyValPair) => {
-            if (!secondTextMap.has(keyValPair[0])) {
-                isAnagram = false;
-                return;
-            } 
-
-            if (keyValPair[1] !== secondTextMap.get(keyValPair[0])) {
-                isAnagram = false;
-                return;
-            }
-        });
-        
-        return isAnagram;
+    while (inputFirstText.length !== MAX_TEXT_LENGTH) {
+      inputFirstText += inputFirstTextUnit;
     }
+    const inputSecondText = inputFirstText;
+    const expectResult = 1;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstText, inputSecondText) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function isAnagram(firstText, secondText) {
-        const firstTextMap = getCharCountMap(firstText);
-        const secondTextMap = getCharCountMap(secondText);
-        return isAnagramToMap(firstTextMap, secondTextMap);
+  function testToMaxFirstTextLenMinScondeTextLen() {
+    const testNum = 2;
+    let inputFirstText = "";
+    let inputFirstTextUnit = "";
+    for (let i = 0; i < 10; i++) {
+      inputFirstTextUnit += String.fromCharCode(97 + i);
     }
+    while (inputFirstText.length !== MAX_TEXT_LENGTH) {
+      inputFirstText += inputFirstTextUnit;
+    }
+    const inputSecondText = String.fromCharCode(97);
+    const expectResult = 1000;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstText, inputSecondText) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function getAnagramCount(firstText, secondText) {
-        const windowLen = secondText.length;
-        let count = 0;
-        let window = "";
-        firstText.split("").forEach((char, idx) => {
-            if(window.length < windowLen) {
-                window = window.concat(char);
-            } 
-            if (idx >= windowLen) {
-                window = window.concat(char);
-                window = window.slice(1, window.length);
-            }
+  function testToMinFirstTextLen() {
+    const testNum = 3;
+    const inputFirstText = String.fromCharCode(97);
+    const inputSecondText = String.fromCharCode(98);
+    const expectResult = 0;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstText, inputSecondText) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-            if(window.length === windowLen && 
-                isAnagram(window, secondText)) {
-                count++;
-            }
-        });
-        
-        return count;
-    }
+  function testToUpperAndLowerCase() {
+    const testNum = 4;
+    const inputFirstWord = "abcdefghij";
+    const inputSecondWord = "ABCDEFGHIJ";
+    const expectResult = 0;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstWord, inputSecondWord) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function solution(firstText, secondText) {
-        let answer = getAnagramCount(firstText, secondText);
-        return answer;
-    }
+  function main() {
+    const inputFirstText = "bacaAacba";
+    const inputSecondText = "abc";
+    const output = this.solution(inputFirstText, inputSecondText);
 
-    function testToMaxFirstTextLenMaxScondeTextLen() {
-        const testNum = 1;
-        let inputFirstText = "";  
-        let inputFirstTextUnit = ""; 
-        for(let i=0; i<10; i++) {
-            inputFirstTextUnit += String.fromCharCode(97+i);
-        }
-        while(inputFirstText.length !== MAX_TEXT_LENGTH) {
-            inputFirstText += inputFirstTextUnit;
-        }
-        const inputSecondText = inputFirstText;   
-        const expectResult = 1;
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstText, inputSecondText) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+    console.log("S5P8\n");
+    // test();
+    console.log(`Input: ${inputFirstText}\n ${inputSecondText}`);
+    console.log(`Output: ${output}\n`);
+  }
 
-    function testToMaxFirstTextLenMinScondeTextLen() {
-        const testNum = 2;
-        let inputFirstText = "";  
-        let inputFirstTextUnit = ""; 
-        for(let i=0; i<10; i++) {
-            inputFirstTextUnit += String.fromCharCode(97+i);
-        }
-        while(inputFirstText.length !== MAX_TEXT_LENGTH) {
-            inputFirstText += inputFirstTextUnit;
-        }
-        const inputSecondText = String.fromCharCode(97);   
-        const expectResult = 1000;
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstText, inputSecondText) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function test() {
+    testToMaxFirstTextLenMaxScondeTextLen();
+    testToMaxFirstTextLenMinScondeTextLen();
+    testToMinFirstTextLen();
+    testToUpperAndLowerCase();
+  }
 
-    function testToMinFirstTextLen() {
-        const testNum = 3;
-        const inputFirstText = String.fromCharCode(97); 
-        const inputSecondText = String.fromCharCode(98); 
-        const expectResult = 0;
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstText, inputSecondText) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-
-    function testToUpperAndLowerCase() {
-        const testNum = 4;
-        const inputFirstWord = "abcdefghij";
-        const inputSecondWord = "ABCDEFGHIJ";   
-        const expectResult = 0;
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstWord, inputSecondWord) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-
-    function main() {
-        const inputFirstText = "bacaAacba";
-        const inputSecondText = "abc";
-        const output = this.solution(inputFirstText, inputSecondText);
-        
-        console.log("S5P8\n");
-        // test();
-        console.log(`Input: ${inputFirstText}\n ${inputSecondText}`);
-        console.log(`Output: ${output}\n`);
-    }
-    
-    function test() {
-        testToMaxFirstTextLenMaxScondeTextLen();
-        testToMaxFirstTextLenMinScondeTextLen();
-        testToMinFirstTextLen();
-        testToUpperAndLowerCase();
-    }
-    
-    main();
+  main();
 }

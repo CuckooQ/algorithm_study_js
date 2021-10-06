@@ -11,95 +11,97 @@
  *          시험 문제의 채점 결과가 주어졌을 때, 총 점수를 계산하기.
  * Input Condition: 첫 줄에 문제의 개수 N(1<=N<=100)이 주어진다. 둘 번째 줄에는 N개 문제의 채점 결과를 나타내는 0이나 1이 빈 칸을 사이에 두고 주어진다.
  *                  0은 문제의 답이 틀린 경우이고, 1은 문제의 답이 맞는 경우이다.
- * Output Condition: 첫 줄에 입력에서 주어진 채점 결과에 대해서 가산점을 고려한 총 점수를 출력한다. 
+ * Output Condition: 첫 줄에 입력에서 주어진 채점 결과에 대해서 가산점을 고려한 총 점수를 출력한다.
  * Input Example: 10
  *                1 0 1 1 1 0 0 1 1 0
  * Output Example: 10
  */
 
-function calculateScoreFrom(results) {
+{
+  function calculateScoreFrom(results) {
     const RIGHT = 1;
     const WRONG = 0;
     let score = 0;
     let point = 0;
     results.forEach((result) => {
-        if (result === RIGHT) {
-            point++;
-            score+=point;
-        }
-        if (result === WRONG) {
-            point = 0;
-        }
+      if (result === RIGHT) {
+        point++;
+        score += point;
+      }
+      if (result === WRONG) {
+        point = 0;
+      }
     });
 
     return score;
-}
+  }
 
-function solution (results) {
+  function solution(results) {
     let answer = calculateScoreFrom(results);
     return answer;
-}
+  }
 
-function testToMaxCount () {
+  function testToMaxCount() {
     const testNum = 1;
     const input = [];
-    for(let i=0; i<100; i++) {
-        i % 2 === 0 ? input.push(1) : input.push(0);
-    }   
+    for (let i = 0; i < 100; i++) {
+      i % 2 === 0 ? input.push(1) : input.push(0);
+    }
     const expectResult = 50;
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToMinCount () {
+  function testToMinCount() {
     const testNum = 2;
-    const input = [1];   
+    const input = [1];
     const expectResult = 1;
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToAllRight () {
+  function testToAllRight() {
     const testNum = 3;
-    const input = [];   
-    for(let i=0; i<10; i++) {
-        input.push(1);
-    }   
+    const input = [];
+    for (let i = 0; i < 10; i++) {
+      input.push(1);
+    }
     const expectResult = 55;
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToAllWrong () {
+  function testToAllWrong() {
     const testNum = 4;
-    const input = [];   
-    for(let i=0; i<10; i++) {
-        input.push(0);
-    }   
+    const input = [];
+    for (let i = 0; i < 10; i++) {
+      input.push(0);
+    }
     const expectResult = 0;
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function main () {
+  function main() {
     const input = [1, 0, 1, 1, 1, 0, 0, 1, 1, 0];
     const output = this.solution(input);
-    
+
     console.log("S2P4\n");
     // test();
-    console.log(`Input: ${input.join(' ')} `);
+    console.log(`Input: ${input.join(" ")} `);
     console.log(`Output: ${output}\n`);
-}
+  }
 
-function test() {
+  function test() {
     testToMaxCount();
     testToMinCount();
     testToAllRight();
     testToAllWrong();
-}
+  }
 
-main();
+  main();
+}

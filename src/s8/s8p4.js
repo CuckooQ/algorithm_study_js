@@ -6,7 +6,7 @@
  *                   단, 공집합은 출력하지 않는다.
  * Input Example: 3
  * Output Example: 1 2 3
- *                 1 2 
+ *                 1 2
  *                 1 3
  *                 1
  *                 2 3
@@ -20,52 +20,52 @@
  *        o       x
  *      2            2
  *    o   x        o   x
- *  3      3     3       3 
+ *  3      3     3       3
  * o  x   o  x  o x     o  x
  *  ...
-*/
+ */
 
 {
-    const MAX_NUM = 10;
-    const MIN_NUM = 1;
-    const INCLUDE_FLAG = 1;
-    const EXCLUDE_FLAG = 0;
+  const MAX_NUM = 10;
+  const MIN_NUM = 1;
+  const INCLUDE_FLAG = 1;
+  const EXCLUDE_FLAG = 0;
 
-    function dfs(endNum,  num = 1, subsets = [], includeFlags) {
-        if (!includeFlags) {
-            includeFlags = Array.from({length: endNum});
-        }
-
-        if (num > endNum) {
-            const subset = [];
-            for(let i=0; i<endNum; i++) {
-                if (includeFlags[i] === INCLUDE_FLAG) {
-                    subset.push(i+1);
-                } 
-            }
-            subset.length !== 0  && subsets.push(subset);
-
-            return subsets;
-        }
-        
-        includeFlags[num-1] = INCLUDE_FLAG;
-        dfs(endNum, num+1, subsets, includeFlags);
-        
-        includeFlags[num-1] = EXCLUDE_FLAG;
-        dfs(endNum, num+1, subsets, includeFlags);
-
-        return subsets;
+  function dfs(endNum, num = 1, subsets = [], includeFlags) {
+    if (!includeFlags) {
+      includeFlags = Array.from({ length: endNum });
     }
 
-    function solution(num) {
-        let subsets = dfs(num);
-        subsets = subsets.map((subset) => {
-            return subset.join(" ");
-        });
-        const answer = subsets.join("\n");
-        return answer;
+    if (num > endNum) {
+      const subset = [];
+      for (let i = 0; i < endNum; i++) {
+        if (includeFlags[i] === INCLUDE_FLAG) {
+          subset.push(i + 1);
+        }
+      }
+      subset.length !== 0 && subsets.push(subset);
+
+      return subsets;
     }
-    /*
+
+    includeFlags[num - 1] = INCLUDE_FLAG;
+    dfs(endNum, num + 1, subsets, includeFlags);
+
+    includeFlags[num - 1] = EXCLUDE_FLAG;
+    dfs(endNum, num + 1, subsets, includeFlags);
+
+    return subsets;
+  }
+
+  function solution(num) {
+    let subsets = dfs(num);
+    subsets = subsets.map((subset) => {
+      return subset.join(" ");
+    });
+    const answer = subsets.join("\n");
+    return answer;
+  }
+  /*
     function testToMaxNum() {
         const testNum = 1;
         const input = MAX_NUM;   
@@ -75,29 +75,29 @@
         validateTestResult(testNum, condition);
     }
     */
-    function testToMinNum() {
-        const testNum = 2;
-        const input = MIN_NUM;   
-        const expectResult = "1";
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMinNum() {
+    const testNum = 2;
+    const input = MIN_NUM;
+    const expectResult = "1";
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function main() {
-        const input = 3;
-        const output = this.solution(input);
-        
-        console.log("S8P4\n");
-        // test();
-        console.log(`Input: ${input} `);
-        console.log(`Output: ${output}\n`);
-    }
-    
-    function test() {
-        // testToMaxNum();
-        testToMinNum();
-    }
-    
-    main();
+  function main() {
+    const input = 3;
+    const output = this.solution(input);
+
+    console.log("S8P4\n");
+    // test();
+    console.log(`Input: ${input} `);
+    console.log(`Output: ${output}\n`);
+  }
+
+  function test() {
+    // testToMaxNum();
+    testToMinNum();
+  }
+
+  main();
 }

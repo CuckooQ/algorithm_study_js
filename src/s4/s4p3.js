@@ -14,145 +14,149 @@
  *                3 4 1 2
  *                4 3 2 1
  *                3 1 4 2
- * Output Example: 3  => Mento: 3 Mentee: 1, Mento: 3 Mentee: 2, Mentt: 4 Mentee: 2 
+ * Output Example: 3  => Mento: 3 Mentee: 1, Mento: 3 Mentee: 2, Mentt: 4 Mentee: 2
  */
-// *다시 풀기. 
-// *예제의 출력 값이 나온 이유도 이해 못했다. 
+// *다시 풀기.
+// *예제의 출력 값이 나온 이유도 이해 못했다.
 // *브루트 포스의 대표 문제.
 
- {
-    const MAX_STUDENT_COUNT = 20;
-    const MAX_TEST_COUNT = 10;
-    const MIN_STUDENT_COUNT = 1;
-    const MIN_TEST_COUNT = 1;
+{
+  const MAX_STUDENT_COUNT = 20;
+  const MAX_TEST_COUNT = 10;
+  const MIN_STUDENT_COUNT = 1;
+  const MIN_TEST_COUNT = 1;
 
-    function isAvailableMento (mentoMenteePair, testResults) {
-        const mento = mentoMenteePair[0];
-        const mentee = mentoMenteePair[1];
-        
-        if (mento === mentee) {
-            return false;
+  function isAvailableMento(mentoMenteePair, testResults) {
+    const mento = mentoMenteePair[0];
+    const mentee = mentoMenteePair[1];
+
+    if (mento === mentee) {
+      return false;
+    }
+
+    const testCount = testResults.length;
+    const studentCount = testResults[0].length;
+    let mentoRank = 0;
+    let menteeRank = 0;
+    let testResult = [];
+    for (let i = 0; i < testCount; i++) {
+      testResult = testResults[i];
+      for (let rank = 0; rank < studentCount; rank++) {
+        if (testResult[rank] === mento) {
+          mentoRank = rank;
+        }
+        if (testResult[rank] === mentee) {
+          menteeRank = rank;
         }
 
-        const testCount = testResults.length;
-        const studentCount = testResults[0].length;
-        let mentoRank = 0;
-        let menteeRank = 0;
-        let testResult = [];
-        for(let i=0; i<testCount; i++) {    
-            testResult = testResults[i];
-            for (let rank=0; rank<studentCount; rank++) {
-                if (testResult[rank] === mento) {
-                    mentoRank = rank;
-                }
-                if (testResult[rank] === mentee) {
-                    menteeRank = rank;
-                }
-
-                if (mentoRank !== 0 && menteeRank !== 0) {
-                    break;
-                }
-            }
-
-            if (mentoRank < menteeRank) {
-                return false;
-            } 
-
-            mentoRank = 0;
-            menteeRank = 0;
+        if (mentoRank !== 0 && menteeRank !== 0) {
+          break;
         }
-        
-        return true;
+      }
+
+      if (mentoRank < menteeRank) {
+        return false;
+      }
+
+      mentoRank = 0;
+      menteeRank = 0;
     }
 
-    function getMentoMenteePairCount (testResults){
-        const studentCount = testResults[0].length;
-        const mentoMenteePairs = [];
-        for (let mento=1; mento<=studentCount; mento++) {
-            for (let mentee=1; mentee<=studentCount; mentee++) {
-                const mentoMenteePair = [mento, mentee];
-                if (isAvailableMento(mentoMenteePair, testResults)) {
-                    mentoMenteePairs.push(mentoMenteePair);
-                }
-            }    
+    return true;
+  }
+
+  function getMentoMenteePairCount(testResults) {
+    const studentCount = testResults[0].length;
+    const mentoMenteePairs = [];
+    for (let mento = 1; mento <= studentCount; mento++) {
+      for (let mentee = 1; mentee <= studentCount; mentee++) {
+        const mentoMenteePair = [mento, mentee];
+        if (isAvailableMento(mentoMenteePair, testResults)) {
+          mentoMenteePairs.push(mentoMenteePair);
         }
-
-        return mentoMenteePairs.length;
+      }
     }
 
-    function solution (testResults) {
-        const answer = getMentoMenteePairCount(testResults);
-        return answer;
-    }
+    return mentoMenteePairs.length;
+  }
 
-    function createTestInput (studentCount, testCount) {
-        const input = [];
-        for(let i=0; i< testCount; i++) {
-            const testResults = [];
-            for(let j=1; j<= studentCount; j++) {
-                testResults.push(j);
-            }
-            if (i % 2 === 0) {
-                testResults.reverse();
-            }
-            
-            input.push(testResults);
-        }
-        return input;
-    }
+  function solution(testResults) {
+    const answer = getMentoMenteePairCount(testResults);
+    return answer;
+  }
 
-    function testToMaxStudentsMaxTests () {
-        const testNum = 1;
-        const input = createTestInput(MAX_STUDENT_COUNT, MAX_TEST_COUNT);
-        const expectResult = 0;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function createTestInput(studentCount, testCount) {
+    const input = [];
+    for (let i = 0; i < testCount; i++) {
+      const testResults = [];
+      for (let j = 1; j <= studentCount; j++) {
+        testResults.push(j);
+      }
+      if (i % 2 === 0) {
+        testResults.reverse();
+      }
 
-    function testToMaxStudentsMinTests () {
-        const testNum = 2;
-        const input = createTestInput(MAX_STUDENT_COUNT, MIN_TEST_COUNT);
-        const expectResult = sumToSelectedNum(MAX_STUDENT_COUNT-1);
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
+      input.push(testResults);
     }
+    return input;
+  }
 
-    function testToMinStudentsMaxTests () {
-        const testNum = 3;
-        const input = createTestInput(MIN_STUDENT_COUNT, MAX_TEST_COUNT);
-        const expectResult = 0;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMaxStudentsMaxTests() {
+    const testNum = 1;
+    const input = createTestInput(MAX_STUDENT_COUNT, MAX_TEST_COUNT);
+    const expectResult = 0;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToMinStudentsMinTests () {
-        const testNum = 4;
-        const input = createTestInput(MIN_STUDENT_COUNT, MIN_TEST_COUNT);
-        const expectResult = 0;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMaxStudentsMinTests() {
+    const testNum = 2;
+    const input = createTestInput(MAX_STUDENT_COUNT, MIN_TEST_COUNT);
+    const expectResult = sumToSelectedNum(MAX_STUDENT_COUNT - 1);
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function main () {
-        const input = [[3, 4, 1, 2], [4, 3, 1, 2], [3, 1, 4, 2]];
-        const output = this.solution(input);
-        
-        console.log("S4P3\n");
-        // test();
-        console.log(`Input: ${input.join('\n')} `);
-        console.log(`Output: ${output}\n`);
-    }
-    
-    function test() {
-        testToMaxStudentsMaxTests();
-        testToMaxStudentsMinTests();
-        testToMinStudentsMaxTests();
-        testToMinStudentsMinTests();
-    }
-    
-    main();
+  function testToMinStudentsMaxTests() {
+    const testNum = 3;
+    const input = createTestInput(MIN_STUDENT_COUNT, MAX_TEST_COUNT);
+    const expectResult = 0;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToMinStudentsMinTests() {
+    const testNum = 4;
+    const input = createTestInput(MIN_STUDENT_COUNT, MIN_TEST_COUNT);
+    const expectResult = 0;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function main() {
+    const input = [
+      [3, 4, 1, 2],
+      [4, 3, 1, 2],
+      [3, 1, 4, 2],
+    ];
+    const output = this.solution(input);
+
+    console.log("S4P3\n");
+    // test();
+    console.log(`Input: ${input.join("\n")} `);
+    console.log(`Output: ${output}\n`);
+  }
+
+  function test() {
+    testToMaxStudentsMaxTests();
+    testToMaxStudentsMinTests();
+    testToMinStudentsMaxTests();
+    testToMinStudentsMinTests();
+  }
+
+  main();
 }

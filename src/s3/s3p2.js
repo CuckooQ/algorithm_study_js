@@ -12,147 +12,148 @@
 // *다시 풀기.
 
 {
-    const YES = "YES";
-    const NO = "NO";
+  const YES = "YES";
+  const NO = "NO";
 
-    function isEmptyWord(word) {
-        return word.length === 0;
-    }
+  function isEmptyWord(word) {
+    return word.length === 0;
+  }
 
-    function isPalindrome(word) {
-        if (isEmptyWord(word)) {
-            return false;
-        }
-        
-        word = word.toUpperCase();
-        const reversedWord = word.split('').reverse().join('');
-        
-        return word === reversedWord;
-    }
-    
-    function filterToOnlyStr(text) {
-        return text.toLowerCase().replace(/[^a-z]/g, '');
+  function isPalindrome(word) {
+    if (isEmptyWord(word)) {
+      return false;
     }
 
-    function solution (text) {
-        let answer;
-        const filteredText = filterToOnlyStr(text);
-        answer = isPalindrome(filteredText) ? YES : NO;
-        return answer;
-    }
+    word = word.toUpperCase();
+    const reversedWord = word.split("").reverse().join("");
 
-    function testToPalindrome () {
-        const testNum = 1;
-        const input = "cuc";   
-        const expectResult = YES;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+    return word === reversedWord;
+  }
 
-    function testToNotPalindrome () {
-        const testNum = 2;
-        const input = "cdab";   
-        const expectResult = NO;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-    
-    function testToMaxLenWord () {
-        const testNum = 3;
-        const input = "abcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcba";   
-        const expectResult = YES;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-    
-    function testToMinLenWord () {
-        const testNum = 4;
-        const input = "";   
-        const expectResult = NO;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-    
-    function testToAllSameChar () {
-        const testNum = 5;
-        const input = "aaaaaaaaaa";   
-        const expectResult = YES;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-    
-    function testToUppernLower () {
-        const testNum = 6;
-        const input = "aBdACcaDbA";   
-        const expectResult = YES;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }    
+  function filterToOnlyStr(text) {
+    return text.toLowerCase().replace(/[^a-z]/g, "");
+  }
 
-    function testToOddLenWord () {
-        const testNum = 7;
-        const input = "abcba";   
-        const expectResult = YES;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }   
-     
-    function testToEvenLenWord () {
-        const testNum = 8;
-        const input = "abccba";   
-        const expectResult = YES;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }    
+  function solution(text) {
+    let answer;
+    const filteredText = filterToOnlyStr(text);
+    answer = isPalindrome(filteredText) ? YES : NO;
+    return answer;
+  }
 
-    function testToOnlyStrWord () {
-        const testNum = 9;
-        const input = "abcdcba";   
-        const expectResult = YES;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }    
+  function testToPalindrome() {
+    const testNum = 1;
+    const input = "cuc";
+    const expectResult = YES;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToNotOnlyStrWord () {
-        const testNum = 10;
-        const input = "!@#$$%^&^*&(*()_+_}{<>?',.[]ab,cc!b!a";   
-        const expectResult = YES;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-    
-    function main () {
-        const input = "found7, time: study; Yduts; emit, 7Dnuof";
-        const output = this.solution(input);
-        
-        console.log("S3P2\n");
-        // test();
-        console.log(`Input: ${input} `);
-        console.log(`Output: ${output}\n`);
-    }
-    
-    function test() {
-        testToPalindrome();
-        testToNotPalindrome();
-        testToMaxLenWord();
-        testToMinLenWord();
-        testToAllSameChar();
-        testToUppernLower();
-        testToOddLenWord();
-        testToEvenLenWord();
-        testToOnlyStrWord();
-        testToNotOnlyStrWord();
-    }
-    
-    main();
+  function testToNotPalindrome() {
+    const testNum = 2;
+    const input = "cdab";
+    const expectResult = NO;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToMaxLenWord() {
+    const testNum = 3;
+    const input =
+      "abcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcbaabcdeedcba";
+    const expectResult = YES;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToMinLenWord() {
+    const testNum = 4;
+    const input = "";
+    const expectResult = NO;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToAllSameChar() {
+    const testNum = 5;
+    const input = "aaaaaaaaaa";
+    const expectResult = YES;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToUppernLower() {
+    const testNum = 6;
+    const input = "aBdACcaDbA";
+    const expectResult = YES;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToOddLenWord() {
+    const testNum = 7;
+    const input = "abcba";
+    const expectResult = YES;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToEvenLenWord() {
+    const testNum = 8;
+    const input = "abccba";
+    const expectResult = YES;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToOnlyStrWord() {
+    const testNum = 9;
+    const input = "abcdcba";
+    const expectResult = YES;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToNotOnlyStrWord() {
+    const testNum = 10;
+    const input = "!@#$$%^&^*&(*()_+_}{<>?',.[]ab,cc!b!a";
+    const expectResult = YES;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function main() {
+    const input = "found7, time: study; Yduts; emit, 7Dnuof";
+    const output = this.solution(input);
+
+    console.log("S3P2\n");
+    // test();
+    console.log(`Input: ${input} `);
+    console.log(`Output: ${output}\n`);
+  }
+
+  function test() {
+    testToPalindrome();
+    testToNotPalindrome();
+    testToMaxLenWord();
+    testToMinLenWord();
+    testToAllSameChar();
+    testToUppernLower();
+    testToOddLenWord();
+    testToEvenLenWord();
+    testToOnlyStrWord();
+    testToNotOnlyStrWord();
+  }
+
+  main();
 }

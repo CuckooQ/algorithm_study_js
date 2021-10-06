@@ -10,86 +10,86 @@
  */
 
 {
-    function parseToNumber(text) {
-         return Number(text);
+  function parseToNumber(text) {
+    return Number(text);
+  }
+
+  function filterToOnlyNumber(text) {
+    return text.replace(/[^0-9]/g, "");
+  }
+
+  function solution(text) {
+    let answer = "";
+    const filteredText = filterToOnlyNumber(text);
+    if (text.length !== 0) {
+      answer = parseToNumber(filteredText);
     }
 
-    function filterToOnlyNumber(text) {
-        return text.replace(/[^0-9]/g, '');
-    }
-    
-    function solution (text) {
-        let answer = "";
-        const filteredText = filterToOnlyNumber(text);
-        if (text.length !== 0) {
-            answer = parseToNumber(filteredText);
-        } 
-    
-        return answer;
-    }
+    return answer;
+  }
 
-    function testToMaxLenText () {
-        const testNum = 1;
-        const input = "a1b2c3d4e5f6g7h8ijklabcdefghijabcdefghijabcdefghij";   
-        const expectResult = 12345678;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-    
-    function testToMinLenText () {
-        const testNum = 2;
-        const input = "";   
-        const expectResult = "";
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMaxLenText() {
+    const testNum = 1;
+    const input = "a1b2c3d4e5f6g7h8ijklabcdefghijabcdefghijabcdefghij";
+    const expectResult = 12345678;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToOnlyNumber () {
-        const testNum = 3;
-        const input = "1234569";   
-        const expectResult = 1234569;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMinLenText() {
+    const testNum = 2;
+    const input = "";
+    const expectResult = "";
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToNotOnlyNumber () {
-        const testNum = 4;
-        const input = "a123b456c9d";   
-        const expectResult = 1234569;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToOnlyNumber() {
+    const testNum = 3;
+    const input = "1234569";
+    const expectResult = 1234569;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToPrefixZeroText () {
-        const testNum = 5;
-        const input = "0ab0c0de1";   
-        const expectResult = 1;
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToNotOnlyNumber() {
+    const testNum = 4;
+    const input = "a123b456c9d";
+    const expectResult = 1234569;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function main () {
-        const input = "g0en2T0s8eSoft";
-        const output = this.solution(input);
-        
-        console.log("S3P3\n");
-        // test();
-        console.log(`Input: ${input} `);
-        console.log(`Output: ${output}\n`);
-    }
+  function testToPrefixZeroText() {
+    const testNum = 5;
+    const input = "0ab0c0de1";
+    const expectResult = 1;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function test() {
-        testToMaxLenText();
-        testToMinLenText();
-        testToOnlyNumber();
-        testToNotOnlyNumber();
-        testToPrefixZeroText();
-    }
+  function main() {
+    const input = "g0en2T0s8eSoft";
+    const output = this.solution(input);
 
-    main();
+    console.log("S3P3\n");
+    // test();
+    console.log(`Input: ${input} `);
+    console.log(`Output: ${output}\n`);
+  }
+
+  function test() {
+    testToMaxLenText();
+    testToMinLenText();
+    testToOnlyNumber();
+    testToNotOnlyNumber();
+    testToPrefixZeroText();
+  }
+
+  main();
 }
