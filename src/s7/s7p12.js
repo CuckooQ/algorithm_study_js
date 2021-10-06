@@ -9,7 +9,7 @@
  * Output Condition: 첫 번째 줄에 가장 가까운 두 말의 최대 거리를 출력하기.
  * Input Example: 5 3
  *                1 2 8 4 9
- * Output Example: 3
+ * Output Example: 3 (1, 4, 8 or 9 --> 4 - 1 = 3)
  */
 // * 다시 풀기
 // * '가장 가까운 두 말의 최대 거리' 이 표현이 헷갈리게 만든다.
