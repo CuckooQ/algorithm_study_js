@@ -15,124 +15,124 @@
 // *암기 아닌가...
 
 {
-    const INIT_VALUE = 1;
-    const LAST_VALUE = 7;
+  const INIT_VALUE = 1;
+  const LAST_VALUE = 7;
 
-    const TRAVERSE = {
-        PREORDER: "PREORDER",
-        INORDER: "INORDER",
-        POSTORDER: "POSTORDER"
-    } 
+  const TRAVERSE = {
+    PREORDER: "PREORDER",
+    INORDER: "INORDER",
+    POSTORDER: "POSTORDER",
+  };
 
-    function getValuesInOrderOfPreorder() {
-        return dfsForPreorder();
+  function getValuesInOrderOfPreorder() {
+    return dfsForPreorder();
+  }
+
+  function getValuesInOrderOfInorder() {
+    return dfsForInorder();
+  }
+
+  function getValuesInOrderOfPostorder() {
+    return dfsForPostorder();
+  }
+
+  function dfsForPreorder(val = INIT_VALUE, vals = []) {
+    if (val > LAST_VALUE) {
+      return vals;
+    } else {
+      vals.push(val);
+      dfsForPreorder(val * 2, vals);
+      dfsForPreorder(val * 2 + 1, vals);
     }
 
-    function getValuesInOrderOfInorder() {
-        return dfsForInorder();
+    return vals;
+  }
+
+  function dfsForInorder(val = INIT_VALUE, vals = []) {
+    if (val > LAST_VALUE) {
+      return vals;
+    } else {
+      dfsForInorder(val * 2, vals);
+      vals.push(val);
+      dfsForInorder(val * 2 + 1, vals);
     }
 
-    function getValuesInOrderOfPostorder() {
-        return dfsForPostorder();
+    return vals;
+  }
+
+  function dfsForPostorder(val = INIT_VALUE, vals = []) {
+    if (val > LAST_VALUE) {
+      return vals;
+    } else {
+      dfsForPostorder(val * 2, vals);
+      dfsForPostorder(val * 2 + 1, vals);
+      vals.push(val);
     }
 
-    function dfsForPreorder(val = INIT_VALUE, vals = []){
-        if(val > LAST_VALUE) {
-            return vals;
-        } else {
-            vals.push(val);
-            dfsForPreorder(val*2, vals);
-            dfsForPreorder(val*2 + 1, vals);
-        }
+    return vals;
+  }
 
-        return vals;
+  function getValuesInOrderOfTraverse(traverse) {
+    switch (traverse) {
+      case TRAVERSE.PREORDER:
+        return getValuesInOrderOfPreorder();
+      case TRAVERSE.INORDER:
+        return getValuesInOrderOfInorder();
+      case TRAVERSE.POSTORDER:
+        return getValuesInOrderOfPostorder();
+      default:
+        return [];
     }
+  }
 
-    function dfsForInorder(val = INIT_VALUE, vals = []){
-        if(val > LAST_VALUE) {
-            return vals;
-        } else {
-            dfsForInorder(val*2, vals);
-            vals.push(val);
-            dfsForInorder(val*2 + 1, vals);
-        }
+  function solution(traverse) {
+    const values = getValuesInOrderOfTraverse(traverse);
+    const answer = values.join(" ");
+    return answer;
+  }
 
-        return vals;
-    }
+  function testToPreorder() {
+    const testNum = 1;
+    const input = TRAVERSE.PREORDER;
+    const expectResult = "1 2 4 5 3 6 7";
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function dfsForPostorder(val = INIT_VALUE, vals = []){
-        if(val > LAST_VALUE) {
-            return vals;
-        } else {
-            dfsForPostorder(val*2, vals);
-            dfsForPostorder(val*2 + 1, vals);
-            vals.push(val);
-        }
+  function testToInorder() {
+    const testNum = 2;
+    const input = TRAVERSE.INORDER;
+    const expectResult = "4 2 5 1 6 3 7";
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-        return vals;
-    }
+  function testToPostorder() {
+    const testNum = 3;
+    const input = TRAVERSE.POSTORDER;
+    const expectResult = "4 5 2 6 7 3 1";
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function getValuesInOrderOfTraverse(traverse) {
-        switch(traverse) {
-            case TRAVERSE.PREORDER:
-                return getValuesInOrderOfPreorder();
-            case TRAVERSE.INORDER:
-                return getValuesInOrderOfInorder();
-            case TRAVERSE.POSTORDER:
-                return getValuesInOrderOfPostorder();   
-            default:
-                return [];        
-        }
-    }
+  function main() {
+    const input = TRAVERSE.PREORDER;
+    const output = this.solution(input);
 
-    function solution(traverse) {
-        const values = getValuesInOrderOfTraverse(traverse);
-        const answer = values.join(" ");
-        return answer;
-    }
+    console.log("S8P3\n");
+    // test();
+    console.log(`Input: ${input} `);
+    console.log(`Output: ${output}\n`);
+  }
 
-    function testToPreorder() {
-        const testNum = 1;
-        const input = TRAVERSE.PREORDER;   
-        const expectResult = "1 2 4 5 3 6 7";
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function test() {
+    testToPreorder();
+    testToInorder();
+    testToPostorder();
+  }
 
-    function testToInorder() {
-        const testNum = 2;
-        const input = TRAVERSE.INORDER;     
-        const expectResult = "4 2 5 1 6 3 7";
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-
-    function testToPostorder() {
-        const testNum = 3;
-        const input = TRAVERSE.POSTORDER;     
-        const expectResult = "4 5 2 6 7 3 1";
-        const testFunction = solution;
-        const condition = (testFunction(input) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
-
-    function main() {
-        const input = TRAVERSE.PREORDER;
-        const output = this.solution(input);
-        
-        console.log("S8P3\n");
-        // test();
-        console.log(`Input: ${input} `);
-        console.log(`Output: ${output}\n`);
-    }
-    
-    function test() {
-        testToPreorder();
-        testToInorder();
-        testToPostorder();
-    }
-    
-    main();
+  main();
 }

@@ -7,62 +7,66 @@
  * Output Example: ITISTIMETOSTUDY
  */
 
-function replaceToUppercase(text) {
+{
+  function replaceToUppercase(text) {
     return text.toString().toUpperCase();
-}
+  }
 
-function solution (text) {
+  function solution(text) {
     let answer;
     answer = replaceToUppercase(text);
     return answer;
-}
+  }
 
-function testToMaxMinValue () {
+  function testToMaxMinValue() {
     const testNum = 1;
     const testFunction = solution;
-    let input = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";   
-    let expectResult = "ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ";
-    let condition = (testFunction(input) === expectResult);    
+    let input =
+      "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+    let expectResult =
+      "ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ";
+    let condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
 
-    input = "";   
+    input = "";
     expectResult = "";
-    condition = (testFunction(input) === expectResult);    
+    condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testWithSpecialChar () {
+  function testWithSpecialChar() {
     const testNum = 2;
-    const input = "a!b#c$d%e^f&g*h(i)j_-=[];';:{}?<>',./";   
+    const input = "a!b#c$d%e^f&g*h(i)j_-=[];';:{}?<>',./";
     const expectResult = "A!B#C$D%E^F&G*H(I)J_-=[];';:{}?<>',./";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testWithNumber () {
+  function testWithNumber() {
     const testNum = 3;
-    const input = "a1b2c3d4e5f6g7h8i9j0";   
+    const input = "a1b2c3d4e5f6g7h8i9j0";
     const expectResult = "A1B2C3D4E5F6G7H8I9J0";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function main () {
+  function main() {
     const input = "ItisTimeToStudy";
     const output = this.solution(input);
-    
+
     console.log("S1P12\n");
     // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
-}
+  }
 
-function test() {
+  function test() {
     testToMaxMinValue();
     testWithSpecialChar();
     testWithNumber();
-}
+  }
 
-main();
+  main();
+}

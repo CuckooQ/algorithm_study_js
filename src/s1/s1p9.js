@@ -7,65 +7,67 @@
  * Output Example: B#N#N#
  */
 
-function solution (text) {
-    const BEFORE_CHAR = 'A';
-    const AFTER_CHAR = '#';
+{
+  function solution(text) {
+    const BEFORE_CHAR = "A";
+    const AFTER_CHAR = "#";
     let answer;
     answer = text.toString().replaceAll(BEFORE_CHAR, AFTER_CHAR);
     return answer;
-}
+  }
 
-function testNoStr () {
+  function testNoStr() {
     const testNum = 1;
-    const input = "";   
+    const input = "";
     const expectResult = "";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testhasNotAchar () {
+  function testhasNotAchar() {
     const testNum = 2;
-    const input = "CHOCO";   
+    const input = "CHOCO";
     const expectResult = "CHOCO";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testHasOneAchar () {
+  function testHasOneAchar() {
     const testNum = 3;
-    const input = "CHOCOLATE";   
+    const input = "CHOCOLATE";
     const expectResult = "CHOCOL#TE";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testHasAllAchar () {
+  function testHasAllAchar() {
     const testNum = 4;
-    const input = "AAAAAAAAAAAAAAA";   
+    const input = "AAAAAAAAAAAAAAA";
     const expectResult = "###############";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function main () {
+  function main() {
     const input = "BANANA";
     const output = this.solution(input);
-    
+
     console.log("S1P9\n");
     // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
-}
+  }
 
-function test() {
+  function test() {
     testNoStr();
     testhasNotAchar();
     testHasOneAchar();
     testHasAllAchar();
-}
+  }
 
-main();
+  main();
+}

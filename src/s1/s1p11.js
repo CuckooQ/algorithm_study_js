@@ -7,43 +7,46 @@
  * Output Example: 3
  */
 
-// 입력 값의 대문자 수 출력 
-function getCountOfUpperCase(text) {
+{
+  // 입력 값의 대문자 수 출력
+  function getCountOfUpperCase(text) {
     return (text.match(/[A-Z]/g) || []).length;
-}
+  }
 
-function solution (text) {
+  function solution(text) {
     let answer;
     answer = getCountOfUpperCase(text);
     return answer;
-}
+  }
 
-function testToMaxMinVal () {
+  function testToMaxMinVal() {
     const testNum = 1;
     const testFunction = solution;
-    let input = "ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ";   
-    let expectResult = 100; 
-    let condition = (testFunction(input) === expectResult);  
+    let input =
+      "ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ";
+    let expectResult = 100;
+    let condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
 
-    input = "";   
+    input = "";
     expectResult = 0;
-    condition = (testFunction(input) === expectResult);  
+    condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function main () {
+  function main() {
     const input = "KoreaTimeGood";
     const output = this.solution(input);
-    
+
     console.log("S1P11\n");
     // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
-}
+  }
 
-function test() {
+  function test() {
     testToMaxMinVal();
-}
+  }
 
-main();
+  main();
+}

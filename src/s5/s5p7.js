@@ -14,98 +14,103 @@
  * Output Example: YES
  */
 
- {
-    const YES = "YES";
-    const NO = "NO";
+{
+  const YES = "YES";
+  const NO = "NO";
 
-    function getCharCountMap(text) {
-        const charMap = new Map();
-        text.split("").forEach((char)=> {
-            if (charMap.has(char)) {
-                charMap.set(char, charMap.get(char) + 1);
-            } else {
-                charMap.set(char, 1);
-            }
-        });
+  function getCharCountMap(text) {
+    const charMap = new Map();
+    text.split("").forEach((char) => {
+      if (charMap.has(char)) {
+        charMap.set(char, charMap.get(char) + 1);
+      } else {
+        charMap.set(char, 1);
+      }
+    });
 
-        return charMap;
-    }
+    return charMap;
+  }
 
-    function isAnagramToMap(firstWordMap, secondWordMap) {
-        let isAnagram = true;
-        Array.from(firstWordMap).forEach((keyValPair) => {
-            if (!secondWordMap.has(keyValPair[0])){
-                isAnagram = false;
-                return;
-            } 
+  function isAnagramToMap(firstWordMap, secondWordMap) {
+    let isAnagram = true;
+    Array.from(firstWordMap).forEach((keyValPair) => {
+      if (!secondWordMap.has(keyValPair[0])) {
+        isAnagram = false;
+        return;
+      }
 
-            if(keyValPair[1] !== secondWordMap.get(keyValPair[0])){
-                isAnagram = false;
-                return;
-            }
-        })
+      if (keyValPair[1] !== secondWordMap.get(keyValPair[0])) {
+        isAnagram = false;
+        return;
+      }
+    });
 
-        return isAnagram;
-    }
+    return isAnagram;
+  }
 
-    function isAnagram(firstWord, secondWord) {
-        const firstWordMap = getCharCountMap(firstWord);
-        const secondWordMap = getCharCountMap(secondWord);
+  function isAnagram(firstWord, secondWord) {
+    const firstWordMap = getCharCountMap(firstWord);
+    const secondWordMap = getCharCountMap(secondWord);
 
-        return isAnagramToMap(firstWordMap, secondWordMap);
-    }
+    return isAnagramToMap(firstWordMap, secondWordMap);
+  }
 
-    function solution(firstWord, secondWord) {
-        const answer = isAnagram(firstWord, secondWord) ? YES : NO;
-        return answer;
-    }
+  function solution(firstWord, secondWord) {
+    const answer = isAnagram(firstWord, secondWord) ? YES : NO;
+    return answer;
+  }
 
-    function testToMaxLen() {
-        const testNum = 1;
-        const inputFirstWord = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
-        const inputSecondWord = "jihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcba";   
-        const expectResult = YES;
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstWord, inputSecondWord) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMaxLen() {
+    const testNum = 1;
+    const inputFirstWord =
+      "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+    const inputSecondWord =
+      "jihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcbajihgfedcba";
+    const expectResult = YES;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstWord, inputSecondWord) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToMinLen() {
-        const testNum = 2;
-        const inputFirstWord = "a";
-        const inputSecondWord = "b";   
-        const expectResult = NO;
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstWord, inputSecondWord) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToMinLen() {
+    const testNum = 2;
+    const inputFirstWord = "a";
+    const inputSecondWord = "b";
+    const expectResult = NO;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstWord, inputSecondWord) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToUpperAndLowerCase() {
-        const testNum = 3;
-        const inputFirstWord = "abcdefghij";
-        const inputSecondWord = "ABCDEFGHIJ";   
-        const expectResult = NO;
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstWord, inputSecondWord) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function testToUpperAndLowerCase() {
+    const testNum = 3;
+    const inputFirstWord = "abcdefghij";
+    const inputSecondWord = "ABCDEFGHIJ";
+    const expectResult = NO;
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstWord, inputSecondWord) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function main() {
-        const inputFirstWord = "AbaAeCe";
-        const inputSecondWord = "baeeACA";   
-        const output = this.solution(inputFirstWord, inputSecondWord);
-        
-        console.log("S5P7\n");
-        // test();
-        console.log(`Input: ${inputFirstWord}\n ${inputSecondWord} `);
-        console.log(`Output: ${output}\n`);
-    }
-    
-    function test() {
-        testToMaxLen();
-        testToMinLen();
-        testToUpperAndLowerCase();
-    }
-    
-    main();
+  function main() {
+    const inputFirstWord = "AbaAeCe";
+    const inputSecondWord = "baeeACA";
+    const output = this.solution(inputFirstWord, inputSecondWord);
+
+    console.log("S5P7\n");
+    // test();
+    console.log(`Input: ${inputFirstWord}\n ${inputSecondWord} `);
+    console.log(`Output: ${output}\n`);
+  }
+
+  function test() {
+    testToMaxLen();
+    testToMinLen();
+    testToUpperAndLowerCase();
+  }
+
+  main();
 }

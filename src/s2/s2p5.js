@@ -11,103 +11,105 @@
  */
 // * 다시 풀기.
 
-function getGradesFrom(scores) {
-    const grades = Array.from({length: scores.length}, () => 1);
-    for (let i=0; i<scores.length; i++) {
-        for (let j=0; j<scores.length; j++) {
-            if (scores[j] > scores[i]) {
-                grades[i]++;
-            }
+{
+  function getGradesFrom(scores) {
+    const grades = Array.from({ length: scores.length }, () => 1);
+    for (let i = 0; i < scores.length; i++) {
+      for (let j = 0; j < scores.length; j++) {
+        if (scores[j] > scores[i]) {
+          grades[i]++;
         }
+      }
     }
 
     return grades;
-} 
+  }
 
-function solution (scores) {
+  function solution(scores) {
     const grades = getGradesFrom(scores);
     const answer = grades.join(" ");
     return answer;
-}
+  }
 
-function testToDescendantScore () {
+  function testToDescendantScore() {
     const testNum = 1;
-    const input = [5, 4, 3, 2, 1];   
+    const input = [5, 4, 3, 2, 1];
     const expectResult = "1 2 3 4 5";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToAscendantScore () {
+  function testToAscendantScore() {
     const testNum = 2;
-    const input = [1, 2, 3, 4, 5];   
+    const input = [1, 2, 3, 4, 5];
     const expectResult = "5 4 3 2 1";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToAllSameScore () {
+  function testToAllSameScore() {
     const testNum = 3;
-    const input = [1, 1, 1, 1, 1];   
+    const input = [1, 1, 1, 1, 1];
     const expectResult = "1 1 1 1 1";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToAllDifferentScore () {
+  function testToAllDifferentScore() {
     const testNum = 4;
-    const input = [20, 30, 60, 40, 10, 80, 100, 95, 84, 71];   
+    const input = [20, 30, 60, 40, 10, 80, 100, 95, 84, 71];
     const expectResult = "9 8 6 7 10 4 1 2 3 5";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToMaxCount () {
+  function testToMaxCount() {
     const testNum = 5;
     const input = [];
-    for(let i=100; i>0; i--) {
-        input.push(i);
-    }   
+    for (let i = 100; i > 0; i--) {
+      input.push(i);
+    }
     const resultArr = [];
-    for(let i=1;i<=100;i++) {
-        resultArr.push(i);
+    for (let i = 1; i <= 100; i++) {
+      resultArr.push(i);
     }
     const expectResult = resultArr.join(" ");
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToMinCount () {
+  function testToMinCount() {
     const testNum = 6;
-    const input = [1, 2, 3];   
+    const input = [1, 2, 3];
     const expectResult = "3 2 1";
     const testFunction = solution;
-    const condition = (testFunction(input) === expectResult);    
+    const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
-}
+  }
 
-function main () {
+  function main() {
     const input = [87, 89, 92, 100, 76];
     const output = this.solution(input);
-    
+
     console.log("S2P5\n");
     // test();
     console.log(`Input: ${input.join(" ")} `);
     console.log(`Output: ${output}\n`);
-}
+  }
 
-function test() {
+  function test() {
     testToDescendantScore();
     testToAscendantScore();
     testToAllSameScore();
     testToAllDifferentScore();
     testToMaxCount();
     testToMinCount();
-}
+  }
 
-main();
+  main();
+}

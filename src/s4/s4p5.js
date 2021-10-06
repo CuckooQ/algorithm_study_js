@@ -14,140 +14,143 @@
 // *카드 수가 고정 3장이 아닌 가변 값일 경우의 처리 방법도 알고 싶다.
 
 {
-    const MAX_CARD_COUNT = 100;
-    const MAX_RANK = 50;
-    const MIN_CARD_COUNT = 3;
-    const MIN_RANK = 1;
+  const MAX_CARD_COUNT = 100;
+  const MAX_RANK = 50;
+  const MIN_CARD_COUNT = 3;
+  const MIN_RANK = 1;
 
-    function sortSums (sums) {
-        return sums.sort((befSum, aftSum) => aftSum - befSum);
-    }
+  function sortSums(sums) {
+    return sums.sort((befSum, aftSum) => aftSum - befSum);
+  }
 
-    function getAllSums (cards) {
-        const sums = new Set();
-        for (let i=0; i<cards.length; i++) {
-            for (let j=i+1; j<cards.length;j++) {
-                for (let k=j+1; k<cards.length;k++) {
-                    let sum = 0;
-                    sum += cards[i];
-                    sum += cards[j];
-                    sum += cards[k];
-                    sums.add(sum);
-                }
-            }
+  function getAllSums(cards) {
+    const sums = new Set();
+    for (let i = 0; i < cards.length; i++) {
+      for (let j = i + 1; j < cards.length; j++) {
+        for (let k = j + 1; k < cards.length; k++) {
+          let sum = 0;
+          sum += cards[i];
+          sum += cards[j];
+          sum += cards[k];
+          sums.add(sum);
         }
-
-        return Array.from(sums);
-    }
-    
-    function getSelectedRankSum (rank, cards) {
-        const sums = getAllSums(cards);
-        const sortedSums = sortSums(sums);
-        const selectedSums = sortedSums[rank-1] ?? -1;
-
-        return selectedSums;
+      }
     }
 
-    function solution (rank, cards) {
-        const answer = getSelectedRankSum(rank, cards);
-        return answer;
-    }
+    return Array.from(sums);
+  }
 
-    function testToMaxCardsMaxRank () {
-        const testNum = 1;
-        const inputRank = MAX_RANK;
-        const inputCards = [];
-        const cardCount = MAX_CARD_COUNT;
-        for (let i=1; i<=cardCount; i++) {
-            inputCards.push(i);
-        }   
-        const expectResult = cardCount + (cardCount-1) + (cardCount-1-inputRank);
-        const testFunction = solution;
-        const condition = (testFunction(inputRank, inputCards) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function getSelectedRankSum(rank, cards) {
+    const sums = getAllSums(cards);
+    const sortedSums = sortSums(sums);
+    const selectedSums = sortedSums[rank - 1] ?? -1;
 
-    function testToMaxCardsMinRank () {
-        const testNum = 2;
-        const inputRank = MIN_RANK;
-        const inputCards = [];
-        const cardCount = MAX_CARD_COUNT;
-        for (let i=1; i<=cardCount; i++) {
-            inputCards.push(i);
-        }   
-        const expectResult = cardCount + (cardCount-1) + (cardCount-1-inputRank);
-        const testFunction = solution;
-        const condition = (testFunction(inputRank, inputCards) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+    return selectedSums;
+  }
 
-    function testToMinCardsMaxRank () {
-        const testNum = 3;
-        const inputRank = MAX_RANK;
-        const inputCards = [];
-        const cardCount = MIN_CARD_COUNT;
-        for (let i=1; i<=cardCount; i++) {
-            inputCards.push(i);
-        }    
-        const expectResult = -1;
-        const testFunction = solution;
-        const condition = (testFunction(inputRank, inputCards) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+  function solution(rank, cards) {
+    const answer = getSelectedRankSum(rank, cards);
+    return answer;
+  }
 
-    function testToMinCardsMinRank () {
-        const testNum = 4;
-        const inputRank = MIN_RANK;
-        const inputCards = [];
-        const cardCount = MIN_CARD_COUNT;
-        for (let i=1; i<=cardCount; i++) {
-            inputCards.push(i);
-        }   
-        const expectResult = cardCount + (cardCount-1) + (cardCount-1-inputRank);
-        const testFunction = solution;
-        const condition = (testFunction(inputRank, inputCards) === expectResult);     
-        validateTestResult(testNum, condition);
+  function testToMaxCardsMaxRank() {
+    const testNum = 1;
+    const inputRank = MAX_RANK;
+    const inputCards = [];
+    const cardCount = MAX_CARD_COUNT;
+    for (let i = 1; i <= cardCount; i++) {
+      inputCards.push(i);
     }
+    const expectResult =
+      cardCount + (cardCount - 1) + (cardCount - 1 - inputRank);
+    const testFunction = solution;
+    const condition = testFunction(inputRank, inputCards) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToNotExistRank () {
-        const testNum = 5;
-        const inputRank = 10;
-        const inputCards = [1, 2, 3];
-        const expectResult = -1;
-        const testFunction = solution;
-        const condition = (testFunction(inputRank, inputCards) === expectResult);    
-        validateTestResult(testNum, condition);
+  function testToMaxCardsMinRank() {
+    const testNum = 2;
+    const inputRank = MIN_RANK;
+    const inputCards = [];
+    const cardCount = MAX_CARD_COUNT;
+    for (let i = 1; i <= cardCount; i++) {
+      inputCards.push(i);
     }
+    const expectResult =
+      cardCount + (cardCount - 1) + (cardCount - 1 - inputRank);
+    const testFunction = solution;
+    const condition = testFunction(inputRank, inputCards) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToOnlySameCards () {
-        const testNum = 6;
-        const inputRank = 1;
-        const inputCards = [2, 2, 2, 2, 2, 2];
-        const expectResult = 6;
-        const testFunction = solution;
-        const condition = (testFunction(inputRank, inputCards) === expectResult);    
-        validateTestResult(testNum, condition);
+  function testToMinCardsMaxRank() {
+    const testNum = 3;
+    const inputRank = MAX_RANK;
+    const inputCards = [];
+    const cardCount = MIN_CARD_COUNT;
+    for (let i = 1; i <= cardCount; i++) {
+      inputCards.push(i);
     }
+    const expectResult = -1;
+    const testFunction = solution;
+    const condition = testFunction(inputRank, inputCards) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function main () {
-        const inputRank = 3;
-        const inputCards = [13, 15, 34, 23, 45, 65, 33, 11, 26, 42];
-        const output = this.solution(inputRank, inputCards);
-        
-        console.log("S4P5\n");
-        // test();
-        console.log(`Input: ${inputRank}\n ${inputCards.join(' ')}`);
-        console.log(`Output: ${output}\n`);
+  function testToMinCardsMinRank() {
+    const testNum = 4;
+    const inputRank = MIN_RANK;
+    const inputCards = [];
+    const cardCount = MIN_CARD_COUNT;
+    for (let i = 1; i <= cardCount; i++) {
+      inputCards.push(i);
     }
-    
-    function test() {
-        testToMaxCardsMaxRank();
-        testToMaxCardsMinRank();
-        testToMinCardsMaxRank();
-        testToMinCardsMinRank();
-        testToNotExistRank();
-        testToOnlySameCards();
-    }
-    
-    main();
+    const expectResult =
+      cardCount + (cardCount - 1) + (cardCount - 1 - inputRank);
+    const testFunction = solution;
+    const condition = testFunction(inputRank, inputCards) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToNotExistRank() {
+    const testNum = 5;
+    const inputRank = 10;
+    const inputCards = [1, 2, 3];
+    const expectResult = -1;
+    const testFunction = solution;
+    const condition = testFunction(inputRank, inputCards) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToOnlySameCards() {
+    const testNum = 6;
+    const inputRank = 1;
+    const inputCards = [2, 2, 2, 2, 2, 2];
+    const expectResult = 6;
+    const testFunction = solution;
+    const condition = testFunction(inputRank, inputCards) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function main() {
+    const inputRank = 3;
+    const inputCards = [13, 15, 34, 23, 45, 65, 33, 11, 26, 42];
+    const output = this.solution(inputRank, inputCards);
+
+    console.log("S4P5\n");
+    // test();
+    console.log(`Input: ${inputRank}\n ${inputCards.join(" ")}`);
+    console.log(`Output: ${output}\n`);
+  }
+
+  function test() {
+    testToMaxCardsMaxRank();
+    testToMaxCardsMinRank();
+    testToMinCardsMaxRank();
+    testToMinCardsMinRank();
+    testToNotExistRank();
+    testToOnlySameCards();
+  }
+
+  main();
 }

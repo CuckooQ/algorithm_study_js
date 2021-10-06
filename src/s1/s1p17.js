@@ -15,83 +15,89 @@
  *                 student
  */
 
-function removeSameTextIn(textArr) {
+{
+  function removeSameTextIn(textArr) {
     const uniqueTextArr = removeSameValIn(Array.from(textArr));
     return uniqueTextArr;
-}
+  }
 
-function solution (textArr) {
+  function solution(textArr) {
     let answer = removeSameTextIn(textArr);
     return answer;
-}
+  }
 
-function testToMinCount () {
+  function testToMinCount() {
     const testNum = 1;
-    const input = [];   
+    const input = [];
     const expectResult = [];
     const testFunction = solution;
     const result = testFunction(input);
-    const condition = arraysEqual(expectResult, result);    
+    const condition = arraysEqual(expectResult, result);
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToAllSameText () {
+  function testToAllSameText() {
     const testNum = 2;
-    const input = ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"];   
+    const input = ["abcdefghij", "abcdefghij", "abcdefghij", "abcdefghij"];
     const expectResult = ["abcdefghij"];
     const testFunction = solution;
     const result = testFunction(input);
-    const condition = arraysEqual(expectResult, result);    
+    const condition = arraysEqual(expectResult, result);
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToNoSameText () {
+  function testToNoSameText() {
     const testNum = 3;
-    const input = ["abcde", "fghij", "klm"];   
+    const input = ["abcde", "fghij", "klm"];
     const expectResult = ["abcde", "fghij", "klm"];
     const testFunction = solution;
     const result = testFunction(input);
-    const condition = arraysEqual(expectResult, result);     
+    const condition = arraysEqual(expectResult, result);
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToSpecialChar () {
+  function testToSpecialChar() {
     const testNum = 4;
-    const input = ["a#","#b", "a#", "!b", "!c"];   
-    const expectResult = ["a#","#b", "!b", "!c"];
+    const input = ["a#", "#b", "a#", "!b", "!c"];
+    const expectResult = ["a#", "#b", "!b", "!c"];
     const testFunction = solution;
     const result = testFunction(input);
-    const condition = arraysEqual(expectResult, result);    
+    const condition = arraysEqual(expectResult, result);
     validateTestResult(testNum, condition);
-}
+  }
 
-function testToNumber () {
+  function testToNumber() {
     const testNum = 5;
-    const input = ["11", "11", "111", "22", "33", "4444", "33", "4444"];   
-    const expectResult = ["11", "111", "22", "33", "4444"];  
+    const input = ["11", "11", "111", "22", "33", "4444", "33", "4444"];
+    const expectResult = ["11", "111", "22", "33", "4444"];
     const testFunction = solution;
     const result = testFunction(input);
-    const condition = arraysEqual(expectResult, result);      
+    const condition = arraysEqual(expectResult, result);
     validateTestResult(testNum, condition);
-}
+  }
 
-function main () {
+  function main() {
     const input = ["good", "time", "good", "time", "student"];
     const output = this.solution(input);
-    
+
     console.log("S1P17\n");
     // test();
-    console.log(`Input: ${input.length}\n ${input[0]}\n ${input[1]}\n ${input[2]}\n ${input[3]}\n ${input[4]}`);
+    console.log(
+      `Input: ${input.length}\n ${input[0]}\n ${input[1]}\n ${input[2]}\n ${input[3]}\n ${input[4]}`
+    );
     console.log(`Output: `);
-    output.forEach((val) => {console.log(`${val}\n`)});
-}
+    output.forEach((val) => {
+      console.log(`${val}\n`);
+    });
+  }
 
-function test() {
+  function test() {
     testToMinCount();
     testToAllSameText();
     testToNoSameText();
     testToSpecialChar();
     testToNumber();
-}
+  }
 
-main();
+  main();
+}

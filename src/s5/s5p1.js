@@ -14,29 +14,32 @@
  * Output Example: 1 2 3 3 5 6 7 9
  */
 
- {
-    const MAX_LENGTH = 100;
-    const MIN_LENGTH = 1;
+{
+  const MAX_LENGTH = 100;
+  const MIN_LENGTH = 1;
 
-    // Two Pointer Algorithm으로 구현한 함수
-    function sortNumArrs(firstNums, secondNums) {
-        const sortedNums = [];
-        let firstIdx = 0;
-        let secondIdx = 0;
-        
-        while (firstIdx < firstNums.length || secondIdx < secondNums.length) {
-            if (firstIdx >= firstNums.length || firstNums[firstIdx] > secondNums[secondIdx]) {
-                sortedNums.push(secondNums[secondIdx]);
-                secondIdx++;
-            } else {
-                sortedNums.push(firstNums[firstIdx]);
-                firstIdx++;
-            }
-        }
-    
-        return sortedNums;
+  // Two Pointer Algorithm으로 구현한 함수
+  function sortNumArrs(firstNums, secondNums) {
+    const sortedNums = [];
+    let firstIdx = 0;
+    let secondIdx = 0;
+
+    while (firstIdx < firstNums.length || secondIdx < secondNums.length) {
+      if (
+        firstIdx >= firstNums.length ||
+        firstNums[firstIdx] > secondNums[secondIdx]
+      ) {
+        sortedNums.push(secondNums[secondIdx]);
+        secondIdx++;
+      } else {
+        sortedNums.push(firstNums[firstIdx]);
+        firstIdx++;
+      }
     }
-    /*
+
+    return sortedNums;
+  }
+  /*
     function sortToAsc(nums) { 
         return nums.sort((befNum, aftNum) => befNum - aftNum);
     }
@@ -52,75 +55,80 @@
         return sortedNums;
     }
     */
-    function solution(firstNums, secondNums) {
-        let answer;
-        const sortedNums = sortNumArrs(firstNums, secondNums);
-        answer = sortedNums.join(" ");
-        
-        return answer;
-    }
+  function solution(firstNums, secondNums) {
+    let answer;
+    const sortedNums = sortNumArrs(firstNums, secondNums);
+    answer = sortedNums.join(" ");
 
-    function testToMaxLen() {
-        const testNum = 1;
-        const inputFirstNums = [];   
-        const inputSecondNums = [];   
-        for(let i=1; i<=MAX_LENGTH; i++) {
-            inputFirstNums.push(2*i);
-            inputSecondNums.push(2*i-1);
-        }
-        const result = [];
-        for(let i=1; i<=MAX_LENGTH; i++) {
-            result.push(2*i-1);
-            result.push(2*i);
-        }
-        const expectResult = result.join(" ");
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstNums, inputSecondNums) === expectResult);    
-        validateTestResult(testNum, condition);
-    }
+    return answer;
+  }
 
-    function testToMinLen() {
-        const testNum = 2;
-        const inputFirstNums = [];   
-        const inputSecondNums = [];   
-        for(let i=1; i<=MIN_LENGTH; i++) {
-            inputFirstNums.push(2*i);
-            inputSecondNums.push(2*i-1);
-        }
-        const result = [1, 2];
-        const expectResult = result.join(" ");
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstNums, inputSecondNums) === expectResult);    
-        validateTestResult(testNum, condition);
+  function testToMaxLen() {
+    const testNum = 1;
+    const inputFirstNums = [];
+    const inputSecondNums = [];
+    for (let i = 1; i <= MAX_LENGTH; i++) {
+      inputFirstNums.push(2 * i);
+      inputSecondNums.push(2 * i - 1);
     }
+    const result = [];
+    for (let i = 1; i <= MAX_LENGTH; i++) {
+      result.push(2 * i - 1);
+      result.push(2 * i);
+    }
+    const expectResult = result.join(" ");
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstNums, inputSecondNums) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function testToAllEqualNumbers() {
-        const testNum = 3;
-        const inputFirstNums = [5, 10, 15, 20, 25, 30];   
-        const inputSecondNums = [5, 10, 15, 20, 25, 30];   
-        const result = [5, 5, 10, 10, 15, 15, 20, 20, 25, 25, 30, 30];
-        const expectResult = result.join(" ");
-        const testFunction = solution;
-        const condition = (testFunction(inputFirstNums, inputSecondNums) === expectResult);    
-        validateTestResult(testNum, condition);
+  function testToMinLen() {
+    const testNum = 2;
+    const inputFirstNums = [];
+    const inputSecondNums = [];
+    for (let i = 1; i <= MIN_LENGTH; i++) {
+      inputFirstNums.push(2 * i);
+      inputSecondNums.push(2 * i - 1);
     }
+    const result = [1, 2];
+    const expectResult = result.join(" ");
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstNums, inputSecondNums) === expectResult;
+    validateTestResult(testNum, condition);
+  }
 
-    function main() {
-        const inputFirstNumbers = [1, 3, 5];
-        const inputSecondNumbers = [2, 3, 6, 7 ,9];
-        const output = this.solution(inputFirstNumbers, inputSecondNumbers);
-        
-        console.log("S5P1\n");
-        // test();
-        console.log(`Input: ${inputFirstNumbers.join(" ")}\n ${inputSecondNumbers.join(" ")}`);
-        console.log(`Output: ${output}\n`);
-    }
-    
-    function test() {
-        testToMaxLen();
-        testToMinLen();
-        testToAllEqualNumbers();
-    }
-    
-    main();
+  function testToAllEqualNumbers() {
+    const testNum = 3;
+    const inputFirstNums = [5, 10, 15, 20, 25, 30];
+    const inputSecondNums = [5, 10, 15, 20, 25, 30];
+    const result = [5, 5, 10, 10, 15, 15, 20, 20, 25, 25, 30, 30];
+    const expectResult = result.join(" ");
+    const testFunction = solution;
+    const condition =
+      testFunction(inputFirstNums, inputSecondNums) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function main() {
+    const inputFirstNumbers = [1, 3, 5];
+    const inputSecondNumbers = [2, 3, 6, 7, 9];
+    const output = this.solution(inputFirstNumbers, inputSecondNumbers);
+
+    console.log("S5P1\n");
+    // test();
+    console.log(
+      `Input: ${inputFirstNumbers.join(" ")}\n ${inputSecondNumbers.join(" ")}`
+    );
+    console.log(`Output: ${output}\n`);
+  }
+
+  function test() {
+    testToMaxLen();
+    testToMinLen();
+    testToAllEqualNumbers();
+  }
+
+  main();
 }
