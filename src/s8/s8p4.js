@@ -31,11 +31,12 @@
   const INCLUDE_FLAG = 1;
   const EXCLUDE_FLAG = 0;
 
-  function dfs(endNum, num = 1, subsets = [], includeFlags) {
-    if (!includeFlags) {
-      includeFlags = Array.from({ length: endNum });
-    }
-
+  function dfs(
+    endNum,
+    num = 1,
+    subsets = [],
+    includeFlags = Array.from({ length: endNum })
+  ) {
     if (num > endNum) {
       const subset = [];
       for (let i = 0; i < endNum; i++) {
