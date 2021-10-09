@@ -26,10 +26,11 @@
   }
 
   function main() {
+    console.log("SnPn\n");
+
     const input = 0;
     const output = this.solution(input);
 
-    console.log("SnPn\n");
     test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
