@@ -59,7 +59,8 @@
     const expectResult = inputSelectedNum ** inputSelectableCnt;
     const testFunction = solution;
     const condition =
-      testFunction(inputSelectedNum, inputSelectableCnt) === expectResult;
+      testFunction(inputSelectedNum, inputSelectableCnt).length ===
+      expectResult;
     validateTestResult(testNum, condition);
   }
 
@@ -70,7 +71,8 @@
     const expectResult = inputSelectedNum ** inputSelectableCnt;
     const testFunction = solution;
     const condition =
-      testFunction(inputSelectedNum, inputSelectableCnt) === expectResult;
+      testFunction(inputSelectedNum, inputSelectableCnt).length ===
+      expectResult;
     validateTestResult(testNum, condition);
   }
 
@@ -81,7 +83,8 @@
     const expectResult = inputSelectedNum ** inputSelectableCnt;
     const testFunction = solution;
     const condition =
-      testFunction(inputSelectedNum, inputSelectableCnt) === expectResult;
+      testFunction(inputSelectedNum, inputSelectableCnt).length ===
+      expectResult;
     validateTestResult(testNum, condition);
   }
 
@@ -92,7 +95,8 @@
     const expectResult = inputSelectedNum ** inputSelectableCnt;
     const testFunction = solution;
     const condition =
-      testFunction(inputSelectedNum, inputSelectableCnt) === expectResult;
+      testFunction(inputSelectedNum, inputSelectableCnt).length ===
+      expectResult;
     validateTestResult(testNum, condition);
   }
 
