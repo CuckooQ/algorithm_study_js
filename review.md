@@ -40,6 +40,7 @@
 -       문제5
 -       문제6
 -       문제8
+-       문제12
 
 ## 고찰
 
@@ -55,6 +56,7 @@
 - Sliding Window을 사용하는 것을 고려하자.
 - Greedy Algorithm을 사용하는 것을 고려하자.
 - Tail Recursive Function을 사용하는 것을 고려하자.
+- Memoization의 구현을 알아두자.
 - Selection Sort의 구현을 알아두자.
 - Bubble Sort의 구현을 알아두자.
 - Insertion Sort의 구현을 알아두자.
@@ -97,3 +99,4 @@
 - Recursive Function: 내부에서 자기 자신을 다시 호출하는 함수.
 - Recursive Function의 필수 조건: 종료 조건.
 - Tail Recursive Function: 재귀 호출이 끝난 후에 현재 함수에서 추가 연산을 요구하지 않도록 구현하는 재귀함수.
+- Memoization: 동일 계산 반복의 경우, 이전 계산 값을 메모리에 저장해서 사용하는 기술.
