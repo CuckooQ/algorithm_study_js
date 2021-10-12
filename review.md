@@ -43,6 +43,8 @@
 -       문제12
 -       문제13
 -       문제14
+- 섹션9
+-       문제1
 
 ## 고찰
 
@@ -62,6 +64,7 @@
 - Selection Sort의 구현을 알아두자.
 - Bubble Sort의 구현을 알아두자.
 - Insertion Sort의 구현을 알아두자.
+- Graph의 구현을 알아두자.
 
 ## 새로 알게 된 지식
 
@@ -102,3 +105,7 @@
 - Recursive Function의 필수 조건: 종료 조건.
 - Tail Recursive Function: 재귀 호출이 끝난 후에 현재 함수에서 추가 연산을 요구하지 않도록 구현하는 재귀함수.
 - Memoization: 동일 계산 반복의 경우, 이전 계산 값을 메모리에 저장해서 사용하는 기술.
+- Graph: 정점(Vertex)과 간선(Edge)으로 이루어진 자료구조. 1번 인덱스부터 사용하는 2차원 배열[vertex1, vertex2]을 사용해서 구현한다.
+- Directed Graph: 정점과 방향이 있는 간선으로 이루어진 자료구조. 1번 인덱스부터 사용하는 2차원 배열[fromVertex, toVertex]을 사용해서 구현한다.
+- Weighted Graph: 정점과 방향 & 가중치가 있는 간선으로 이루어진 자료구조.
+  1번 인덱스부터 사용하는 2차원 배열[fromVertex, toVertex]과 가중치 값을 사용해서 구현한다.
