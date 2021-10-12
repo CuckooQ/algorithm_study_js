@@ -1,7 +1,7 @@
 /**
- * Title: 경로 탐색 (인접 행렬)
+ * Title: 경로 탐색 (인접 리스트)
  * Content: 방향 그래프가 주어지면 1번 정점에서 N번 정점으로 가는 모든 경로의 가지 수를 출력하라.
- *          인접 행렬로 구현하라.
+ *          인접 리스트로 구현하라.
  *
  *          1 <――――> 2 ―――――> 5
  *          | ↘  ↙ ↑      ↗
@@ -45,14 +45,12 @@
     return cnt;
 
     function createGraph(graphInfo) {
-      const graph = Array.from({ length: maxVertexVal + 1 }, () =>
-        Array.from({ length: maxVertexVal + 1 }, () => 0)
-      );
+      const graph = Array.from({ length: maxVertexVal + 1 }, () => []);
 
       graphInfo.forEach((unit) => {
         const from = unit[0];
         const to = unit[1];
-        graph[from][to] = 1;
+        graph[from].push(to);
       });
 
       return graph;
@@ -64,12 +62,10 @@
         return;
       }
 
-      for (let i = 1; i <= maxVertexVal; i++) {
-        if (graph[from][i] === 1) {
-          const alreadyPassVertex = route.flat().indexOf(i) !== -1;
-          !alreadyPassVertex && dfs(i, [...route, [from, i]]);
-        }
-      }
+      graph[from].forEach((toVertex) => {
+        const alreadyPassVertex = route.flat().indexOf(toVertex) !== -1;
+        !alreadyPassVertex && dfs(toVertex, [...route, [from, toVertex]]);
+      });
     }
   }
 
@@ -79,7 +75,7 @@
   }
 
   function main() {
-    console.log("S9P1\n");
+    console.log("S9P2\n");
 
     const input = [
       [1, 2],
