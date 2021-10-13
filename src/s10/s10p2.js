@@ -1,24 +1,31 @@
 /**
- * Title: 계단 오르기
- * Content: 철수는 계단을 오를 때 한 번에 한 계단 또는 두 계단씩 올라간다.
- *          만약 총 4계단을 오른다면, 그 방법의 수는 1+1+1+1, 1+1+2, 1+2+1, 2+1+1, 2+2로 총 5가지이다.
- *          총 N계단일 때 철수가 올라갈 수 있는 방법의 수를 구하라.
- * Input Condition: 첫 번째 줄은 계단의 개수인 자연수 N(3<=N<=45)가 주어진다.
- * Output Condition: 첫 번째 줄에 올라가는 방법의 수를 출력한다.
+ * Title: 돌다리 건너기
+ * Content: 철수는 학교를 가는데 개울을 만났다.
+ *          개울은 N개의 돌로 다리를 만들어 놓았다.
+ *          철수는 돌 다리를 건널 때 한 번에 한 칸 또는 두 칸씩 건너뛰면서 돌다리를 건널 수 있다.
+ *          철수가 개울을 건너는 방법은 몇 가지인지 구하라.
+ * Input Condition: 첫 번째 줄은 돌의 개수인 자연수 N(3<=N<=45)가 주어진다.
+ * Output Condition: 첫 번째 줄에 개울을 건너는 방법 수를 출력한다.
  * Input Example: 7
- * Output Example: 21
+ * Output Example: 34
  */
-// *다이나믹 프로그래밍 복습을 위해 다시 풀기
+/**
+ * 1: 1+1, 2 -> 2개
+ * 2: 1+1+1, 1+2, 2+1 -> 3개
+ * 3: d[1]+d[2]
+ * 4: d[2]+d[3]
+ * ...
+ */
 
 {
   // const MAX_STEPS_CNT = 45;
   const MIN_STEPS_CNT = 3;
 
-  function getCntOfWayToGoUp(stepsCnt) {
+  function getCntOfWayToPass(stepsCnt) {
     let cnt = 0;
     const d = Array.from({ length: stepsCnt + 1 }, () => 0);
-    d[1] = 1;
-    d[2] = 2;
+    d[1] = 2;
+    d[2] = 3;
 
     for (let i = 3; i <= stepsCnt; i++) {
       d[i] = d[i - 2] + d[i - 1];
@@ -30,21 +37,20 @@
   }
 
   function solution(stepsCnt) {
-    const answer = getCntOfWayToGoUp(stepsCnt);
+    const answer = getCntOfWayToPass(stepsCnt);
     return answer;
   }
 
   function testToMinSteps() {
     const testNum = 1;
     const input = MIN_STEPS_CNT;
-    const expectResult = 3;
+    const expectResult = 5;
     const testFunction = solution;
     const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
   }
-
   /*
-  function testToMaxStep() {
+  function testToMaxSteps() {
     const testNum = 2;
     const input = MAX_STEPS_CNT;
     const expectResult = ???;
@@ -53,9 +59,8 @@
     validateTestResult(testNum, condition);
   }
   */
-
   function main() {
-    console.log("S10P1\n");
+    console.log("S10P2\n");
 
     const input = 7;
     const output = this.solution(input);
@@ -66,8 +71,8 @@
   }
 
   function test() {
-    testToMinStep();
-    // testToMaxStep();
+    testToMinSteps();
+    // testToMaxSteps();
   }
 
   main();
