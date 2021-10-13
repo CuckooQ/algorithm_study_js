@@ -53,6 +53,7 @@
 - 섹션10
 -       문제1
 -       문제3
+-       문제4
 
 ## 고찰
 
@@ -128,3 +129,9 @@
 - Dynamic Programming 대표 예: 피보나치 수열.
 - LIS: Longest Increasing Subsequence. 최장 증가 부분 수열.
   각 원소가 이전 원소보다 크고, 그 길이가 최대인 부분 수열.
+- Knapsack Problem: 배낭 문제.
+  배낭에 담을 수 있는 무게의 최대값이 정해져 있고, 일정한 가치와 무게가 정해져 있는 배낭에 담을 때,
+  가치의 합이 최대가 되도록 짐을 고르는 방법을 찾는 문제.
+- Knapsack Problem 종류: Fraction Knapsack + 0-1 Knapsack.
+- Fraction Knapsack: 물건을 쪼갤 수 있는 배낭 문제. 그리디 알고리즘으로 해결 가능.
+- 0-1 Knapsack: 물건을 쪼갤 수 없는 배낭 문제. Dynamic Programming으로 해결 가능.

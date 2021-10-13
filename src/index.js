@@ -15,7 +15,7 @@
       "s9",
       "s10",
     ];
-    const fileCounts = [17, 7, 5, 5, 8, 7, 12, 15, 7, 3];
+    const fileCounts = [17, 7, 5, 5, 8, 7, 12, 15, 7, 4];
     directories.forEach((directory, idx) => {
       const fileCount = fileCounts[idx];
       for (let i = 1; i <= fileCount; i++) {
