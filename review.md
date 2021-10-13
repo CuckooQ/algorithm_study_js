@@ -52,6 +52,7 @@
 -       문제7
 - 섹션10
 -       문제1
+-       문제3
 
 ## 고찰
 
@@ -125,3 +126,5 @@
 - Dynamic Programming 조건: 작은 문제의 반복 + 같은 입력에 대한 같은 결과.
 - Dynamic Programming 종류: Bottom-Up. Top-Down.
 - Dynamic Programming 대표 예: 피보나치 수열.
+- LIS: Longest Increasing Subsequence. 최장 증가 부분 수열.
+  각 원소가 이전 원소보다 크고, 그 길이가 최대인 부분 수열.
