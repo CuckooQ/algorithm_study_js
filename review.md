@@ -50,6 +50,8 @@
 -       문제5
 -       문제6
 -       문제7
+- 섹션10
+-       문제1
 
 ## 고찰
 
@@ -119,3 +121,7 @@
   두 번째 인덱스의 길이는 fromVertex와 연결된 정점의 개수이다.
 - DFS: Deep First Search. 깊게 탐색. 모든 경로를 방문할 경우 사용. 재귀적으로 동작.
 - BFS: Breadth First Search. 넓게 탐색. 최단 경로를 찾을 경우 사용. 재귀적으로 동작 X.
+- Dynamic Programming: 큰 문제 해결 목적으로, 작은 복수의 문제로 나누어서 해결한 결과들을 저장해두고 결과를 토대로 큰 문제를 해결하는 기법.
+- Dynamic Programming 조건: 작은 문제의 반복 + 같은 입력에 대한 같은 결과.
+- Dynamic Programming 종류: Bottom-Up. Top-Down.
+- Dynamic Programming 대표 예: 피보나치 수열.
