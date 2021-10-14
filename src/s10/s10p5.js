@@ -92,15 +92,6 @@
     return answer;
   }
 
-  function test() {
-    const testNum = 1;
-    const input = 0;
-    const expectResult = 1;
-    const testFunction = solution;
-    const condition = testFunction(input) === expectResult;
-    validateTestResult(testNum, condition);
-  }
-
   function main() {
     console.log("S10P5\n");
 
@@ -114,12 +105,9 @@
     ];
     const output = this.solution(inputLimitTime, inputProblemInfo);
 
-    test();
     console.log(`Input: ${inputLimitTime}\n${inputProblemInfo.join("\n")} `);
     console.log(`Output: ${output}\n`);
   }
-
-  function test() {}
 
   main();
 }
