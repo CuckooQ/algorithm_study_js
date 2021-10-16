@@ -12,7 +12,9 @@
  * Output Example: [7,0,8] (342 + 465 = 807)
  */
 // Expected: 18:36 - 19:16
-// Real: 18:36 - 20:06
+// Actual: 18:36 - 20:06
+// Cause: 문제를 제대로 안 읽은 결과, Linked List로 구현하지 않고 Array로 구현했다.
+
 {
   class ListNode {
     constructor(val, next) {
