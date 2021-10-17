@@ -8,7 +8,7 @@
  * Output Example: 3
  */
 // Expected: 14:03-14:43
-// Actual:14:03-
+// Actual: 14:03-14:33
 
 {
   function getMaxLenOfSubStr(text) {
