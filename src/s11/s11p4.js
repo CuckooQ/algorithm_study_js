@@ -84,7 +84,7 @@
     const inputLocation = 2;
     const output = this.solution(inputPriorities, inputLocation);
 
-    test();
+    // test();
     console.log(`Input: ${inputPriorities.join(" ")}\n${inputLocation} `);
     console.log(`Output: ${output}\n`);
   }
