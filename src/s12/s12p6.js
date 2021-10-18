@@ -10,7 +10,7 @@
  * Input Condition: 1 <= s.length <= 1000
  *                  s consists of English letters (lower-case and upper-case), ',' and '.'.
  *                  1 <= numRows <= 1000
- * Output Condition:
+ * Output Condition: None
  * Input Example: s = "PAYPALISHIRING"
  *                numRows = 3
  * Output Example: "PAHNAPLSIIGYIR"
