@@ -9,6 +9,8 @@
  * Input Example:
  * Output Example:
  */
+// Expected:
+// Actual:
 
 {
   function solution(param) {
