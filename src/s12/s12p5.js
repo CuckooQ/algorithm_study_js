@@ -1,5 +1,5 @@
 /**
- * Title: Longest Palindromic Substring
+ * Title: 5. Longest Palindromic Substring
  * Content: Given a string s, return the longest palindromic substring in s.
  * Input Condition: 1 <= s.length <= 1000
  *                  s consist of only digits and English letters.
