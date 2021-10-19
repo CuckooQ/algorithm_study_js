@@ -9,7 +9,7 @@
  *                  Each node has a unique value.
  *                  x != y
  *                  x and y are exist in the tree.
- * Output Condition:
+ * Output Condition: None
  * Input Example: root = [1,2,3,4], x = 4, y = 3
  * Output Example: false
  */
