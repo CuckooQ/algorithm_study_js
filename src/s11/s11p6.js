@@ -33,15 +33,6 @@
     return answer;
   }
 
-  function testToExample() {
-    const testNum = 1;
-    const input = 0;
-    const expectResult = 1;
-    const testFunction = solution;
-    const condition = testFunction(input) === expectResult;
-    validateTestResult(testNum, condition);
-  }
-
   function main() {
     console.log("S11P6\n");
 
@@ -53,12 +44,9 @@
     ];
     const output = this.solution(inputArray, inputCommands);
 
-    test();
     console.log(`Input: ${inputArray.join(" ")}\n${inputCommands.join(" ")}`);
     console.log(`Output: ${output.join(" ")}\n`);
   }
-
-  function test() {}
 
   main();
 }
