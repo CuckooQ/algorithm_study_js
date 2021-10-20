@@ -226,7 +226,8 @@
 
     const input = [3, 0, 6, 1, 5];
     const output = this.solution(input);
-    test();
+
+    // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
   }
