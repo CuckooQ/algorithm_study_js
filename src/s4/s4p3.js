@@ -26,6 +26,39 @@
   const MIN_STUDENT_COUNT = 1;
   const MIN_TEST_COUNT = 1;
 
+  // 이중 for문 + while문
+  function getMentoMenteePairCount(testResults) {
+    const mentoMenteePairsSet = new Set();
+    const allPairsSet = new Set();
+
+    for (let i = 0; i < testResults.length; i++) {
+      const testResult = testResults[i];
+
+      for (let j = 0; j < testResult.length; j++) {
+        const pair = [];
+        pair[0] = testResult[j];
+        testResult.forEach((num, idx) => {
+          if (idx > j) {
+            pair[1] = num;
+            allPairsSet.add(pair.join(" "));
+          }
+        });
+      }
+    }
+
+    const allPairValues = allPairsSet.values();
+    let targetPair = allPairValues.next();
+    while (!targetPair.done) {
+      const reversedPair = targetPair.value.split(" ").reverse().join(" ");
+      !allPairsSet.has(reversedPair) &&
+        mentoMenteePairsSet.add(targetPair.value);
+      targetPair = allPairValues.next();
+    }
+
+    return mentoMenteePairsSet.size;
+  }
+  /*
+  // 사중 for문
   function isAvailableMento(mentoMenteePair, testResults) {
     const mento = mentoMenteePair[0];
     const mentee = mentoMenteePair[1];
@@ -65,6 +98,7 @@
     return true;
   }
 
+  
   function getMentoMenteePairCount(testResults) {
     const studentCount = testResults[0].length;
     const mentoMenteePairs = [];
@@ -79,6 +113,7 @@
 
     return mentoMenteePairs.length;
   }
+  */
 
   function solution(testResults) {
     const answer = getMentoMenteePairCount(testResults);
@@ -140,7 +175,7 @@
   function main() {
     const input = [
       [3, 4, 1, 2],
-      [4, 3, 1, 2],
+      [4, 3, 2, 1],
       [3, 1, 4, 2],
     ];
     const output = this.solution(input);
