@@ -161,7 +161,7 @@
     const input = "42";
     const output = this.solution(input);
 
-    test();
+    // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
   }
