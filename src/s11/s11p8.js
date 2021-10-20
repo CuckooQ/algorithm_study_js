@@ -1,4 +1,5 @@
 /**
+ * 프로그래머스 정렬 Level 2
  * Title: H-Index
  * Content: H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다.
  *          어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다.
