@@ -10,19 +10,22 @@
 // *오래 걸렸다. 다시 풀기.
 
 {
-  function getDistancesFromSelectedCharIndexes(text, selectedCharIndexes) {
-    const distances = Array.from({ length: text.length }, () => -1);
-    let i = 0;
-    while (i < distances.length) {
+  function getDistancesFromSelectedCharIndexes(selectedCharIndexes, textLen) {
+    const distances = Array.from({ length: textLen }, () => -1);
+
+    for (let i = 0; i < distances.length; i++) {
       if (selectedCharIndexes.indexOf(i) !== -1) {
         distances[i] = 0;
       } else {
-        const distancesFromSelectedChar = selectedCharIndexes.map((idx) => {
-          return Math.abs(idx - i);
+        let minDistance = Number.MAX_SAFE_INTEGER;
+        selectedCharIndexes.map((idx) => {
+          const distance = Math.abs(idx - i);
+          if (distance < minDistance) {
+            minDistance = distance;
+          }
         });
-        distances[i] = Math.min(...distancesFromSelectedChar);
+        distances[i] = minDistance;
       }
-      i++;
     }
 
     return distances;
@@ -30,15 +33,16 @@
 
   function getIndexesOfSelectedChar(text, char) {
     const indexes = [];
-    let idx = 0;
-    while (true) {
-      idx = Array.from(text).indexOf(char, idx);
-      if (idx === -1) {
-        break;
-      }
 
-      indexes.push(idx);
-      idx++;
+    let idx = 0;
+    const charArr = Array.from(text);
+    while (idx !== -1) {
+      idx = charArr.indexOf(char, idx);
+
+      if (idx !== -1) {
+        indexes.push(idx);
+        idx++;
+      }
     }
 
     return indexes;
@@ -47,8 +51,8 @@
   function getDistancesFromSelectedChar(text, char) {
     const selectedCharIndexes = getIndexesOfSelectedChar(text, char);
     const distances = getDistancesFromSelectedCharIndexes(
-      text,
-      selectedCharIndexes
+      selectedCharIndexes,
+      text.length
     );
     return distances;
   }
