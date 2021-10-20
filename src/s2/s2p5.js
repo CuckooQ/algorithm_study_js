@@ -29,8 +29,6 @@
       grades.push(scoreGradeMap.get(score));
     });
 
-    console.log(scoreGradeMap, scores);
-
     return grades;
   }
 
