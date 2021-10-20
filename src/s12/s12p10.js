@@ -15,7 +15,7 @@
  * Output Example: "blue is sky the"
  */
 // Expected: 15:12 - 15:52
-// Actual: 15:12 -
+// Actual: 15:12 -15:35
 
 {
   const SPACE = " ";
