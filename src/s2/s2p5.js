@@ -12,7 +12,32 @@
 // * 다시 풀기.
 
 {
-  function getGradesFrom(scores) {
+  // 복수의 for문으로 개선
+  function getGrades(scores) {
+    let grades = [];
+
+    let grade = 0;
+    const scoreGradeMap = new Map();
+    const sortedScores = [...scores].sort((a, b) => b - a);
+    sortedScores.forEach((score) => {
+      grade++;
+      const recordedGrade = scoreGradeMap.get(score);
+      !recordedGrade && scoreGradeMap.set(score, grade);
+    });
+
+    scores.forEach((score) => {
+      grades.push(scoreGradeMap.get(score));
+    });
+
+    console.log(scoreGradeMap, scores);
+
+    return grades;
+  }
+
+  /*
+  // 이중 for문
+  function getGrades(scores) {
+    const start = Date.now();
     const grades = Array.from({ length: scores.length }, () => 1);
     for (let i = 0; i < scores.length; i++) {
       for (let j = 0; j < scores.length; j++) {
@@ -24,9 +49,9 @@
 
     return grades;
   }
-
+  */
   function solution(scores) {
-    const grades = getGradesFrom(scores);
+    const grades = getGrades(scores);
     const answer = grades.join(" ");
     return answer;
   }
@@ -92,6 +117,15 @@
     validateTestResult(testNum, condition);
   }
 
+  function testToThreeSameOneDiff() {
+    const testNum = 7;
+    const input = [3, 3, 3, 2];
+    const expectResult = "1 1 1 4";
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
   function main() {
     const input = [87, 89, 92, 100, 76];
     const output = this.solution(input);
@@ -109,6 +143,7 @@
     testToAllDifferentScore();
     testToMaxCount();
     testToMinCount();
+    testToThreeSameOneDiff();
   }
 
   main();
