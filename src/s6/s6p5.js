@@ -18,14 +18,31 @@
  * Output Example:  17
  */
 // *다시 풀기
-// *풀이와는 매우 다르게 풀었다. 풀이가 훨씬 간단하기는 한대... 내가 푼 방법이 더 선호된다.
-// *풀이 방법도 알아두자.
 
 {
   const LEFT_PARENTHESIS = "(";
   const RIGHT_PARENTHESIS = ")";
   const RAZOR = "|";
 
+  function getSlicedBarCount(barInfo) {
+    let slicedBarCount = 0;
+
+    const stack = [];
+    Array.from(barInfo).forEach((info) => {
+      if (info === LEFT_PARENTHESIS) {
+        stack.push(1);
+      }
+
+      if (info === RIGHT_PARENTHESIS) {
+        stack.pop();
+        slicedBarCount += stack.length;
+      }
+    });
+
+    return slicedBarCount;
+  }
+  /*
+  // 클래스를 이용한 처리
   class Bar {
     #razorCount;
     #slicedBarCount;
@@ -121,7 +138,7 @@
 
     return slicedBarCount;
   }
-
+  */
   function solution(barInfo) {
     const answer = getSlicedBarCount(barInfo);
     return answer;
