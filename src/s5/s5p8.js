@@ -29,46 +29,40 @@
     return map;
   }
 
-  function isAnagramToMap(firstTextMap, secondTextMap) {
+  function isAnagram(firstTextMap, secondTextMap) {
+    const KEY_IDX = 0;
+    const VAL_IDX = 1;
     let isAnagram = true;
-    Array.from(firstTextMap).forEach((keyValPair) => {
-      if (!secondTextMap.has(keyValPair[0])) {
+
+    const firstTextArr = Array.from(firstTextMap);
+    for (const keyValPair of firstTextArr) {
+      if (!secondTextMap.has(keyValPair[KEY_IDX])) {
         isAnagram = false;
-        return;
+        break;
       }
 
-      if (keyValPair[1] !== secondTextMap.get(keyValPair[0])) {
+      if (keyValPair[VAL_IDX] !== secondTextMap.get(keyValPair[KEY_IDX])) {
         isAnagram = false;
-        return;
+        break;
       }
-    });
+    }
 
     return isAnagram;
   }
 
-  function isAnagram(firstText, secondText) {
-    const firstTextMap = getCharCountMap(firstText);
-    const secondTextMap = getCharCountMap(secondText);
-    return isAnagramToMap(firstTextMap, secondTextMap);
-  }
-
   function getAnagramCount(firstText, secondText) {
     const windowLen = secondText.length;
+
+    const secondTextMap = getCharCountMap(secondText);
     let count = 0;
     let window = "";
-    firstText.split("").forEach((char, idx) => {
-      if (window.length < windowLen) {
-        window = window.concat(char);
-      }
-      if (idx >= windowLen) {
-        window = window.concat(char);
-        window = window.slice(1, window.length);
-      }
-
-      if (window.length === windowLen && isAnagram(window, secondText)) {
+    for (let i = 0; i <= firstText.length - windowLen; i++) {
+      window = firstText.substr(i, windowLen);
+      const windowMap = getCharCountMap(window);
+      if (isAnagram(windowMap, secondTextMap)) {
         count++;
       }
-    });
+    }
 
     return count;
   }
