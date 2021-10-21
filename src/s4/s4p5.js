@@ -11,18 +11,54 @@
  * Output Example: 143
  */
 // *다시 풀기
-// *카드 수가 고정 3장이 아닌 가변 값일 경우의 처리 방법도 알고 싶다.
+// *카드 수가 고정 3장이 아닌 가변 값일 경우의 처리 방법도 알고 싶다. -> dfs 사용.
 
 {
   const MAX_CARD_COUNT = 100;
   const MAX_RANK = 50;
   const MIN_CARD_COUNT = 3;
   const MIN_RANK = 1;
+  /*
+  // dfs
+  function getSelectedRankSum(rank, cards) {
+    const SEL_CNT = 3;
+    let selectedSum = -1;
+    const sums = [];
+
+    const sortedCards = [...cards].sort((a, b) => b - a);
+
+    dfs();
+
+    return selectedSum;
+
+    function dfs(selCards = [], remainedCards = [...sortedCards]) {
+      if (selCards.length === SEL_CNT) {
+        const sum = selCards.reduce((acc, val) => acc + val, 0);
+        sums.push(sum);
+
+        if (sums.length === rank) {
+          selectedSum = sums[sums.length - 1];
+        }
+
+        return;
+      }
+
+      if (remainedCards.length === 0) {
+        return;
+      }
+
+      const selCard = remainedCards.shift();
+      dfs([...selCards, selCard], [...remainedCards]);
+      dfs([...selCards], [...remainedCards]);
+    }
+  }
+  */
 
   function sortSums(sums) {
     return sums.sort((befSum, aftSum) => aftSum - befSum);
   }
 
+  // 선택 카드 수만큼 for문 사용
   function getAllSums(cards) {
     const sums = new Set();
     for (let i = 0; i < cards.length; i++) {
