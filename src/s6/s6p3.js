@@ -53,11 +53,49 @@
  */
 // *다시 풀기
 // *0일 때의 처리에서 간과한 것이 있었다. 주의하자.
+// *실제 시험일 때에는 클래스까지 구현할 여유가 없을 것이다.
 
 {
   const BURST_CONDITION = 2;
   const EMPTY = 0;
 
+  function getBurstedPuppetCount(board, moves) {
+    let puppetCnt = 0;
+    let burstCnt = 0;
+
+    const bucket = [];
+    moves.forEach((move) => {
+      for (const boardHorizon of board) {
+        if (boardHorizon[move - 1] === EMPTY) {
+          continue;
+        } else {
+          const selPuppet = boardHorizon[move - 1];
+          boardHorizon[move - 1] = EMPTY;
+          bucket.push(selPuppet);
+          break;
+        }
+      }
+
+      let burstCond = false;
+      do {
+        if (bucket[bucket.length - 1] === bucket[bucket.length - 2]) {
+          bucket.pop();
+          bucket.pop();
+          burstCnt++;
+          burstCond = true;
+        } else {
+          burstCond = false;
+        }
+      } while (burstCond);
+    });
+
+    puppetCnt = burstCnt * BURST_CONDITION;
+
+    return puppetCnt;
+  }
+
+  /*
+  // 클래스를 이용한 처리
   class Bucket {
     #stack;
     #score;
@@ -141,6 +179,7 @@
   function getBurstedPuppetCount(board, moves) {
     return getBurstCount(board, moves) * BURST_CONDITION;
   }
+  */
 
   function solution(board, moves) {
     const answer = getBurstedPuppetCount(board, moves);
