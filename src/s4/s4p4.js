@@ -29,6 +29,40 @@
   const DELIVERY_IDX = 1;
   const SALE = 1 / 2;
 
+  function getMaxGivablePresentCount(budget, studentInfoList) {
+    let cnt = 0;
+
+    const sortedStudentInfoList = [...studentInfoList].sort(
+      (a, b) =>
+        a[PRODUCT_IDX] * SALE +
+        a[DELIVERY_IDX] -
+        (b[PRODUCT_IDX] * SALE + b[DELIVERY_IDX])
+    );
+
+    let sum = 0;
+    for (let i = 0; i < sortedStudentInfoList.length; i++) {
+      const selectedInfo = sortedStudentInfoList[i];
+      const selectedSum =
+        selectedInfo[PRODUCT_IDX] + selectedInfo[DELIVERY_IDX];
+      const saledSelectedSum =
+        selectedInfo[PRODUCT_IDX] * SALE + selectedInfo[DELIVERY_IDX];
+      if (sum + selectedSum > budget) {
+        if (sum + saledSelectedSum > budget) {
+          break;
+        }
+        sum += saledSelectedSum;
+      } else {
+        sum += selectedSum;
+      }
+
+      cnt++;
+    }
+
+    return cnt;
+  }
+
+  /*
+  // 이중 for문
   function getGivablePresentCounts(budget, studentInfoList) {
     const counts = [0];
     for (let i = 0; i < studentInfoList.length; i++) {
@@ -76,7 +110,7 @@
 
     return Math.max(...givablePresentCounts);
   }
-
+  */
   function solution(budget, studentInfoList) {
     const answer = getMaxGivablePresentCount(budget, studentInfoList);
     return answer;
