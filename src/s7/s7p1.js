@@ -18,11 +18,16 @@
   function sortNumsAsc(numbers) {
     const sortedNums = Array.from(numbers);
     for (let i = 0; i < sortedNums.length - 1; i++) {
+      let minNumIdx = i;
       for (let j = i + 1; j < sortedNums.length; j++) {
-        if (sortedNums[i] > sortedNums[j]) {
-          [sortedNums[i], sortedNums[j]] = [sortedNums[j], sortedNums[i]];
+        if (sortedNums[minNumIdx] > sortedNums[j]) {
+          minNumIdx = j;
         }
       }
+      [sortedNums[i], sortedNums[minNumIdx]] = [
+        sortedNums[minNumIdx],
+        sortedNums[i],
+      ];
     }
 
     return sortedNums;
