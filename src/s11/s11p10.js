@@ -69,7 +69,7 @@
     const inputYellow = 2;
     const output = this.solution(inputBrown, inputYellow);
 
-    test();
+    // test();
     console.log(`Input: ${inputBrown}\n ${inputYellow} `);
     console.log(`Output: ${output}\n`);
   }
