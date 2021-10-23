@@ -79,7 +79,7 @@
     ];
     const output = this.solution(inputN, inputComputers);
 
-    test();
+    // test();
     console.log(`Input: ${inputN}\n ${inputComputers.join("\n")} `);
     console.log(`Output: ${output}\n`);
   }
