@@ -26,7 +26,26 @@
   const MIN_LIMIT_WEIGHT = 1;
   const MAX_CNT = 30;
   const MIN_CNT = 1;
+  /*
+  // dfs가 아닌 방법
+  function getMaxWeightsSum(limitWeight, dogWeights) {
+    let maxSum = 0;
 
+    const sortedWeights = [...dogWeights].sort((a, b) => b - a);
+    let sum = 0;
+    for (const weight of sortedWeights) {
+      if (sum + weight <= limitWeight) {
+        sum += weight;
+        maxSum = sum > maxSum ? sum : maxSum;
+      } else {
+        continue;
+      }
+    }
+
+    return maxSum;
+  }
+  */
+  // dfs
   function getMaxWeightsSum(limitWeight, dogWeights) {
     let maxSum = 0;
     dfs(0);
