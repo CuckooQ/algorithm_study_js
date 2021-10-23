@@ -73,7 +73,7 @@
     const input = [1, 3, 5];
     const output = this.solution(input);
 
-    test();
+    // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
   }
