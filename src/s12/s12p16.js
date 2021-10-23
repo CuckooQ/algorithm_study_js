@@ -16,7 +16,7 @@
  * Output Example: 1
  */
 // Expected: 13:48 - 14:28
-// Actual: 13:48 -
+// Actual: 13:48 - 14:08
 
 {
   const MAX_LEN = 5000;
