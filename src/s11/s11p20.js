@@ -5,7 +5,7 @@
  * Input Condition: 1 ≤ numbers의 길이 ≤ 9
  *                  0 ≤ numbers의 모든 수 ≤ 9
  *                  numbers의 모든 수는 서로 다릅니다.
- * Output Condition:
+ * Output Condition: None
  * Input Example: [1,2,3,4,6,7,8,0]
  * Output Example: 14
  */
