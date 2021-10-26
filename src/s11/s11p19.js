@@ -122,7 +122,7 @@
     const inputHand = "right";
     const output = this.solution(inputNumbers, inputHand);
 
-    test();
+    // test();
     console.log(`Input: ${inputNumbers.join(" ")}\n${inputHand} `);
     console.log(`Output: ${output}\n`);
   }
