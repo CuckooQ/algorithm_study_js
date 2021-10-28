@@ -137,7 +137,7 @@
     const inputStages = [2, 1, 2, 6, 2, 4, 3, 3];
     const output = this.solution(inputN, inputStages);
 
-    test();
+    // test();
     console.log(`Input: ${inputN}\n${inputStages.join(" ")} `);
     console.log(`Output: ${output}\n`);
   }
