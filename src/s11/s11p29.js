@@ -29,9 +29,6 @@
     const charQueue = [...s];
     const storeStack = [charQueue.shift()];
 
-    const test = [...[...s].entries()].sort((a, b) => a[1].localeCompare(b[1]));
-    console.log(test);
-
     while (charQueue.length !== 0) {
       const char = charQueue.shift();
       const storedChar = storeStack.length !== 0 ? storeStack.pop() : "";
