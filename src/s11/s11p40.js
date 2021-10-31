@@ -238,7 +238,7 @@
     ];
     const output = this.solution(input);
 
-    test();
+    // test();
     console.log(`Input: ${input.join(" ")} `);
     console.log(`Output: ${output}\n`);
   }
