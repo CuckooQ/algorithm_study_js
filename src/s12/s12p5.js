@@ -8,20 +8,37 @@
  * Output Example: "bab"
  */
 // *다시 풀기.
-// *매우 오래 걸렸고 통과하지 못했다.
-// *모두 통과하는 해답을 찾아야 한다.
+// *Brute Force로 풀면 시간 초과가 발생한다.
 
 {
   const MAX_LEN = 1000;
 
-  function compareToPalindrome(text) {
-    const reversedText = text.split("").reverse().join("");
-    return text === reversedText;
+  function isPalindrome(s) {
+    const reversedText = s.split("").reverse().join("");
+    return s === reversedText;
   }
 
-  function solution(text) {
-    let answer = "";
+  function getMaxLenSubStrPalindrome(s) {
+    let maxLenSubStr = "";
 
+    const dp = Array.from({ length: s.length }, () =>
+      Array.from({ length: s.length }, () => 0)
+    );
+
+    for (let i = s.length - 1; i >= 0; i--) {
+      for (let j = i; j < s.length; j++) {
+        dp[i][j] = s[i] === s[j] && (j - i <= 2 || dp[i + 1][j - 1]) ? 1 : 0;
+        if (dp[i][j] && j - i + 1 >= maxLenSubStr.length) {
+          maxLenSubStr = s.substring(i, j + 1);
+        }
+      }
+    }
+
+    return maxLenSubStr;
+  }
+
+  function solution(s) {
+    const answer = getMaxLenSubStrPalindrome(s);
     return answer;
   }
 
@@ -131,7 +148,7 @@
     const input = "babad";
     const output = this.solution(input);
 
-    // test();
+    test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
   }
