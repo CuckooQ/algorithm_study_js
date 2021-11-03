@@ -164,7 +164,7 @@
     const inputP = "a";
     const output = this.solution(inputS, inputP);
 
-    test();
+    // test();
     console.log(`Input: ${inputS}\n ${inputP} `);
     console.log(`Output: ${output}\n`);
   }
