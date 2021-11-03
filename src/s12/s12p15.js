@@ -14,15 +14,56 @@
  * Output Example: false
  */
 // *다시 풀기
-// *풀지 못했다.
+// *regex '*'의 지식이 중요했다.
+// *문자와 패턴에 대한 각각의 인덱스, 그리고 다음 패턴이 *인 경우의 처리가 중요했다.
 
 {
   const ASTERISK = "*";
   const COMMA = ".";
 
-  function solution(s, p) {
-    let answer;
+  function isMatch(s, p) {
+    let isMatch = false;
+    const sLen = s.length;
+    const pLen = p.length;
 
+    isMatch = dfs();
+
+    return isMatch;
+
+    function dfs(sIdx = 0, pIdx = 0) {
+      if (pIdx === pLen) {
+        // 모든 문자 일치 여부
+        return sIdx === sLen;
+      }
+
+      // 패턴의 다음 문자가 *인 경우
+      if (p[pIdx + 1] === ASTERISK) {
+        if (dfs(sIdx, pIdx + 2)) {
+          // 패턴 문자 + *를 공백 문자로 가정하고, 현재 문자와 패턴의 다다음 문자를 판별
+          return true;
+        } else {
+          // 패턴 문자 + *가 현재 문자로 가정하고, 문자열에서의 현재 문자 패턴의 문자가 일치하거나 패턴의 문자가 .인 경우
+          while (s[sIdx] && (p[pIdx] === COMMA || s[sIdx] === p[pIdx])) {
+            // 문자열의 다음 문자들과 패턴의 다다음 문자를 판별
+            sIdx++;
+            if (dfs(sIdx, pIdx + 2)) {
+              return true;
+            }
+          }
+        }
+      }
+      // 패턴의 다음 문자가 *가 아니고, 문자열에서의 문자가 패턴의 문자가 일치하거나 패턴의 문자가 .인 경우
+      else if (s[sIdx] && (p[pIdx] === COMMA || s[sIdx] === p[pIdx])) {
+        // 문자열과 패턴의 다음 문자를 판별
+        return dfs(sIdx + 1, pIdx + 1);
+      }
+
+      return false;
+    }
+  }
+
+  function solution(s, p) {
+    const answer = isMatch(s, p);
     return answer;
   }
 
@@ -66,6 +107,56 @@
     validateTestResult(testNum, condition);
   }
 
+  function testToExample5() {
+    const testNum = 5;
+    const inputS = "aaa";
+    const inputP = "ab*ac*a";
+    const expectResult = true;
+    const testFunction = solution;
+    const condition = testFunction(inputS, inputP) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToExample6() {
+    const testNum = 6;
+    const inputS = "aaa";
+    const inputP = "ab*a*c*a";
+    const expectResult = true;
+    const testFunction = solution;
+    const condition = testFunction(inputS, inputP) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToExample7() {
+    const testNum = 7;
+    const inputS = "a";
+    const inputP = "ab*";
+    const expectResult = true;
+    const testFunction = solution;
+    const condition = testFunction(inputS, inputP) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToExample8() {
+    const testNum = 8;
+    const inputS = "ab";
+    const inputP = ".*..";
+    const expectResult = true;
+    const testFunction = solution;
+    const condition = testFunction(inputS, inputP) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToExample9() {
+    const testNum = 9;
+    const inputS = "abcdede";
+    const inputP = "ab.*de";
+    const expectResult = true;
+    const testFunction = solution;
+    const condition = testFunction(inputS, inputP) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
   function main() {
     console.log("S12P15\n");
 
@@ -73,7 +164,7 @@
     const inputP = "a";
     const output = this.solution(inputS, inputP);
 
-    // test();
+    test();
     console.log(`Input: ${inputS}\n ${inputP} `);
     console.log(`Output: ${output}\n`);
   }
@@ -83,6 +174,11 @@
     testToExample2();
     testToExample3();
     testToExample4();
+    testToExample5();
+    testToExample6();
+    testToExample7();
+    testToExample8();
+    testToExample9();
   }
 
   main();
