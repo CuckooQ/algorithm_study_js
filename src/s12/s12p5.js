@@ -42,40 +42,6 @@
     return answer;
   }
 
-  /*
-  // 시간 초과된 처리
-  function solution(text) {
-    let answer = "";
-
-    let startIdx = 0;
-    let subText = text;
-    let windowSize = subText.length;
-
-    while (windowSize !== 0) {
-      if (answer.length > windowSize) {
-        break;
-      }
-
-      if (compareToPalindrome(subText)) {
-        answer = subText;
-        break;
-      } else {
-        startIdx++;
-        const newSubText = text.substr(startIdx, windowSize);
-        if (subText.length !== newSubText.length) {
-          startIdx = 0;
-          windowSize--;
-          subText = text.substr(startIdx, windowSize);
-        } else {
-          subText = newSubText;
-        }
-      }
-    }
-
-    return answer;
-  }
-  */
-
   function testToExample1() {
     const testNum = 1;
     const input = "cbbd";
@@ -148,7 +114,7 @@
     const input = "babad";
     const output = this.solution(input);
 
-    test();
+    // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
   }
