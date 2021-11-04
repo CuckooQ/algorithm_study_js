@@ -82,7 +82,7 @@
     const inputB = 7;
     const output = this.solution(inputN, inputA, inputB);
 
-    test();
+    // test();
     console.log(`Input: ${inputN} ${inputA} ${inputB}`);
     console.log(`Output: ${output}\n`);
   }
