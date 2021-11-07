@@ -18,12 +18,43 @@
  * Output Example: 1
  */
 // *다시 풀기
+// *규칙을 찾는 것이 중요한 문제다.
 
 {
   function solution(n) {
     let answer;
-
+    const convertedNumStr = rf();
+    answer = Number(convertedNumStr);
     return answer;
+
+    function rf(num = n, convStr = "") {
+      const remained = num % 3;
+      switch (remained) {
+        case 1: {
+          convStr = "1" + convStr;
+          break;
+        }
+        case 2: {
+          convStr = "2" + convStr;
+          break;
+        }
+        case 0: {
+          convStr = "4" + convStr;
+          break;
+        }
+        default:
+      }
+
+      let val = Math.floor(num / 3);
+      if (remained === 0) {
+        val -= 1;
+      }
+      if (val === 0) {
+        return convStr;
+      }
+
+      return rf(val, convStr);
+    }
   }
 
   function testToExample1() {
@@ -53,6 +84,15 @@
     validateTestResult(testNum, condition);
   }
 
+  function testToExample4() {
+    const testNum = 4;
+    const input = 10;
+    const expectResult = 41;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
   function main() {
     console.log("S11P25\n");
 
@@ -68,6 +108,7 @@
     testToExample1();
     testToExample2();
     testToExample3();
+    testToExample4();
   }
 
   main();
