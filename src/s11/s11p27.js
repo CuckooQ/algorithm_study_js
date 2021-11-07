@@ -22,20 +22,22 @@
 // *다른 사람 풀이들은 DP로 되어있는데, DP로는 못 풀겠다.
 
 {
+  const LIMIT_CNT = 8;
+
   function getMinCnt(n, number) {
     let minCnt = -1;
     let tmpCnt = Number.MAX_SAFE_INTEGER;
     const len = number.toString().length;
     dfs();
 
-    if (tmpCnt <= 8) {
+    if (tmpCnt <= LIMIT_CNT) {
       minCnt = tmpCnt;
     }
 
     return minCnt;
 
     function dfs(sum = 0, cnt = 0, digitArr = [], arithOp) {
-      if (cnt > 8) {
+      if (cnt > LIMIT_CNT) {
         return;
       }
 
@@ -55,7 +57,7 @@
             break;
           }
           case "/": {
-            Math.floor((sum /= num));
+            sum = Math.floor(sum / num);
             break;
           }
           default:
