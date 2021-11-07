@@ -14,64 +14,49 @@
  * Output Example: 1
  */
 // *다시 풀기
-// *문제 이해부터 안 된다.
-// *최대로 중복되는 처리 개수를 구하는 문제라고 생각했는데 아니었다.
 
 {
   function getMaxThroughput(lines) {
-    return 0;
+    let maxCnt = 0;
+
+    const arr = [];
+    const logPointArr = [];
+    lines.forEach((log) => {
+      let [date, time, sec] = log.split(" ");
+      [sec, milSec] = sec.substring(0, sec.length - 1).split(".");
+
+      const endDate = new Date(date + " " + time);
+      const startDate = new Date(endDate);
+      startDate.setSeconds(startDate.getSeconds() - 1 * sec);
+      milSec && startDate.setMilliseconds(startDate.getMilliseconds() - milSec);
+      startDate.setMilliseconds(startDate.getMilliseconds() + 1);
+      arr.push([startDate.getTime(), endDate.getTime()]);
+      logPointArr.push(startDate.getTime(), endDate.getTime());
+    });
+    logPointArr.sort((a, b) => a - b);
+
+    for (let i = 0; i < logPointArr.length; i++) {
+      const beginRange = logPointArr[i];
+      const endRange = logPointArr[i] + 1000;
+
+      let cnt = 0;
+      for (let j = 0; j < arr.length; j++) {
+        const stPoint = arr[j][0];
+        const edPoint = arr[j][1];
+
+        if (
+          (stPoint >= beginRange && stPoint < endRange) ||
+          (edPoint >= beginRange && edPoint < endRange) ||
+          (stPoint <= beginRange && edPoint >= endRange)
+        ) {
+          cnt++;
+        }
+      }
+      if (cnt > maxCnt) maxCnt = cnt;
+    }
+
+    return maxCnt;
   }
-
-  /*
-  // 착각하고 만든 처리
-  const FLAG_IDX = 0;
-  const TIME_IDX = 1;
-  const START_FLAG = "S";
-  const END_FLAG = "E";
-
-  function getMaxThroughput(lines) {
-    let maxThrouput = 0;
-
-    const timelines = [];
-
-    lines.forEach((line) => {
-      const [dateStr, timeStr, secStr] = line.split(" ");
-
-      const elapsedTime = Number(secStr.slice(0, secStr.length - 1));
-      const endDatetime = new Date(`${dateStr} ${timeStr}`);
-      const startDatetime = new Date(
-        endDatetime.getTime() - elapsedTime * 10 ** 3
-      );
-
-      const startInfo = [START_FLAG, startDatetime];
-      const endInfo = [END_FLAG, endDatetime];
-      timelines.push(endInfo, startInfo);
-    });
-
-    timelines.sort((a, b) => {
-      if (a[TIME_IDX] === b[TIME_IDX]) {
-        return a[FLAG_IDX].charCodeAt() - b[FLAG_IDX].charCodeAt();
-      } else {
-        return a[TIME_IDX] - b[TIME_IDX];
-      }
-    });
-
-    let stack = [];
-    timelines.forEach((timeline) => {
-      if (timeline[FLAG_IDX] === START_FLAG) {
-        stack.push(1);
-      } else {
-        stack.pop();
-      }
-
-      if (stack.length > maxThrouput) {
-        maxThrouput = stack.length;
-      }
-    });
-
-    return maxThrouput;
-  }
-  */
 
   function solution(lines) {
     const answer = getMaxThroughput(lines);
@@ -91,7 +76,7 @@
   }
 
   function testToExample2() {
-    const testNum = 1;
+    const testNum = 2;
     const input = [
       "2016-09-15 20:59:57.421 0.351s",
       "2016-09-15 20:59:58.233 1.181s",
