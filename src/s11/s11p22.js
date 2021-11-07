@@ -11,8 +11,6 @@
  *                b = [-3,-1,0,2]
  * Output Example: 3
  */
-// Expected: 12:57 - 13:37
-// Actual: 12:57 -
 
 {
   function solution(a, b) {
