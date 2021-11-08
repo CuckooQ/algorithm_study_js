@@ -17,10 +17,25 @@
  */
 // *다시 풀기
 // *효율성 테스트가 모두 시간초과로 실패했다.
+// *매우 긴 배열은 시간초과를 야기한다.
+// *어이가 없네.
 
 {
+  // 문자열을 배열로 저장하는 처리 제거
   function isPairStr(s) {
-    return 0;
+    const storeStack = [];
+
+    for (let i = 0; i < s.length; i++) {
+      const char = s[i];
+      const storedChar = storeStack.pop();
+
+      if (char !== storedChar) {
+        storedChar && storeStack.push(storedChar);
+        storeStack.push(char);
+      }
+    }
+
+    return storeStack.length === 0 ? 1 : 0;
   }
 
   /*
