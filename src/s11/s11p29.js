@@ -78,7 +78,7 @@
     const input = "baabaa";
     const output = this.solution(input);
 
-    test();
+    // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
   }
