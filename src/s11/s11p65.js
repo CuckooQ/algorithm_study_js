@@ -54,7 +54,7 @@
     const inputDivisor = 5;
     const output = this.solution(inputArr, inputDivisor);
 
-    test();
+    // test();
     console.log(`Input: ${inputArr.join(" ")}\n${inputDivisor} `);
     console.log(`Output: ${output.join(" ")}\n`);
   }
