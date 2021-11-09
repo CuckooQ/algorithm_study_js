@@ -15,13 +15,43 @@
  * Output Example: 3
  */
 // *다시 풀기
-// *BFS로 풀어야 한다.
 
 {
   function getCntOfFarNode(n, vertex) {
-    let cnt = n;
+    let cnt;
+
+    const adjacencyList = Array.from({ length: n + 1 }, () => []);
+    vertex.forEach(([a, b]) => {
+      adjacencyList[a].push(b);
+      adjacencyList[b].push(a);
+    });
+
+    cnt = bfs();
 
     return cnt;
+
+    function bfs() {
+      const queue = [1];
+      const visited = Array.from({ length: n + 1 }, () => 0);
+      visited[1] = 1;
+      const levels = Array.from({ length: n + 1 }, () => 0);
+      levels[1] = 1;
+
+      while (queue.length) {
+        const node = queue.shift();
+        const nodes = adjacencyList[node];
+        nodes.forEach((nextNode) => {
+          if (!visited[nextNode]) {
+            queue.push(nextNode);
+            visited[nextNode] = 1;
+            levels[nextNode] = levels[node] + 1;
+          }
+        });
+      }
+
+      const lastLevel = Math.max(...levels);
+      return levels.filter((level) => level === lastLevel).length;
+    }
   }
 
   function solution(n, vertex) {
@@ -66,16 +96,6 @@
 
   function testToExample3() {
     const testNum = 3;
-    const inputN = 6;
-    const inputVertex = [[2, 3]];
-    const expectResult = 5;
-    const testFunction = solution;
-    const condition = testFunction(inputN, inputVertex) === expectResult;
-    validateTestResult(testNum, condition);
-  }
-
-  function testToExample4() {
-    const testNum = 4;
     const inputN = 4;
     const inputVertex = [
       [1, 2],
@@ -89,31 +109,8 @@
     validateTestResult(testNum, condition);
   }
 
-  function testToExample5() {
-    const testNum = 5;
-    const inputN = 11;
-    const inputVertex = [
-      [1, 2],
-      [1, 3],
-      [2, 4],
-      [2, 5],
-      [3, 5],
-      [3, 6],
-      [4, 8],
-      [4, 9],
-      [5, 9],
-      [5, 10],
-      [6, 10],
-      [6, 11],
-    ];
-    const expectResult = 4;
-    const testFunction = solution;
-    const condition = testFunction(inputN, inputVertex) === expectResult;
-    validateTestResult(testNum, condition);
-  }
-
-  function testToExample6() {
-    const testNum = 6;
+  function testToExample4() {
+    const testNum = 4;
     const inputN = 5;
     const inputVertex = [
       [4, 3],
@@ -129,8 +126,8 @@
     validateTestResult(testNum, condition);
   }
 
-  function testToExample7() {
-    const testNum = 7;
+  function testToExample5() {
+    const testNum = 5;
     const inputN = 4;
     const inputVertex = [
       [1, 4],
@@ -144,8 +141,8 @@
     validateTestResult(testNum, condition);
   }
 
-  function testToExample8() {
-    const testNum = 8;
+  function testToExample6() {
+    const testNum = 6;
     const inputN = 4;
     const inputVertex = [
       [4, 3],
@@ -184,8 +181,6 @@
     testToExample4();
     testToExample5();
     testToExample6();
-    testToExample7();
-    testToExample8();
   }
 
   main();
