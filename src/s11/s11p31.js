@@ -18,11 +18,29 @@
  * Output Example: 28
  */
 // *다시 풀기
-// *전혀 모르겠다.
 
 {
   function getMinElapsedTime(n, times) {
     let minElapsedTime = Number.MAX_SAFE_INTEGER;
+
+    let highTime = n * Math.max(...times);
+    let lowTime = 1;
+    while (lowTime <= highTime) {
+      let midTime = Math.floor((highTime + lowTime) / 2);
+      let sum = 0;
+      times.forEach((time) => {
+        sum += Math.floor(midTime / time);
+      });
+
+      if (sum >= n) {
+        if (midTime < minElapsedTime) {
+          minElapsedTime = midTime;
+        }
+        highTime = midTime - 1;
+      } else {
+        lowTime = midTime + 1;
+      }
+    }
 
     return minElapsedTime;
   }
