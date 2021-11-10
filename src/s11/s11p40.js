@@ -33,7 +33,6 @@
 // Actual: 12:23 - 13:56
 // *다시 풀기
 // *작업중 뽑는 처리와 기다리는 처리를 잘 못 구현했다.
-// *구현한 방법은 마음에 든다.
 
 {
   class Processer {
@@ -45,16 +44,15 @@
     }
 
     sortJobs() {
+      // 작업 실행 시간 오름차 순으로 정렬
+      // (현재 실행할 수 있는 작업 중 가장 짧은 시간에 완료할 수 있는 작업을 우선 실행)
       this.jobs.sort((a, b) => a[1] - b[1]);
     }
 
-    getJob() {
-      const executableJobIdx = this.jobs.findIndex((job) => job[0] <= this.now);
-
-      const selectedJob = this.jobs[executableJobIdx];
-      selectedJob && this.jobs.splice(executableJobIdx, 1);
-
-      return selectedJob;
+    waitUntilExecutable() {
+      const onlyEnterTimes = this.jobs.map((job) => job[0]);
+      const startableTime = Math.min(...onlyEnterTimes);
+      this.now = startableTime;
     }
 
     getElapseTime(job) {
@@ -70,16 +68,13 @@
       this.now += job[1];
     }
 
-    waitUntilExecutable() {
-      const onlyEnterTimes = this.jobs.map((job) => job[0]);
-      const startableTime = Math.min(...onlyEnterTimes);
-      this.now = startableTime;
-    }
+    getJob() {
+      const executableJobIdx = this.jobs.findIndex((job) => job[0] <= this.now);
 
-    getAverageElapsedTime() {
-      const elapsedTime = this.executedTimes.reduce((acc, val) => acc + val, 0);
-      const jobCnt = this.executedTimes.length;
-      return elapsedTime / jobCnt;
+      const selectedJob = this.jobs[executableJobIdx];
+      selectedJob && this.jobs.splice(executableJobIdx, 1);
+
+      return selectedJob;
     }
 
     execute() {
@@ -93,6 +88,12 @@
         }
       }
     }
+
+    getAverageElapsedTime() {
+      const elapsedTime = this.executedTimes.reduce((acc, val) => acc + val, 0);
+      const jobCnt = this.executedTimes.length;
+      return Math.floor(elapsedTime / jobCnt);
+    }
   }
 
   function getMinAverageTime(jobs) {
@@ -102,7 +103,6 @@
     processer.execute();
 
     minAverageTime = processer.getAverageElapsedTime();
-    minAverageTime = Math.floor(minAverageTime);
 
     return minAverageTime;
   }
