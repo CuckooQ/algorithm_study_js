@@ -130,3 +130,4 @@
 - Knapsack Problem 종류: Fraction Knapsack + 0-1 Knapsack.
 - Fraction Knapsack: 물건을 쪼갤 수 있는 배낭 문제. 그리디 알고리즘으로 해결 가능.
 - 0-1 Knapsack: 물건을 쪼갤 수 없는 배낭 문제. Dynamic Programming으로 해결 가능.
+- 가우스의 법칙: 합 = (마지막 숫자 + 처음 숫자) \* (전체 개수 / 2)
