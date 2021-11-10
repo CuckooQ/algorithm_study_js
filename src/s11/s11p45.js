@@ -22,144 +22,155 @@
  * Output Example: 56
  */
 // *다시 풀기
+// *거꾸로 가는 경우의 횟수 찾는 처리를 구현하는 것이 어려웠다.
+// *시간 초과가 발생하지 않게 하기위해 버튼을 누르는 처리를 반복문으로 여러번 처리하는 것이 아닌,
+//  매개변수로 횟수를 줘서 처리했다.
 
 {
-  function getMinCntOfControl() {
-    return 0;
-  }
-
-  /*
-  // 60점 처리, 테스트4,7,8,11 실패
   const A_CODE = 65;
   const Z_CODE = 90;
 
   class Controller {
-    constructor(len) {
+    constructor(name) {
+      this.moveCnt = 0;
       this.idxNow = 0;
-      this.nameArr = Array.from({ length: len }, () => A_CODE);
+      this.goalName = name;
+      this.codes = Array.from({ length: name.length }, () => A_CODE);
     }
 
-    pushUp() {
-      this.nameArr[this.idxNow] =
-        this.nameArr[this.idxNow] !== Z_CODE
-          ? this.nameArr[this.idxNow] + 1
-          : A_CODE;
+    pushUp(n) {
+      this.codes[this.idxNow] = this.codes[this.idxNow] + n;
+      this.moveCnt += n;
     }
 
-    pushDown() {
-      this.nameArr[this.idxNow] =
-        this.nameArr[this.idxNow] !== A_CODE
-          ? this.nameArr[this.idxNow] - 1
-          : Z_CODE;
+    pushDown(n) {
+      this.codes[this.idxNow] =
+        this.codes[this.idxNow] !== A_CODE
+          ? this.codes[this.idxNow] - n
+          : Z_CODE - n + 1;
+      this.moveCnt += n;
     }
 
-    pushLeft() {
+    pushLeft(n) {
       this.idxNow =
-        this.idxNow !== 0 ? this.idxNow - 1 : this.nameArr.length - 1;
+        this.idxNow - n >= 0 ? this.idxNow - n : this.codes.length - n;
+      this.moveCnt += n;
     }
 
-    pushRight() {
+    pushRight(n) {
       this.idxNow =
-        this.idxNow !== this.nameArr.length - 1 ? this.idxNow + 1 : this.idxNow;
+        this.idxNow + n < this.codes.length
+          ? this.idxNow + n
+          : this.codes.length - 1;
+      this.moveCnt += n;
     }
 
     getName() {
-      return this.nameArr
+      return this.codes
         .map((charCode) => String.fromCharCode(charCode))
         .join("");
     }
-  }
 
-  function setCharWithController(name, idx, controller) {
-    let cnt = 0;
+    moveToNextIdx() {
+      // 정방향 경우의 횟수
+      let rightMoveCnt = [...this.codes]
+        .slice(this.idxNow)
+        .findIndex(
+          (code, idx) =>
+            this.goalName[this.idxNow + idx] !== String.fromCharCode(A_CODE) &&
+            code === A_CODE
+        );
+      rightMoveCnt =
+        rightMoveCnt !== -1 ? rightMoveCnt : Number.MAX_SAFE_INTEGER;
 
-    const charCode = name[idx].charCodeAt(0);
-    if (charCode === A_CODE) {
-      return cnt;
-    }
-
-    if (Math.abs(idx - controller.idxNow) > Math.floor(name.length / 2)) {
-      while (idx !== controller.idxNow) {
-        if (idx - controller.idxNow > 0) {
-          controller.pushLeft();
-        } else {
-          controller.pushRight();
+      // 역방향 경우의 횟수 (여기가 제일 어려웠다)
+      let leftMoveCnt = -1;
+      let cnt = 0;
+      for (let i = this.idxNow; i >= 0; i--) {
+        if (
+          this.codes[i] === A_CODE &&
+          this.goalName[i] !== String.fromCharCode(A_CODE)
+        ) {
+          leftMoveCnt += cnt + 1;
+          break;
         }
         cnt++;
       }
-    } else {
-      while (idx !== controller.idxNow) {
-        if (idx - controller.idxNow > 0) {
-          controller.pushRight();
-        } else {
-          controller.pushLeft();
+      if (leftMoveCnt === -1) {
+        let cnt = 0;
+        for (let i = this.codes.length - 1; i >= this.idxNow; i--) {
+          cnt++;
+          if (
+            this.codes[i] === A_CODE &&
+            this.goalName[i] !== String.fromCharCode(A_CODE)
+          ) {
+            leftMoveCnt += cnt + 1;
+            break;
+          }
         }
-        cnt++;
+        leftMoveCnt =
+          leftMoveCnt !== -1
+            ? this.idxNow + leftMoveCnt
+            : Number.MAX_SAFE_INTEGER;
+      }
+
+      if (rightMoveCnt <= leftMoveCnt) {
+        this.pushRight(rightMoveCnt);
+      } else {
+        this.pushLeft(leftMoveCnt);
       }
     }
 
-    if (charCode > Math.floor((A_CODE + Z_CODE) / 2)) {
-      while (controller.nameArr[idx] !== charCode) {
-        controller.pushDown();
-        cnt++;
-      }
-    } else {
-      while (controller.nameArr[idx] !== charCode) {
-        controller.pushUp();
-        cnt++;
+    makeNameChar() {
+      const goalCharCode = this.goalName[this.idxNow].charCodeAt(0);
+
+      const upDiff = Math.abs(goalCharCode - A_CODE);
+      const downDiff = Math.abs(goalCharCode - Z_CODE);
+      if (upDiff > downDiff) {
+        this.pushDown(downDiff + 1);
+      } else {
+        this.pushUp(upDiff);
       }
     }
 
-    return cnt;
-  }
-
-  function getNextCharIdx(name, selectedIdxes, controller) {
-    let nextIdx = 0;
-    const idxFromFirst = [...name].findIndex((char, idx) => {
-      return !selectedIdxes.includes(idx) && char.charCodeAt(0) !== A_CODE;
-    });
-    const idxFromLast = [...name]
-      .map((char, idx) => {
-        return !selectedIdxes.includes(idx) && char.charCodeAt(0) !== A_CODE;
-      })
-      .lastIndexOf(true);
-    if (
-      Math.abs(idxFromFirst - controller.idxNow) <=
-      Math.abs(idxFromLast - controller.idxNow)
-    ) {
-      nextIdx = idxFromFirst;
-    } else {
-      nextIdx = idxFromLast;
+    createName() {
+      while (this.getName() !== this.goalName) {
+        // A가 아닌 인덱스로 이동하기
+        this.moveToNextIdx();
+        // 문자 만들기
+        this.makeNameChar();
+      }
     }
-
-    return nextIdx;
   }
 
   function getMinCntOfControl(name) {
-    let cnt = 0;
+    let cnt;
 
-    const controller = new Controller(name.length);
-    const selectedIdxes = [];
-
-    while (name !== controller.getName()) {
-      const nextIdx = getNextCharIdx(name, selectedIdxes, controller);
-      cnt += setCharWithController(name, nextIdx, controller);
-      selectedIdxes.push(nextIdx);
-    }
+    const controller = new Controller(name);
+    controller.createName();
+    cnt = controller.moveCnt;
 
     return cnt;
   }
-  */
 
   function solution(name) {
     const answer = getMinCntOfControl(name);
     return answer;
   }
 
-  function testToExample() {
+  function testToExample1() {
     const testNum = 1;
     const input = "JAN";
     const expectResult = 23;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToExample2() {
+    const testNum = 2;
+    const input = "ZAAAZZZZZZZ";
+    const expectResult = 15;
     const testFunction = solution;
     const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
@@ -177,7 +188,8 @@
   }
 
   function test() {
-    testToExample();
+    testToExample1();
+    testToExample2();
   }
 
   main();
