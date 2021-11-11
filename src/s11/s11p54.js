@@ -57,12 +57,65 @@
  * Output Example: [1,1,1,1,2,4]
  */
 // *다시 풀기
-// *효율성 테스트에서 모두 실패했다.
+// *처음 작성했던 처리는 효율성 테스트에서 모두 실패했다.
+// *정보를 효율적으로 저장하는 방법과 이분 탐색이 중요했다.
 
 {
   function solution(info, query) {
     const answer = [];
+
+    const map = new Map();
+
+    info.forEach((unitInfo) => {
+      const args = unitInfo.split(" ");
+      const score = Number(args.pop());
+      comb(args, score, 0);
+    });
+
+    map.forEach((scores) => {
+      return scores.sort((a, b) => a - b);
+    });
+
+    query.forEach((unitQuery) => {
+      const args = unitQuery.replace(/ and /g, " ").split(" ");
+      const score = Number(args.pop());
+      const key = args.join("");
+      const scores = map.get(key);
+
+      if (scores) {
+        let startIdx = 0;
+        let endIdx = scores.length;
+        while (startIdx < endIdx) {
+          const midIdx = Math.floor((startIdx + endIdx) / 2);
+          if (scores[midIdx] >= score) {
+            endIdx = midIdx;
+          } else if (scores[midIdx] < score) {
+            startIdx = midIdx + 1;
+          }
+        }
+        const result = scores.length - startIdx;
+        answer.push(result);
+      }
+    });
+
     return answer;
+
+    function comb(args, score, startIdx) {
+      const key = args.join("");
+      const val = map.get(key);
+
+      if (val) {
+        map.set(key, [...map.get(key), score]);
+      } else {
+        map.set(key, [score]);
+      }
+
+      for (let i = startIdx; i < args.length; i++) {
+        const tmp = [...args];
+        tmp[i] = "-";
+        comb(tmp, score, i + 1);
+      }
+    }
   }
 
   /*
