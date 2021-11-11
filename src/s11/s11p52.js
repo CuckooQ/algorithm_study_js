@@ -32,7 +32,6 @@
 // Actual: 12:20 - 14:12
 // *다시 풀기
 // *오래 걸렸다.
-// *Simulation
 
 {
   const FIRST_ARRIVAL_TIME = "09:00";
@@ -96,7 +95,7 @@
     }
   }
 
-  function getTimes(timetable, lastArrivalTime) {
+  function getCrueArrivalTimes(timetable, lastArrivalTime) {
     const times = [];
 
     timetable.forEach((timeStr) => {
@@ -118,53 +117,56 @@
     return times;
   }
 
-  function getArrivalTimes(n, t) {
-    const arrivalTimes = [];
-    let arrivalTime;
+  function getBusArrivalTimes(n, t) {
+    const times = [];
+    let time;
     for (let i = 0; i < n; i++) {
-      if (!arrivalTime) {
-        arrivalTime = new Time(FIRST_ARRIVAL_TIME);
+      if (!time) {
+        time = new Time(FIRST_ARRIVAL_TIME);
       } else {
-        arrivalTime = arrivalTime.getAfterMin(t);
+        time = time.getAfterMin(t);
       }
-      arrivalTimes.push(arrivalTime);
+      times.push(time);
     }
 
-    return arrivalTimes;
+    return times;
   }
 
   function solution(n, t, m, timetable) {
     let answer;
 
-    const arrivalTimes = getArrivalTimes(n, t);
-    const times = getTimes(timetable, arrivalTimes[arrivalTimes.length - 1]);
+    const busArrivalTimes = getBusArrivalTimes(n, t);
+    const crueArrivalTimes = getCrueArrivalTimes(
+      timetable,
+      busArrivalTimes[busArrivalTimes.length - 1]
+    );
 
-    if (times.length === 0) {
+    if (crueArrivalTimes.length === 0) {
       // 버스에 탈 크루가 없는 경우 가장 늦은 시간의 버스를 탄다.
-      answer = arrivalTimes[arrivalTimes.length - 1].getTimeStr();
+      answer = busArrivalTimes[busArrivalTimes.length - 1].getTimeStr();
     } else {
       // 버스에 탈 크루가 있는 경우 버스 도착 시간마다 크루들을 태운다.
-      for (let i = 0; i < arrivalTimes.length; i++) {
-        let emptyCnt = m;
-        let cnt = times.length;
-        while (cnt !== 0) {
-          cnt--;
-          const time = times.shift();
-          if (time.isFaterOrEqualThan(arrivalTimes[i])) {
+      for (let i = 0; i < busArrivalTimes.length; i++) {
+        let busRemainCnt = m;
+        let checkRemainCnt = crueArrivalTimes.length;
+        while (checkRemainCnt !== 0) {
+          checkRemainCnt--;
+          const crueTime = crueArrivalTimes.shift();
+          if (crueTime.isFaterOrEqualThan(busArrivalTimes[i])) {
             // 도착한 버스에 탈 수 있는 크루인 경우 일단 탄다고 가정한다.
-            emptyCnt--;
+            busRemainCnt--;
             // 도착한 버스가 만원이 된 경우
-            if (emptyCnt === 0) {
+            if (busRemainCnt === 0) {
               // 다음 도착 버스가 더이상 없다면
-              if (!arrivalTimes[i + 1]) {
+              if (!busArrivalTimes[i + 1]) {
                 // 내가 그 버스에 탄다.
-                answer = time.getBeforeTimeStr();
+                answer = crueTime.getBeforeTimeStr();
               }
               break;
             }
           } else {
             // 도착한 버스에 탈 수 없는 크루인 경우 다음 버스 도착 시간을 생각한다. (오름차순 정렬했기 때문에 이후의 크루도 탈 수 없다)
-            times.unshift(time);
+            crueArrivalTimes.unshift(crueTime);
             break;
           }
         }
@@ -172,7 +174,7 @@
 
       if (!answer) {
         // 모든 크루가 타도 내가 탈 버스가 남는 경우 가장 늦은 시간의 버스를 탄다.
-        answer = arrivalTimes[arrivalTimes.length - 1].getTimeStr();
+        answer = busArrivalTimes[busArrivalTimes.length - 1].getTimeStr();
       }
     }
 
