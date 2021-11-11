@@ -99,7 +99,6 @@
 ## 못 푼 문제
 
 - 섹션11
--       문제49
 -       문제54
 -       문제55
 -       문제57
@@ -113,6 +112,7 @@
 - 영소문자 a 표현: String.fromCharCode(97).
 - 영대문자 A 표현: String.fromCharCode(65).
 - 배열의 두 요소를 서로 바꾸는 식: [arr[i], arr[j]] = [arr[j], arr[i]].
+- 2차원 배열 복사: arr.map((row) => [...row]).
 - Math.max(), Math.min()함수의 최대 변수 수가 한정되어 있다.
 - Recursive Function: 내부에서 자기 자신을 다시 호출하는 함수.
 - Recursive Function의 필수 조건: 종료 조건.

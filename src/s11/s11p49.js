@@ -23,15 +23,97 @@
  * Output Example: true
  */
 // *다시 풀기
-// 모르겠다. 어렵다.
+// *2차원 배열 활용이 중요한 문제였다.
 
 {
-  function canOpen(key, lock) {
+  class Key {
+    constructor(key) {
+      this.key = key;
+    }
+
+    rotate() {
+      // 시계방향으로 90도 회전
+      const len = this.key.length;
+      const ret = Array.from({ length: len }, () =>
+        Array.from({ length: len }, () => 0)
+      );
+      for (let i = 0; i < len; i++) {
+        for (let j = 0; j < len; j++) {
+          ret[i][j] = this.key[len - j - 1][i];
+        }
+      }
+      this.key = ret;
+    }
+  }
+
+  function isFit(area, len) {
+    // 영역에서 가운데 부분만 탐색
+    for (let i = len; i < len * 2; i++) {
+      for (let j = len; j < len * 2; j++) {
+        // 1: 일치 (0: 맞지 않음, 2: 돌기의 중복)
+        if (area[i][j] !== 1) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function canUnlock(key, lock) {
+    const myKey = new Key(key);
+    const originalLockLen = lock.length;
+
+    // 원래 자물쇠보다 3배 큰 영역을 생성하고, 가운데 영역에 자물쇠 정보 설정.
+    const area = Array.from({ length: originalLockLen * 3 }, () =>
+      Array.from({ length: originalLockLen * 3 }, () => 0)
+    );
+    for (let i = originalLockLen; i < originalLockLen * 2; i++) {
+      for (let j = originalLockLen; j < originalLockLen * 2; j++) {
+        area[i][j] = lock[i - originalLockLen][j - originalLockLen];
+      }
+    }
+
+    // 시계방향으로 90도 회전하면서 탐색
+    for (let i = 0; i < 4; i++) {
+      myKey.rotate();
+
+      // 영역의 첫 번째부터 자물쇠 크기의 마지막 부분이 영역의 끝까지 닿는 영역까지 탐색
+      for (let j = 0; j <= area.length - myKey.key.length; j++) {
+        for (let k = 0; k <= area[0].length - myKey.key[0].length; k++) {
+          // 탐색을 위해 사용할 새 영역 생성
+          const newArea = area.map((row) => [...row]);
+
+          // 자물쇠의 크기만큼 탐색
+          for (let m = 0; m < myKey.key.length; m++) {
+            for (let n = 0; n < myKey.key.length; n++) {
+              // 자물쇠와 열쇠 모두 돌기인 경우 2(중복)로 설정
+              if (newArea[j + m][k + n] === 1 && myKey.key[m][n] === 1) {
+                newArea[j + m][k + n] = 2;
+              }
+              // 자물쇠가 돌기이고 열쇠가 홈인 경우 1(일치)로 설정
+              else if (newArea[j + m][k + n] === 1 && myKey.key[m][n] === 0) {
+                newArea[j + m][k + n] = 1;
+              }
+              // 그 외의 경우에는 열쇠의 상태에 의존
+              else {
+                newArea[j + m][k + n] = myKey.key[m][n];
+              }
+            }
+          }
+
+          // 영역의 자물쇠 부분이 열쇠와 일치하는지 판단
+          if (isFit(newArea, originalLockLen)) {
+            return true;
+          }
+        }
+      }
+    }
+
     return false;
   }
 
   function solution(key, lock) {
-    const answer = canOpen(key, lock);
+    const answer = canUnlock(key, lock);
     return answer;
   }
 
