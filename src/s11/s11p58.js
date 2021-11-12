@@ -21,12 +21,46 @@
  * Output Example: [3, 7]
  */
 // *다시 풀기
-// Binary Search와 Sliding Window로 구현해봤지만 통과하지 못했다.
-// 카카오 문제 레벨2, 3은 거의 못 푼다...
-
+// *투 포인터를 더 유연하게 활용하는 것이 중요한 문제였다.
+// *map의 키의 값이 0일 경우 (없을 경우) delete를 사용해서 개수를 비교하는 것도 할 수 있다.
 {
   function solution(gems) {
     let answer;
+
+    const gemsLen = new Set(gems).size;
+    let maxLen = gems.length;
+    let leftIdx = 0;
+    let rightIdx = 0;
+    answer = [0, maxLen - 1];
+
+    const map = new Map();
+    map.set(gems[0], 1);
+
+    while (leftIdx <= rightIdx && rightIdx < maxLen) {
+      if (gemsLen === map.size) {
+        if (rightIdx - leftIdx < answer[1] - answer[0]) {
+          answer = [leftIdx, rightIdx];
+        } else if (rightIdx - leftIdx === answer[1] - answer[0]) {
+          if (leftIdx < answer[0]) {
+            answer = [leftIdx, rightIdx];
+          }
+        }
+
+        if (map.get(gems[leftIdx]) > 1) {
+          map.set(gems[leftIdx], map.get([leftIdx]) - 1);
+        } else {
+          map.delete(gems[leftIdx]);
+        }
+        leftIdx++;
+      } else {
+        rightIdx++;
+        const cnt = map.get(gems[rightIdx]);
+        map.set(gems[rightIdx], cnt ? cnt + 1 : 1);
+      }
+    }
+
+    answer[0]++;
+    answer[1]++;
 
     return answer;
   }
