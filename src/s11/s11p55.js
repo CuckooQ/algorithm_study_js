@@ -89,12 +89,13 @@
  *          다시한번 "Z"를 수행하면 그 다음으로 최근에 제거된 "콘"이 적힌 행이 원래대로 복구됩니다. 이때, 현재 선택된 행은 바뀌지 않는 점에 주의하세요.
  *          행 번호  이름     선택
  *          0        무지
- *          1        어피치
- *          2        제이지    ㅇ
- *          3        네오
- *          4        튜브
- *          5        라이언
- *          6        콘
+ *          1        콘
+ *          2        어피치
+ *          3        제이지    ㅇ
+ *          4        네오
+ *          5        튜브
+ *          6        라이언
+ *
  *          이때, 최종 표의 상태와 처음 주어진 표의 상태를 비교하여 삭제되지 않은 행은 "O", 삭제된 행은 "X"로 표시하면 다음과 같습니다.
  *          행 번호  이름     비교
  *          0        무지      O
@@ -131,16 +132,10 @@
  * Output Example: "OOOOXOOO"
  */
 // *다시 풀기
-// *커맨드 순서대로 실행만 해도 효율성 테스트를 통과하지 못한다.
-// *일반 테스트도 통과하지 못했다.
-{
-  function getResult(n, k, cmd) {
-    return "";
-  }
+// *문제를 복사하는 과정에서 틀린 내용으로 적은 내용이 있었다.
+// *언제 배열을 사용하고 언제 링크드 리스트를 사용하면 좋은지 숙지하자.
 
-  /*
-  // 아무것도 통과하지 못했다.
-  // Simulation 
+{
   const UP = "U";
   const DOWN = "D";
   const REMOVE = "C";
@@ -148,21 +143,26 @@
   const EXIST = "O";
   const NOT_EXIST = "X";
 
+  class Node {
+    constructor(idx, prevNode) {
+      this.idx = idx;
+      this.prev = prevNode;
+      this.next;
+    }
+  }
+
   function getResult(n, k, cmd) {
-    let resultArr;
+    let resultArr = Array.from({ length: n }, () => EXIST);
 
-    let choicedIdx = k;
-    const removedIds = [];
-    const originalArr = Array.from({ length: n }, (_, id) => id);
-    const changedArr = [...originalArr];
-
-    cmd.forEach((unitCmd) => {
+    let curNode = initNodes();
+    const removedNodes = [];
+    for (const unitCmd of cmd) {
       executeCommand(unitCmd);
-    });
+    }
 
-    resultArr = originalArr.map((id) =>
-      changedArr.includes(id) ? EXIST : NOT_EXIST
-    );
+    removedNodes.forEach((node) => {
+      resultArr[node.idx] = NOT_EXIST;
+    });
 
     return resultArr.join("");
 
@@ -171,36 +171,68 @@
 
       switch (cmdChar) {
         case UP: {
-          choicedIdx = choicedIdx > Number(val) ? choicedIdx - Number(val) : 0;
-          break;
-        }
-        case DOWN: {
-          choicedIdx =
-            choicedIdx + Number(val) <= changedArr.length - 1
-              ? choicedIdx + Number(val)
-              : changedArr.length - 1;
-          break;
-        }
-        case REMOVE: {
-          if (changedArr[choicedIdx] !== undefined) {
-            removedIds.push(changedArr[choicedIdx]);
-            changedArr.splice(choicedIdx, 1);
-            changedArr.length === choicedIdx && choicedIdx--;
+          for (let i = 0; i < val; i++) {
+            if (!curNode.prev) {
+              break;
+            }
+            curNode = curNode.prev;
           }
           break;
         }
+        case DOWN: {
+          for (let i = 0; i < val; i++) {
+            if (!curNode.next) {
+              break;
+            }
+            curNode = curNode.next;
+          }
+          break;
+        }
+        case REMOVE: {
+          removedNodes.push(curNode);
+
+          if (curNode.next) {
+            curNode.next.prev = curNode.prev;
+          }
+          if (curNode.prev) {
+            curNode.prev.next = curNode.next;
+          }
+
+          curNode = curNode.next ? curNode.next : curNode.prev;
+          break;
+        }
         case RECOVERY: {
-          if (removedIds.length > 0) {
-            const recoveryId = removedIds.pop();
-            changedArr.push(recoveryId);
+          const curRemovedNode = removedNodes.pop();
+          if (curRemovedNode.prev) {
+            curRemovedNode.prev.next = curRemovedNode;
+          }
+          if (curRemovedNode.next) {
+            curRemovedNode.next.prev = curRemovedNode;
           }
           break;
         }
         default:
       }
     }
+
+    function initNodes() {
+      let curNode;
+      let prevNode;
+      for (let i = 0; i < n; i++) {
+        const node = new Node(i);
+        if (prevNode) {
+          prevNode.next = node;
+          node.prev = prevNode;
+        }
+        if (i === k) {
+          curNode = node;
+        }
+        prevNode = node;
+      }
+
+      return curNode;
+    }
   }
-  */
 
   function solution(n, k, cmd) {
     const answer = getResult(n, k, cmd);
