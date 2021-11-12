@@ -13,55 +13,36 @@
  * Output Example: 94
  */
 // *다시 풀기
+// *매우 긴 문자열을 배열로 변환해서 처리하는 경우 시간 초과가 발생했다.
 
 {
   function getMaxSubNum(number, k) {
     let maxSubNum = 0;
 
-    return maxSubNum;
-  }
-
-  /*
-  // 50점
-  function getMaxSubNum(number, k) {
-    let maxSubNum = 0;
-
-    const selCnt = number.length - k;
-    let numArr = number.split("");
-
-    let idx = 1;
-    while (numArr.length !== selCnt) {
-      if (idx >= numArr.length) {
-        numArr = numArr.slice(0, selCnt);
-        break;
-      }
-
-      let removeIdx;
-      const targetNum = Number(numArr[idx]);
-      const leftNum = Number(numArr[idx - 1]);
-      const rightNum = Number(numArr[idx + 1]);
-      if (targetNum > leftNum) {
-        removeIdx = idx - 1;
-        idx = 1;
-      } else {
-        if (targetNum > rightNum) {
-          removeIdx = idx + 1;
-          idx++;
-        } else if (targetNum === rightNum) {
-          idx++;
-          continue;
-        } else {
-          removeIdx = idx;
+    let stack = [];
+    for (let i = 0; i < number.length; i++) {
+      const num = Number(number[i]);
+      if (stack.length && k) {
+        let isSmall = true;
+        while (isSmall && k > 0) {
+          const curNum = stack.pop();
+          isSmall = curNum < num;
+          if (!isSmall) {
+            stack.push(curNum);
+          } else {
+            k--;
+          }
         }
       }
-      numArr.splice(removeIdx, 1);
+      stack.push(num);
     }
 
-    maxSubNum = numArr.join("");
+    stack = stack.slice(0, number.length - k);
+    maxSubNum = stack.join("");
 
     return maxSubNum;
   }
-  */
+
   function solution(number, k) {
     const answer = getMaxSubNum(number, k);
     return answer;
