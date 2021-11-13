@@ -1,7 +1,7 @@
 /**
  * Title: [1차] 프렌즈4블록
  * Content: 블라인드 공채를 통과한 신입 사원 라이언은 신규 게임 개발 업무를 맡게 되었다. 이번에 출시할 게임 제목은 "프렌즈4블록".
- *          같은 모양의 카카오프렌즈 블록이 2×2 형태로 4개가 붙어있을 경우 사라지면서 점수를 얻는 게임이다.
+ *          같은 모양의 카카오프렌즈 블록이 2×2 형태로 4개가 붙어있을 경우 사라지면서 점수를 얻는 게임이다.
  *          TTTANT
  *          RRFACC
  *          RRRFCC
@@ -24,11 +24,74 @@
  * Output Example: 14
  */
 // *다시 풀기
+// *한꺼번에 지워진다는 의미 구현을 재귀함수로 구현했었는데, 이 것이 문제였다.
+// *재귀함수로 구현할 필요없이 한 턴에 매칭되는 인덱스만 찾아도 의미가 일치했다.
 
 {
+  const EMPTY = "0";
+
   function solution(m, n, board) {
-    const answer = 0;
+    let answer;
+    const myBoard = board.map((row) => row.split(""));
+
+    while (true) {
+      let matched = [];
+      // 이번 턴에 매칭되는 모든 인덱스 찾기
+      for (let i = 0; i < m; i++) {
+        for (let j = 0; j < n; j++) {
+          if (searchMatching(i, j)) {
+            matched.push([i, j]);
+          }
+        }
+      }
+
+      // 매칭된 블럭이 없다면 반복 끝내기
+      if (matched.length === 0) {
+        answer = myBoard.flat().filter((block) => block === EMPTY).length;
+        break;
+      }
+
+      // 매칭된 인덱스들을 모두 빈 블럭으로 변경
+      matched.forEach(([i, j]) => {
+        myBoard[i][j] = EMPTY;
+        myBoard[i][j + 1] = EMPTY;
+        myBoard[i + 1][j] = EMPTY;
+        myBoard[i + 1][j + 1] = EMPTY;
+      });
+
+      // 빈 블럭들 채우기
+      for (let i = m - 1; i >= 0; i--) {
+        for (let j = n - 1; j >= 0; j--) {
+          if (myBoard[i][j] === EMPTY) {
+            let upperIdx = i - 1;
+            while (myBoard[upperIdx] && myBoard[upperIdx][j] === EMPTY) {
+              upperIdx--;
+            }
+
+            if (myBoard[upperIdx]) {
+              myBoard[i][j] = myBoard[upperIdx][j];
+              myBoard[upperIdx][j] = EMPTY;
+            }
+          }
+        }
+      }
+    }
+
     return answer;
+
+    function searchMatching(i, j) {
+      const targetBlock = myBoard[i][j];
+      const rightBlock = myBoard[i][j + 1];
+      const bottomBlock = myBoard[i + 1] ? myBoard[i + 1][j] : null;
+      const sideBlock = myBoard[i + 1] ? myBoard[i + 1][j + 1] : null;
+
+      return (
+        targetBlock !== EMPTY &&
+        targetBlock === rightBlock &&
+        targetBlock === bottomBlock &&
+        targetBlock === sideBlock
+      );
+    }
   }
 
   function testToExample1() {
