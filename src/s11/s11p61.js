@@ -43,8 +43,6 @@
 // Expected: 12:58 - 13:38
 // Actual: 12:58 - 14:35
 // *다시 풀기
-// *오래 걸렸다.
-// *풀었으나 좋은 풀이가 아니라고 생각한다.
 
 {
   // 다른 사람 풀이
@@ -58,29 +56,38 @@
     return rf();
 
     function rf(bannedIdx = 0) {
+      // 제재 아이디 모두 확인이 끝난 경우
       if (bannedIdx === bannedLen) {
+        // 매칭된 아이디들을 정렬시켜서 문자열로 변환
         const sorted = [...current].sort().toString();
         if (usedSets.has(sorted)) {
           return 0;
         }
-
+        // 이미 존재했던 조합이 아니라면 Set에 조합을 저장하고 경우의 수 1로 반환.
         usedSets.add(sorted);
         return 1;
       }
 
+      // *은 어느 문자든 상관없음이므로 정규식의 .으로 변환
       const regex = new RegExp(banned_id[bannedIdx].replace(/\*/g, "."));
+      // 정규식과 일치하고 길이가 같은 아이디들 가져오기
       const matches = user_id.filter((user) => {
         const result = regex.exec(user);
         return result && result[0].length === user.length;
       });
 
+      // 경우의 수 정의
       let ret = 0;
       for (const user of matches) {
-        if (!isUsed[user]) {
-          isUsed[user] = true;
+        if (!isUsed.get(user)) {
+          // 다음 제재 아이디 확인에서 사용하지 않도록 이미 사용된 아이디에 저장
+          isUsed.set(user, 1);
+          // 이번 제재 아이디 확인에서 매칭된 아이디로 저장
           current[bannedIdx] = user;
+          // 다음 제재 아이디 확인
           ret += rf(bannedIdx + 1);
-          isUsed[user] = false;
+          // 다음 제재 아이디 확인이 끝났으므로 이미 사용된 아이디에서 제거
+          isUsed.delete(user);
         }
       }
 
