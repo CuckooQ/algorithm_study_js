@@ -12,23 +12,34 @@
  *          ----------------------
  *          직사각형의 가로의 길이 n이 매개변수로 주어질 때, 이 직사각형을 채우는 방법의 수를 return 하는 solution 함수를 완성해주세요.
  * Input Condition: 가로의 길이 n은 60,000이하의 자연수 입니다.
- *                  경우의 수가 많아 질 수 있으므로, 경우의 수를 1,000,000,007으로 나눈 나머지를 return해주세요.
- * Output Condition: None
+ * Output Condition: 경우의 수가 많아 질 수 있으므로, 경우의 수를 1,000,000,007으로 나눈 나머지를 return해주세요.
  * Input Example: 4
  * Output Example: 5
  */
 // *다시 풀기
+// *규칙을 찾을 때 경우의 수를 잘 못 찾은 것과 1,000,000,007의 의미를 몰랐던 것이 문제였다.
 
 {
   const DIVISOR = 1_000_000_007;
 
-  function getCnt(n) {}
+  function getCnt(n) {
+    let cnt = 0;
+    const dp = Array.from({ length: n + 1 }, () => 0);
+    dp[1] = 1;
+    dp[2] = 2;
+    for (let i = 3; i <= n; i++) {
+      dp[i] = (dp[i - 1] + dp[i - 2]) % DIVISOR;
+    }
+
+    cnt = dp[n];
+    return cnt;
+  }
 
   function solution(n) {
     let answer;
 
     const cnt = getCnt(n);
-    answer = cnt % DIVISOR;
+    answer = cnt;
 
     return answer;
   }
