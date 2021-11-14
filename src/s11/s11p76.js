@@ -41,10 +41,58 @@
  * Output Example: 82
  */
 // *다시 풀기
+// 네트워크에서 최단 거리를 구하는 경우의 풀이법을 알 수 있었다.
 
 {
   function solution(n, s, a, b, fares) {
     let answer;
+
+    const matrix = Array.from({ length: n + 1 }, (_, i) =>
+      Array.from({ length: n + 1 }, (_, j) => {
+        if (i === 0 || j === 0 || i === j) {
+          return 0;
+        }
+        return Infinity;
+      })
+    );
+
+    fares.forEach((fare) => {
+      const [nodeA, nodeB, fee] = fare;
+      matrix[nodeA][nodeB] = fee;
+      matrix[nodeB][nodeA] = fee;
+    });
+
+    // 지나가는 노드  = i
+    for (let i = 1; i <= n; i++) {
+      // 시작 노드 = j
+      for (let j = 1; j <= n; j++) {
+        // 도착 노드 = k
+        for (let k = 1; k <= n; k++) {
+          if (j === k || j === i || k === i) {
+            continue;
+          }
+
+          // 지나가는 경우의 비용과 직접 가는 경우의 비용을 비교해서 작은 값 저장
+          const throughDist = matrix[j][i] + matrix[i][k];
+          const directDist = matrix[j][k];
+          matrix[j][k] = throughDist < directDist ? throughDist : directDist;
+        }
+      }
+    }
+
+    // s에서 동승해서 이동한 노드 i로의 최단비용 + i에서 a로 최단비용 + i에서 b로 최단비용의 최소값 구하기
+    let minFee = Number.MAX_SAFE_INTEGER;
+    for (let i = 1; i <= n; i++) {
+      const togetherFee = matrix[s][i];
+      const toAfee = matrix[i][a];
+      const toBfee = matrix[i][b];
+      const sum = togetherFee + toAfee + toBfee;
+
+      if (sum < minFee) {
+        minFee = sum;
+      }
+    }
+    answer = minFee;
 
     return answer;
   }
@@ -61,29 +109,6 @@
       [3, 6, 1],
       [3, 2, 3],
       [2, 1, 6],
-    ];
-    const expectResult = 14;
-    const testFunction = solution;
-    const condition =
-      testFunction(inputN, inputS, inputA, inputB, inputFares) === expectResult;
-    validateTestResult(testNum, condition);
-  }
-
-  function testToExample2() {
-    const testNum = 2;
-    const inputN = 6;
-    const inputS = 5;
-    const inputA = 5;
-    const inputB = 6;
-    const inputFares = [
-      [2, 6, 6],
-      [6, 3, 7],
-      [4, 6, 7],
-      [6, 5, 11],
-      [2, 5, 12],
-      [5, 3, 20],
-      [2, 4, 8],
-      [4, 3, 9],
     ];
     const expectResult = 14;
     const testFunction = solution;
@@ -121,7 +146,6 @@
 
   function test() {
     testToExample1();
-    testToExample2();
   }
 
   main();
