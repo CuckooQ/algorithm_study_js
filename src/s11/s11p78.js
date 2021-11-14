@@ -48,10 +48,59 @@
  * Output Example: ["....*....", ".........", ".........", "*.......*", ".........", ".........", ".........", ".........", "*.......*"]
  */
 // *다시 풀기
+// *두 직선의 교점 공식
+//  Ax + By + E = 0
+//  Cx + Dy + F = 0
+//  x = (B*F - E*D) / (A*D - B*C)
+//  y = (E*C - A*F) / (A*D - B*C)
 
 {
   function solution(line) {
     let answer;
+
+    // 접점 구하기
+    const lineLen = line.length;
+    const crossPointsX = [];
+    const crossPointsY = [];
+    const crossPoints = [];
+    for (let i = 0; i < lineLen; i++) {
+      for (let j = i + 1; j < lineLen; j++) {
+        const [a, b, e] = line[i];
+        const [c, d, f] = line[j];
+        const x = (b * f - e * d) / (a * d - b * c);
+        const y = (e * c - a * f) / (a * d - b * c);
+        if (Number.isInteger(x) && Number.isInteger(y)) {
+          crossPointsX.push(x);
+          crossPointsY.push(y);
+          crossPoints.push([x, y]);
+        }
+      }
+    }
+
+    // x와 y의 최대/최소값으로 행과 열을 포함하는 사각형 구하기
+    const xMax = Math.max(...crossPointsX);
+    const xMin = Math.min(...crossPointsX);
+    const yMax = Math.max(...crossPointsY);
+    const yMin = Math.min(...crossPointsY);
+    const xLen = xMax - xMin + 1;
+    const yLen = yMax - yMin + 1;
+    const box = Array.from({ length: yLen }, () => ".".repeat(xLen).split(""));
+
+    // 위, 왼쪽부터 별을 찍기 위해 정렬하고 별 찍기
+    crossPoints.sort((a, b) => {
+      const [ax, ay] = a;
+      const [bx, by] = b;
+      if (ay === by) {
+        return ax - bx;
+      }
+      return by - ay;
+    });
+    for (let i = 0; i < crossPoints.length; i++) {
+      const x = Math.abs(crossPoints[i][0] + xMin);
+      const y = Math.abs(crossPoints[i][1] - yMax);
+      box[y][x] = "*";
+    }
+    answer = box.map((row) => row.join(""));
 
     return answer;
   }
@@ -107,7 +156,7 @@
     const output = this.solution(input);
 
     // test();
-    console.log(`Input: ${input} `);
+    console.log(`Input: ${input.join("\n")} `);
     console.log(`Output: ${output}\n`);
   }
 
