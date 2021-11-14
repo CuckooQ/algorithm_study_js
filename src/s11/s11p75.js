@@ -18,10 +18,26 @@
  * Output Example: 3
  */
 // *다시 풀기
+// *요소가 많은 경우 배열을 사용하는 것은 비효율적이다. (시간초과 발생)
 
 {
   function solution(people, limit) {
     let answer;
+
+    const dangerPeople = [...people].sort((a, b) => b - a);
+    let cnt = 0;
+    let leftIdx = 0;
+    let rightIdx = dangerPeople.length - 1;
+    while (leftIdx <= rightIdx) {
+      cnt++;
+      if (dangerPeople[leftIdx] + dangerPeople[rightIdx] > limit) {
+        leftIdx++;
+      } else {
+        leftIdx++;
+        rightIdx--;
+      }
+    }
+    answer = cnt;
 
     return answer;
   }
