@@ -96,7 +96,7 @@
       return by - ay;
     });
     for (let i = 0; i < crossPoints.length; i++) {
-      const x = Math.abs(crossPoints[i][0] + xMin);
+      const x = Math.abs(crossPoints[i][0] - xMin);
       const y = Math.abs(crossPoints[i][1] - yMax);
       box[y][x] = "*";
     }
