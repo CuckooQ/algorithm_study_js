@@ -10,7 +10,7 @@
  * Output Example: "김서방은 1에 있다"
  */
 // Expected: 11:14 - 11:54
-// Actual: 11:14 -
+// Actual: 11:14 - 11:19
 
 {
   const KIM = "Kim";
