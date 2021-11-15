@@ -40,9 +40,68 @@
 {
   function solution(board) {
     let answer = Number.MAX_SAFE_INTEGER;
-
     return answer;
   }
+
+  /*
+  // 각 위치마다 최소한의 비용으로 가면 도착지점에 최소한의 비용으로 갈 수 있다는 전제의 풀이이나, 마지막 테스트가 실패한다.
+  // 예외가 있는 전제.
+  const BLOCK = 1;
+  const COST = {
+    STRAIGHT: 100,
+    CORNER: 500,
+  };
+  const NEXT_POINT = [
+    [-1, 0], // 상
+    [1, 0], // 하
+    [0, -1], // 좌
+    [0, 1], // 우
+  ];
+
+  function solution(board) {
+    let answer = Number.MAX_SAFE_INTEGER;
+
+    const boardLen = board.length;
+    const minCosts = Array.from({ length: boardLen }, () =>
+      Array(boardLen).fill(Infinity)
+    );
+    minCosts[0][0] = 0;
+
+    bfs();
+    answer = minCosts[boardLen - 1][boardLen - 1];
+    return answer;
+
+    function bfs() {
+      const queue = [];
+      queue.push([0, 0, 0, 0]);
+
+      while (queue.length) {
+        const [x, y, way, cost] = queue.shift();
+
+        for (let i = 1; i <= 4; i++) {
+          const [px, py] = NEXT_POINT[i - 1];
+          const nextX = x + px;
+          const nextY = y + py;
+          let nextCost = cost + COST.STRAIGHT;
+          nextCost += way !== i && way !== 0 && COST.CORNER;
+          if (
+            nextX < 0 ||
+            nextY < 0 ||
+            nextX >= boardLen ||
+            nextY >= boardLen ||
+            board[nextX][nextY] === BLOCK ||
+            minCosts[nextX][nextY] < nextCost
+          ) {
+            continue;
+          }
+
+          minCosts[nextX][nextY] = nextCost;
+          queue.push([nextX, nextY, i, nextCost]);
+        }
+      }
+    }
+  }
+  */
 
   function testToExample1() {
     const testNum = 1;
@@ -92,6 +151,24 @@
     validateTestResult(testNum, condition);
   }
 
+  function testToExample4() {
+    const testNum = 4;
+    const input = [
+      [0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 0, 1, 1, 1, 1, 1, 0],
+      [1, 0, 0, 1, 0, 0, 0, 0],
+      [1, 1, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 0, 0],
+      [1, 1, 1, 1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1, 1, 1, 0],
+      [1, 1, 1, 1, 1, 1, 1, 0],
+    ];
+    const expectResult = 4500;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
   function main() {
     console.log("S11P79\n");
 
@@ -111,6 +188,7 @@
     testToExample1();
     testToExample2();
     testToExample3();
+    testToExample4();
   }
 
   main();
