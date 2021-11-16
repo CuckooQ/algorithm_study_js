@@ -19,6 +19,8 @@
   function getMaxThroughput(lines) {
     let maxCnt = 0;
 
+    // 로그들로부터 처리 시작시간과 끝시간의 배열 2개 정의
+    // 1개는 초단위가 아닌, 시작 시간과 끝 시간을 구간의 시작 기준으로 설정해 검사하기 위한 배열
     const arr = [];
     const logPointArr = [];
     lines.forEach((log) => {
@@ -33,17 +35,23 @@
       arr.push([startDate.getTime(), endDate.getTime()]);
       logPointArr.push(startDate.getTime(), endDate.getTime());
     });
+    // 구간 시작 시간 기준 배열의 오름차순 정렬
     logPointArr.sort((a, b) => a - b);
 
+    // 구간 시작 시간 기준 배열을 반복
     for (let i = 0; i < logPointArr.length; i++) {
       const beginRange = logPointArr[i];
       const endRange = logPointArr[i] + 1000;
 
       let cnt = 0;
+      // 처리 시작 시간과 끝 시간의 배열을 반복
       for (let j = 0; j < arr.length; j++) {
         const stPoint = arr[j][0];
         const edPoint = arr[j][1];
-
+        // 시작 시간이 기준 기간 내에 있는 경우
+        // 끝 시간이 기준 기간 내에 있는 경우
+        // 시작 시간이 기준 기간보다 먼저이고 끝 시간이 기준 기간보다 이후인 경우
+        // 기간 내의 처리 개수 증가
         if (
           (stPoint >= beginRange && stPoint < endRange) ||
           (edPoint >= beginRange && edPoint < endRange) ||
