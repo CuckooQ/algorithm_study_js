@@ -64,18 +64,18 @@
   function solution(info, query) {
     const answer = [];
 
+    // 맵에 입력정보 키와 점수 배열 값을 설정
     const map = new Map();
-
     info.forEach((unitInfo) => {
       const args = unitInfo.split(" ");
       const score = Number(args.pop());
       comb(args, score, 0);
     });
-
+    // 맵의 값인 점수 배열을 오름차순으로 정렬
     map.forEach((scores) => {
       return scores.sort((a, b) => a - b);
     });
-
+    // 쿼리를 반복하면서 해당 쿼리와 일치하는 점수 배열을 가져와서 이분 탐색으로 기준 점수 이상의 점수의 개수 구하기
     query.forEach((unitQuery) => {
       const args = unitQuery.replace(/ and /g, " ").split(" ");
       const score = Number(args.pop());
@@ -95,6 +95,8 @@
         }
         const result = scores.length - startIdx;
         answer.push(result);
+      } else {
+        answer.push(0);
       }
     });
 
@@ -105,11 +107,12 @@
       const val = map.get(key);
 
       if (val) {
-        map.set(key, [...map.get(key), score]);
+        val.push(score);
       } else {
         map.set(key, [score]);
       }
 
+      // 해당 정보의 한개씩 '-'로 변환하면서 맵에 저장
       for (let i = startIdx; i < args.length; i++) {
         const tmp = [...args];
         tmp[i] = "-";
