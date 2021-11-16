@@ -9,36 +9,32 @@
  * Output Example: 4
  */
 // *다시 풀기
+// 에라토스테네스의 체를 이용하면 다수의 소수를 빠르게 구할 수 있다.
 
 {
-  function isPrimeNum(n) {
-    return false;
-  }
-
-  /*
-  // 효율성 테스트 실패
-  function isPrimeNum(n) {
-    if (n === 1) {
-      return false;
-    }
-
-    const lastI = Math.sqrt(n);
-    for (let i = 2; i <= lastI; i++) {
-      if (n % i === 0) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-  */
-
+  // 어째서인지 배열이 아닌 셋을 사용하면 시간초과가 발생한다.
+  // 배열을 사용해서 인덱스를 수로 사용하는 경우에는 값의 크기는 변하지 않지만, 셋을 사용하는 경우네는 값의 크기가 해당 수만큼 커지기 때문인 것으로 보인다.
   function solution(n) {
     let answer = 0;
 
-    for (let i = 1; i <= n; i++) {
-      isPrimeNum(i) && answer++;
+    // 소수를 판별할 수가 인덱스이고 소수인지를 나타내는 기본값 true를 설정
+    const arr = [];
+    for (let i = 2; i <= n; i++) {
+      arr[i] = true;
     }
+
+    // 배수인 소수가 아닌 수 인덱스의 값을 false로 설정
+    for (let i = 2; i <= Math.ceil(Math.sqrt(n)); i++) {
+      if (arr[i]) {
+        let weight = 2;
+        while (i * weight <= n) {
+          arr[i * weight] = false;
+          weight++;
+        }
+      }
+    }
+
+    answer = arr.filter((isPrimeNum) => isPrimeNum === true).length;
 
     return answer;
   }
@@ -58,7 +54,7 @@
     const input = 10;
     const output = this.solution(input);
 
-    test();
+    // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
   }
