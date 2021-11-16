@@ -21,22 +21,28 @@
 {
   function solution(n, computers) {
     let answer = 0;
+
+    // 인덱스가 네트워크 번호이고 값이 방문 여부를 의미하는 배열 정의
     const visited = Array.from({ length: n }, () => 0);
 
+    // 모든 네트워크를 반복
     for (let i = 0; i < n; i++) {
+      // 방문하지 않은 경우 연결된 네트워크 탐색하고 네트워크 개수 증가
       if (visited[i] === 0) {
-        dfs(i, computers, visited);
+        dfs(i);
         answer += 1;
       }
     }
 
     return answer;
 
-    function dfs(num, computers, visited) {
+    function dfs(num) {
+      // 방문한 네트워크 인덱스의 값을 방문으로 변경
       visited[num] = 1;
       for (let i = 0; i < n; i++) {
+        // 네트워크 정보에서 현재 네트워크와 연결된 다른 네트워크인 경우 해당 네트워크도 탐색
         if (computers[num][i] === 1 && visited[i] === 0) {
-          dfs(i, computers, visited);
+          dfs(i);
         }
       }
     }
