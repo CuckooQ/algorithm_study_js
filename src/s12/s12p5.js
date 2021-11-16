@@ -13,11 +13,6 @@
 {
   const MAX_LEN = 1000;
 
-  function isPalindrome(s) {
-    const reversedText = s.split("").reverse().join("");
-    return s === reversedText;
-  }
-
   function getMaxLenSubStrPalindrome(s) {
     let maxLenSubStr = "";
 
