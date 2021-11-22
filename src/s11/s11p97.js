@@ -60,7 +60,7 @@
     const input = "110010101001";
     const output = this.solution(input);
 
-    test();
+    // test();
     console.log(`Input: ${input} `);
     console.log(`Output: ${output}\n`);
   }
