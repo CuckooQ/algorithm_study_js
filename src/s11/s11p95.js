@@ -112,7 +112,7 @@
     ];
     const output = this.solution(inputGameBoard, inputTable);
 
-    test();
+    // test();
     console.log(
       `Input: ${inputGameBoard.join("\n")}\n${inputTable.join("\n")}`
     );
