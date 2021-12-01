@@ -54,7 +54,7 @@
     ];
     const output = this.solution(input);
 
-    test();
+    // test();
     console.log(`Input: ${input.join("\n")} `);
     console.log(`Output: ${output}\n`);
   }
