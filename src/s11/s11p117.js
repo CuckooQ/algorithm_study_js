@@ -21,23 +21,44 @@
 // *2차원 배열을 다루는 것이 제일 어렵다..
 
 {
-  const VAL = {
-    EMPTY: 0,
-    BLOCK: 1,
-  };
   function solution(board) {
-    let answer = 0;
+    let answer = board[0][0];
+
+    const rowLen = board.length;
+    const colLen = board[0].length;
+
+    for (let i = 1; i < rowLen; i++) {
+      for (let j = 1; j < colLen; j++) {
+        if (board[i][j] !== 0) {
+          board[i][j] =
+            Math.min(board[i][j - 1], board[i - 1][j], board[i - 1][j - 1]) + 1;
+          answer = board[i][j] ** 2 > answer ? board[i][j] ** 2 : answer;
+        }
+      }
+    }
 
     return answer;
   }
 
-  function testToExample() {
+  function testToExample1() {
     const testNum = 1;
     const input = [
       [0, 0, 1, 1],
       [1, 1, 1, 1],
     ];
     const expectResult = 4;
+    const testFunction = solution;
+    const condition = testFunction(input) === expectResult;
+    validateTestResult(testNum, condition);
+  }
+
+  function testToExample2() {
+    const testNum = 1;
+    const input = [
+      [1, 0],
+      [0, 0],
+    ];
+    const expectResult = 1;
     const testFunction = solution;
     const condition = testFunction(input) === expectResult;
     validateTestResult(testNum, condition);
@@ -60,7 +81,8 @@
   }
 
   function test() {
-    testToExample();
+    testToExample1();
+    testToExample2();
   }
 
   main();
