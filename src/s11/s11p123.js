@@ -20,11 +20,50 @@
 // *다시 풀기
 
 {
+  // 다른 사람 풀이
+  // 신박한대 이렇게는 못 풀 것 같다.
   function solution(land) {
     let answer = 0;
 
+    answer = Math.max(
+      ...land.reduce(
+        (acc, val) => [
+          val[0] + Math.max(acc[1], acc[2], acc[3]),
+          val[1] + Math.max(acc[0], acc[2], acc[3]),
+          val[2] + Math.max(acc[0], acc[1], acc[3]),
+          val[3] + Math.max(acc[0], acc[1], acc[2]),
+        ],
+        Array(4).fill(0)
+      )
+    );
+
     return answer;
   }
+
+  /*
+  // 반복문
+  function solution(land) {
+    let answer = 0;
+
+    const rowLen = land.length;
+    const colLen = land[0].length;
+    const calcArr = Array.from({ length: rowLen }, () => Array(colLen));
+    for (let i = 0; i < rowLen; i++) {
+      for (let j = 0; j < colLen; j++) {
+        calcArr[i][j] = land[i][j];
+        if (i !== 0) {
+          const arr = [...calcArr[i - 1]];
+          arr.splice(j, 1);
+          calcArr[i][j] += Math.max(...arr);
+        }
+      }
+    }
+
+    answer = Math.max(...calcArr[rowLen - 1]);
+
+    return answer;
+  }
+  */
 
   // DFS 시간 초과
   /*
