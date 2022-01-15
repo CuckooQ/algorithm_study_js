@@ -23,41 +23,38 @@
   // Two Pointer Algorithm으로 구현한 함수 O(n+m)
   function getSameNumbers(firstNumbers, secondNumbers) {
     const sameNums = [];
+
     let firstIdx = 0;
     let secondIdx = 0;
-    while (firstIdx < firstNumbers.length || secondIdx < secondNumbers.length) {
-      if (firstNumbers[firstIdx] > secondNumbers[secondIdx]) {
-        secondIdx++;
-      } else if (firstNumbers[firstIdx] === secondNumbers[secondIdx]) {
-        sameNums.push(firstNumbers[firstIdx]);
+    while (firstIdx < firstNumbers.length && secondIdx < secondNumbers.length) {
+      const firstNum = firstNumbers[firstIdx];
+      const secondNum = secondNumbers[secondIdx];
+      if (firstNum < secondNum) {
         firstIdx++;
+      } else if (firstNum > secondNum) {
         secondIdx++;
-      } else if (firstNumbers[firstIdx] < secondNumbers[secondIdx]) {
-        firstIdx++;
       } else {
-        if (firstIdx >= firstNumbers.length) {
-          secondIdx++;
-        }
-        if (secondIdx >= secondNumbers.length) {
-          firstIdx++;
-        }
+        sameNums.push(firstNum);
+        firstIdx++;
+        secondIdx++;
       }
     }
+
     return sameNums;
   }
   /*
-    function getSameNumbers(firstNumbers, secondNumbers) {
-        const sameNums = [];
-        firstNumbers.filter((num)=> {
-            const idx = secondNumbers.indexOf(num);
-            if (idx !== -1) {
-                sameNums.push(secondNumbers[idx]);
-                secondNumbers.splice(idx, 1);
-            };
-        })
-        return sameNums;
-    }
-    */
+  function getSameNumbers(firstNumbers, secondNumbers) {
+      const sameNums = [];
+      firstNumbers.filter((num)=> {
+          const idx = secondNumbers.indexOf(num);
+          if (idx !== -1) {
+              sameNums.push(secondNumbers[idx]);
+              secondNumbers.splice(idx, 1);
+          };
+      });
+      return sameNums;
+  }
+  */
   function getSameNumbersAsc(firstNumbers, secondNumbers) {
     const sortedFirstNumbers = Array.from(firstNumbers).sort(
       (bef, aft) => bef - aft
