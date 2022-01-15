@@ -16,52 +16,18 @@
 {
   const MAX_TEXT_LENGTH = 10_000;
 
-  function getCharCountMap(text) {
-    const map = new Map();
-    text.split("").forEach((char) => {
-      if (map.has(char)) {
-        map.set(char, map.get(char) + 1);
-      } else {
-        map.set(char, 1);
-      }
-    });
-
-    return map;
-  }
-
-  function isAnagram(firstTextMap, secondTextMap) {
-    const KEY_IDX = 0;
-    const VAL_IDX = 1;
-    let isAnagram = true;
-
-    const firstTextArr = Array.from(firstTextMap);
-    for (const keyValPair of firstTextArr) {
-      if (!secondTextMap.has(keyValPair[KEY_IDX])) {
-        isAnagram = false;
-        break;
-      }
-
-      if (keyValPair[VAL_IDX] !== secondTextMap.get(keyValPair[KEY_IDX])) {
-        isAnagram = false;
-        break;
-      }
-    }
-
-    return isAnagram;
-  }
-
   function getAnagramCount(firstText, secondText) {
-    const windowLen = secondText.length;
-
-    const secondTextMap = getCharCountMap(secondText);
     let count = 0;
-    let window = "";
-    for (let i = 0; i <= firstText.length - windowLen; i++) {
-      window = firstText.substr(i, windowLen);
-      const windowMap = getCharCountMap(window);
-      if (isAnagram(windowMap, secondTextMap)) {
-        count++;
-      }
+
+    const secondCharSet = new Set(secondText);
+    const anagramLength = secondText.length;
+    for (let i = 0; i <= firstText.length - anagramLength; i++) {
+      const slicedText = firstText.substr(i, anagramLength);
+      const firstCharSet = new Set(slicedText);
+      const isAnagram = [...secondCharSet].every((char) =>
+        firstCharSet.has(char)
+      );
+      isAnagram && count++;
     }
 
     return count;
