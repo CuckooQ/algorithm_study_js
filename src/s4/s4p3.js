@@ -26,37 +26,30 @@
   const MIN_STUDENT_COUNT = 1;
   const MIN_TEST_COUNT = 1;
 
-  // 이중 for문 + while문
+  // 삼중 for문 + for문
   function getMentoMenteePairCount(testResults) {
-    const mentoMenteePairsSet = new Set();
-    const allPairsSet = new Set();
+    const pairs = new Set();
 
-    for (let i = 0; i < testResults.length; i++) {
-      const testResult = testResults[i];
-
-      for (let j = 0; j < testResult.length; j++) {
-        const pair = [];
-        pair[0] = testResult[j];
-        testResult.forEach((num, idx) => {
-          if (idx > j) {
-            pair[1] = num;
-            allPairsSet.add(pair.join(" "));
-          }
-        });
+    testResults.forEach((testResult) => {
+      for (let i = 0; i < testResult.length - 1; i++) {
+        for (let j = i + 1; j < testResult.length; j++) {
+          const pair = `${testResult[i]} ${testResult[j]}`;
+          pairs.add(pair);
+        }
       }
-    }
+    });
 
-    const allPairValues = allPairsSet.values();
-    let targetPair = allPairValues.next();
-    while (!targetPair.done) {
-      const reversedPair = targetPair.value.split(" ").reverse().join(" ");
-      !allPairsSet.has(reversedPair) &&
-        mentoMenteePairsSet.add(targetPair.value);
-      targetPair = allPairValues.next();
-    }
+    [...pairs].forEach((pair) => {
+      const reversePair = pair.split(" ").reverse().join(" ");
+      if (pairs.has(reversePair)) {
+        pairs.delete(reversePair);
+        pairs.delete(pair);
+      }
+    });
 
-    return mentoMenteePairsSet.size;
+    return pairs.size;
   }
+
   /*
   // 사중 for문
   function isAvailableMento(mentoMenteePair, testResults) {
